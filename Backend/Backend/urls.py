@@ -23,4 +23,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
     path('posts/', include('posts.urls')),
+    path('users/', include('users.urls')),
 ]
