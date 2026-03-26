@@ -22,10 +22,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('login', views.login, name='login'),
-<<<<<<< HEAD
+
     path('nujdaeshti', views.nujdaeshti, name='nujdaeshti'),
     path('pomagashti', views.pomagashti, name='pomagashti'),
-=======
     path('posts/', include('posts.urls')),
->>>>>>> 38bf20468ea3cd76d1167becadb4520c3c8e5b05
+    path('helper_selector', views.nujdaeshti, name='helper_selector'),
+
 ]
