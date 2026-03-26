@@ -27,5 +27,5 @@ urlpatterns = [
     path('pomagashti/', views.pomagashti, name='pomagashti'),
     path('posts/', include('posts.urls')),
     path('helper_selector/', views.nujdaeshti, name='helper_selector'),
-    path('profile_na_potrebitel/', views.profile_na_potrebitel, name='profile_na_potrebitel'),
+    path('profile/', views.profile, name='profile'),
 ]
