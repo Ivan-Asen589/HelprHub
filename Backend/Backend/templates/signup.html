@@ -44,14 +44,16 @@
                 </div>
 
                 <div class="selection-container">
-                    <div class="option-card">
+                    <label class="option-card">
+                        <input type="radio" name="user_role" value="receiver" required style="display:none;">
                         <i class="fa-regular fa-heart"></i>
                         <p>I need help</p>
-                    </div>
-                    <div class="option-card">
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="user_role" value="helper" required style="display:none;">
                         <i class="fa-solid fa-handshake-angle"></i>
                         <p>I want to help</p>
-                    </div>
+                    </label>
                 </div>
 
                 <button type="submit" class="continue-btn">Create Account</button>
