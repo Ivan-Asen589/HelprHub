@@ -1,0 +1,103 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpConnect - Add Availability</title>
+    <link rel="stylesheet" href="{% static 'styles-helper.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span>HelpConnect™</span>
+                </div>
+                <a href="{% url 'profile' %}" class="account-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+            </div>
+        </header>
+
+        <main>
+            <div class="welcome card">
+                <h1>Add Availability</h1>
+                <p class="subtitle-text">When are you free to help others?</p>
+                
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                    <div class="error-box">
+                        <p><strong>Please fix the following:</strong></p>
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <label for="date">Date</label>
+                    <div class="input-group">
+                        <input type="date" id="date" name="date" lang="en">
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="start_time">From</label>
+                            <input type="time" id="start_time" name="start_time">
+                        </div>
+                        <div class="input-field">
+                            <label for="end_time">To</label>
+                            <input type="time" id="end_time" name="end_time">
+                        </div>
+                    </div>
+
+                    <label for="location">Location (City or Neighborhood)</label>
+                    <div class="input-group">
+                        <input type="text" id="location" name="location" placeholder="e.g. Sofia, Center">
+                    </div>
+
+                    <button type="submit" class="primary-btn">Save Schedule</button>
+                </form>
+
+                <div class="requests-section">
+                    <h3>Your Current Schedule</h3>
+                    {% if helper_slots %}
+                        {% for slot in helper_slots %}
+                        <div class="post-card">
+                            <div class="post-details">
+                                <span><i class="fa-regular fa-calendar"></i> {{ slot.date }}</span>
+                                <span><i class="fa-regular fa-clock"></i> {{ slot.start_time }} - {{ slot.end_time }}</span>
+                            </div>
+                            <div class="post-location">
+                                <i class="fa-solid fa-location-dot"></i> {{ slot.location }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-requests">You haven't added any times yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
