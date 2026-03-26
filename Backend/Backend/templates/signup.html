@@ -22,38 +22,44 @@
             <h1>Create Account</h1>
             <p class="subtitle">Join our community to help or receive help.</p>
 
-            <div class="input-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" placeholder="Enter your name">
-            </div>
+            <form method="POST">
+                {% csrf_token %}
 
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="name@example.com">
-            </div>
-
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Create a password">
-            </div>
-
-            <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Repeat your password">
-            </div>
-
-            <div class="selection-container">
-                <div class="option-card">
-                    <i class="fa-regular fa-heart"></i>
-                    <p>I need help</p>
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
                 </div>
-                <div class="option-card">
-                    <i class="fa-solid fa-handshake-angle"></i>
-                    <p>I want to help</p>
-                </div>
-            </div>
 
-            <button class="continue-btn">Create Account</button>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your password" required>
+                </div>
+
+                <div class="selection-container">
+                    <label class="option-card">
+                        <input type="radio" name="user_type" value="need_help" style="display:none">
+                        <i class="fa-regular fa-heart"></i>
+                        <p>I need help</p>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="user_type" value="want_to_help" style="display:none">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                        <p>I want to help</p>
+                    </label>
+                </div>
+
+                <button type="submit" class="continue-btn">Create Account</button>
+            </form>
 
             <p class="login-text">
                 Already have an account? <a href="/login/">Log in</a>
