@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Welcome</title>
+    <title>HelpConnect - Sign Up</title>
     <link rel="stylesheet" href="{% static 'styles-login.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -19,12 +19,27 @@
 
     <main>
         <div class="welcome-card">
-            <h1>Welcome</h1>
+            <h1>Create Account</h1>
             <p class="subtitle">Join our community to help or receive help.</p>
 
             <div class="input-group">
                 <label for="name">Your Name</label>
                 <input type="text" id="name" placeholder="Enter your name">
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" placeholder="email@example.com">
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Create a password">
+            </div>
+
+            <div class="input-group">
+                <label for="confirm-password">Confirm Password</label>
+                <input type="password" id="confirm-password" placeholder="Repeat your password">
             </div>
 
             <div class="selection-container">
@@ -38,7 +53,11 @@
                 </div>
             </div>
 
-            <button class="continue-btn">Continue</button>
+            <button class="continue-btn">Create Account</button>
+
+            <p class="login-text">
+                Already have an account? <a href="login.html">Log in</a>
+            </p>
         </div>
     </main>
 

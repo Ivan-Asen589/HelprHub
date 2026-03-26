@@ -9,3 +9,5 @@ def nujdaeshti(request):
     return render(request, 'nujdaeshti.html', {})
 def pomagashti(request):
     return render(request, 'pomagashti.html', {})
+def helper_selector(request):
+    return render(request, 'helper_selector.html', {})
