@@ -4,6 +4,8 @@ def index(request):
 
 def login(request):
     return render(request, 'login.html', {})
+def signup(request):
+    return render(request, 'signup.html', {})
 # def AddUser()
 def nujdaeshti(request):
     return render(request, 'nujdaeshti.html', {})
