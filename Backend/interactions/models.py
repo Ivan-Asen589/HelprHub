@@ -6,4 +6,4 @@ class Request(models.Model):
     receiver = models.CharField(max_length=30)
     heading = models.CharField(max_length=30)
 
-    
+
