@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f8fafc;
-    font-size: 16px; /* Fixed: No more giant text! */
+    font-size: 16px; /* Fixed standard size */
 }
 
 /* Header */
@@ -35,7 +35,7 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 40px 20px; /* Added more padding for mobile scrolling */
+    padding: 40px 20px;
 }
 
 .welcome-card {
@@ -63,7 +63,7 @@ h1 {
 /* Inputs */
 .input-group {
     text-align: left;
-    margin-bottom: 15px; /* Tighter spacing for more fields */
+    margin-bottom: 15px;
 }
 
 .input-group label {
@@ -123,7 +123,7 @@ h1 {
 /* Button */
 .continue-btn {
     width: 100%;
-    background-color: #4461ff; /* Solid blue for better visibility */
+    background-color: #4461ff;
     color: white;
     border: none;
     padding: 14px;
