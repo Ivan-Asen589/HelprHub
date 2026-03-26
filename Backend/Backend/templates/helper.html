@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Need help</title>
-    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+    <title>HelpConnect - Add Availability</title>
+    <link rel="stylesheet" href="{% static 'styles-helper.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -24,7 +24,8 @@
 
         <main>
             <div class="welcome card">
-                <h1>Post a new request</h1>
+                <h1>Add Availability</h1>
+                <p class="subtitle-text">When are you free to help others?</p>
                 
                 <form method="post">
                     {% csrf_token %}
@@ -42,54 +43,46 @@
                     </div>
                     {% endif %}
 
-                    <label for="description">What do you need help with?</label>
+                    <label for="date">Date</label>
                     <div class="input-group">
-                        <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance"></textarea>
+                        <input type="date" id="date" name="date" lang="en">
                     </div>
 
                     <div class="input-row">
                         <div class="input-field">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="date" lang="en">
+                            <label for="start_time">From</label>
+                            <input type="time" id="start_time" name="start_time">
                         </div>
                         <div class="input-field">
-                            <label for="time">Time</label>
-                            <input type="time" id="time" name="time">
+                            <label for="end_time">To</label>
+                            <input type="time" id="end_time" name="end_time">
                         </div>
                     </div>
 
-                    <label for="locationTown">City</label>
+                    <label for="location">Location (City or Neighborhood)</label>
                     <div class="input-group">
-                        <input type="text" id="locationTown" name="locationTown" placeholder="City">
+                        <input type="text" id="location" name="location" placeholder="e.g. Sofia, Center">
                     </div>
 
-                    <label for="locationNeighborhood">Address</label>
-                    <div class="input-group">
-                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
-                    </div>
-
-                    <button type="submit" class="primary-btn">Post Request</button>
+                    <button type="submit" class="primary-btn">Save Schedule</button>
                 </form>
 
                 <div class="requests-section">
-                    <h3>Your Requests</h3>
-                    {% if user_posts %}
-                        {% for post in user_posts %}
+                    <h3>Your Current Schedule</h3>
+                    {% if helper_slots %}
+                        {% for slot in helper_slots %}
                         <div class="post-card">
-                            <div class="post-header">
-                                <strong>{{ post.description }}</strong>
-                            </div>
                             <div class="post-details">
-                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
-                                <span><i class="fa-regular fa-clock"></i> {{ post.time }}</span>
+                                <span><i class="fa-regular fa-calendar"></i> {{ slot.date }}</span>
+                                <span><i class="fa-regular fa-clock"></i> {{ slot.start_time }} - {{ slot.end_time }}</span>
                             </div>
                             <div class="post-location">
-                                <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
+                                <i class="fa-solid fa-location-dot"></i> {{ slot.location }}
                             </div>
                         </div>
                         {% endfor %}
                     {% else %}
-                        <p class="no-requests">You have no requests yet.</p>
+                        <p class="no-requests">You haven't added any times yet.</p>
                     {% endif %}
                 </div>
             </div>
