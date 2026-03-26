@@ -1,81 +1,110 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HelpConnect - Need help</title>
-    {% load static %}
-<link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
-    </head>
-     <body>
-    <header>
-        <div class="header-content">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <span>HelpConnect™</span>
-        </div>
-    </header>
-    <main>
-        <div class="welcome card">
-            <h1>Post a new request</h1>
-            <form method="post">
-                {% csrf_token %}
-                {{ form.errors }}
-
-               <p class="subtitle">What do you need help with?</p>
-               <div class="input-group">
-                <textarea id="description" name="description" 
-    placeholder="e.g. I need help with groceries, housework, mobility assistance"></textarea>
-               </div>
-
-               <p class="subtitle">On what dates do you need the help</p>
-               <div class="input-group">
-                <input type="date" id="date" name="date">
-               </div>
-
-               <p class="subtitle">At what time do you need the help</p>
-               <div class="input-group">
-                <input type="time" id="time" name="time">
-               </div>
-
-               <p class="subtitle">City</p>
-               <div class="input-group">
-                <input type="text" id="locationTown" name="locationTown" placeholder="City">
-               </div>
-
-               <p class="subtitle">Address</p>
-               <div class="input-group">
-                <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
-               </div>
-
-               <button type="submit">Post Request</button>
-            </form>
-
-               <h3>Your Requests</h3>
-               {% if user_posts %}
-                   {% for post in user_posts %}
-                   <div class="post-card">
-                       <p><strong>{{ post.description }}</strong></p>
-                       <p>{{ post.date }} at {{ post.time }}</p>
-                       <p>{{ post.locationTown }}, {{ post.locationNeighborhood }}</p>
-                   </div>
-                   {% endfor %}
-               {% else %}
-                   <p>You have no requests yet.</p>
-               {% endif %}
-
-        </div>
-    </main>
-
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
+    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="page-container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                    <span>HelpConnect™</span>
+                </div>
+                <a href="{% url 'profile' %}" class="account-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
             </div>
-        </div>
-    </footer>
+        </header>
 
-    </body>
+        <main>
+            <div class="welcome card">
+                <h1>Post a new request</h1>
+                
+                <form method="post">
+                    {% csrf_token %}
+
+                    {% if form.errors %}
+                    <div class="error-box">
+                        <p><strong>Please fix the following:</strong></p>
+                        <ul>
+                            {% for field in form %}
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+
+                    <label for="description">What do you need help with?</label>
+                    <div class="input-group">
+                        <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance"></textarea>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="input-field">
+                            <label for="date">Date</label>
+                            <input type="date" id="date" name="date" lang="en">
+                        </div>
+                        <div class="input-field">
+                            <label for="time">Time</label>
+                            <input type="time" id="time" name="time">
+                        </div>
+                    </div>
+
+                    <label for="locationTown">City</label>
+                    <div class="input-group">
+                        <input type="text" id="locationTown" name="locationTown" placeholder="City">
+                    </div>
+
+                    <label for="locationNeighborhood">Address</label>
+                    <div class="input-group">
+                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
+                    </div>
+
+                    <button type="submit" class="primary-btn">Post Request</button>
+                </form>
+
+                <div class="requests-section">
+                    <h3>Your Requests</h3>
+                    {% if user_posts %}
+                        {% for post in user_posts %}
+                        <div class="post-card">
+                            <div class="post-header">
+                                <strong>{{ post.description }}</strong>
+                            </div>
+                            <div class="post-details">
+                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
+                                <span><i class="fa-regular fa-clock"></i> {{ post.time }}</span>
+                            </div>
+                            <div class="post-location">
+                                <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-requests">You have no requests yet.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </main>
+
+        <footer class="main-footer">
+            <div class="footer-content">
+                <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
+                <div class="footer-links">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                    <a href="#">Contact Us</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
 </html>
