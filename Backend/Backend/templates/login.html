@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Welcome</title>
-    <link rel="stylesheet" href="{% static 'styles-login.css' %}">
+    <title>HelpConnect - Log In</title>
+    <link rel="stylesheet" href="{% static 'styles-signup.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -19,26 +19,24 @@
 
     <main>
         <div class="welcome-card">
-            <h1>Welcome</h1>
-            <p class="subtitle">Join our community to help or receive help.</p>
+            <h1>Welcome Back</h1>
+            <p class="subtitle">Log in to your account to continue.</p>
 
             <div class="input-group">
                 <label for="name">Your Name</label>
-                <input type="text" id="name" placeholder="Enter your name">
+                <input type="text" id="name" name="name" placeholder="Enter your name">
             </div>
 
-            <div class="selection-container">
-                <div class="option-card">
-                    <i class="fa-regular fa-heart"></i>
-                    <p>I need help</p>
-                </div>
-                <div class="option-card">
-                    <i class="fa-solid fa-handshake-angle"></i>
-                    <p>I want to help</p>
-                </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter password">
             </div>
 
-            <button class="continue-btn">Continue</button>
+            <button class="continue-btn">Log In</button>
+
+            <p class="login-text">
+                Don't have an account? <a href="/signup/">Sign up</a>
+            </p>
         </div>
     </main>
 

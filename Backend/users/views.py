@@ -31,11 +31,8 @@ def VerifySignUp(request):
         cond[3]=True
     
     cond[4] = any(char.isdigit() for char in password)
-
     cond[5] = any(char.isupper() for char in password)
-
     cond[6] = any(char.islower() for char in password)
-
     return cond
 
 
@@ -75,6 +72,9 @@ def LogIn(request):
         return redirect('home.html')
     else:
         return render(request, 'login.html', {'error': 'Invalid username or password.'})
+ 
+def LogOut(request):
+    
         
 
     
