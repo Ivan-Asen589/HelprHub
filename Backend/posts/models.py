@@ -6,3 +6,4 @@ class Post(models.Model):
     heading = models.CharField(max_length=30)
     locationTown = models.CharField(max_length=30)
     locationNeighborhood = models.CharField(max_length=30)
+    description = models.CharField(max_length=3000)

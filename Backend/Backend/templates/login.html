@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpConnect - Welcome</title>
+    <link rel="stylesheet" href="{% static 'styles-login.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header>
+        <div class="header-content">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>HelpConnect™</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="welcome-card">
+            <h1>Welcome</h1>
+            <p class="subtitle">Join our community to help or receive help.</p>
+
+            <div class="input-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" placeholder="Enter your name">
+            </div>
+
+            <div class="selection-container">
+                <div class="option-card">
+                    <i class="fa-regular fa-heart"></i>
+                    <p>I need help</p>
+                </div>
+                <div class="option-card">
+                    <i class="fa-solid fa-handshake-angle"></i>
+                    <p>I want to help</p>
+                </div>
+            </div>
+
+            <button class="continue-btn">Continue</button>
+        </div>
+    </main>
+
+    <footer>
+        HelpConnect™ 2026 - Assisting People with Disabilities
+    </footer>
+
+</body>
+</html>
