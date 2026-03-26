@@ -11,7 +11,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f8fafc;
-    font-size: 16px; /* Fixed standard size */
+    font-size: 16px; /* Fixed: Back to normal size */
 }
 
 /* Header */
@@ -55,12 +55,12 @@ h1 {
 }
 
 .subtitle {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     color: #64748b;
     margin-bottom: 25px;
 }
 
-/* Inputs */
+/* Form Styles */
 .input-group {
     text-align: left;
     margin-bottom: 15px;
@@ -80,7 +80,7 @@ h1 {
     border: 1px solid #e2e8f0;
     border-radius: 8px;
     outline: none;
-    transition: border 0.2s;
+    transition: 0.2s;
 }
 
 .input-group input:focus {
@@ -131,14 +131,14 @@ h1 {
     font-weight: bold;
     font-size: 1rem;
     cursor: pointer;
-    transition: opacity 0.2s;
+    transition: 0.2s;
 }
 
 .continue-btn:hover {
-    opacity: 0.9;
+    background-color: #3350e6;
 }
 
-/* Login Link Text */
+/* Footer Link */
 .login-text {
     margin-top: 20px;
     font-size: 0.9rem;
@@ -149,10 +149,6 @@ h1 {
     color: #4461ff;
     text-decoration: none;
     font-weight: 600;
-}
-
-.login-text a:hover {
-    text-decoration: underline;
 }
 
 /* Footer */

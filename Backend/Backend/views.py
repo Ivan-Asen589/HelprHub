@@ -4,6 +4,8 @@ def index(request):
 
 def login(request):
     return render(request, 'login.html', {})
+def signup(request):
+    return render(request, 'signup.html', {})
 # def AddUser()
 def nujdaeshti(request):
     return render(request, 'nujdaeshti.html', {})
@@ -11,3 +13,5 @@ def pomagashti(request):
     return render(request, 'pomagashti.html', {})
 def helper_selector(request):
     return render(request, 'helper_selector.html', {})
+def profil_potrebitel(request):
+    return render(request, 'profil_potrebitel.html', {})
