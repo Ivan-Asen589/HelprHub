@@ -62,12 +62,15 @@ def SignUp(request):
 
 def LogIn(request):
     if request.method == 'POST':
-        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+        user = authenticate(request, email=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
             login(request, user)
-            return redirect('/')
+            if user.type == 'helper':
+                return redirect('helper_selector')
+            else:
+                return redirect('nujdaeshti')
         else:
-            return render(request, 'login.html', {'error': 'Invalid username or password.'})
+            return render(request, 'login.html', {'error': 'Invalid email or password.'})
     return render(request, 'login.html')
 
 

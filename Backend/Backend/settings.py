@@ -20,6 +20,7 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
 
 # Auth
 AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
 
 # Application definition
 INSTALLED_APPS = [
