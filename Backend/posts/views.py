@@ -16,7 +16,7 @@ def create_post(request):
             heading=request.POST.get('heading'),
             locationTown=request.POST.get('locationTown'),
             locationNeighborhood=request.POST.get('locationNeighborhood'),
-            description=request.POST.get('description'),
+            description=request.POST.get('description')
         )
         return redirect('post-list')
 
