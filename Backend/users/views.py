@@ -74,7 +74,8 @@ def LogIn(request):
         return render(request, 'login.html', {'error': 'Invalid username or password.'})
  
 def LogOut(request):
-    
+    logout(request.user)
+    return redirect('signup.html')
         
 
     
