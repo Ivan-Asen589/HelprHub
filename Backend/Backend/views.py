@@ -11,3 +11,5 @@ def pomagashti(request):
     return render(request, 'pomagashti.html', {})
 def helper_selector(request):
     return render(request, 'helper_selector.html', {})
+def profil_potrebitel(request):
+    return render(request, 'profil_potrebitel.html', {})    
