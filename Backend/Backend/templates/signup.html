@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-content">
             <i class="fa-solid fa-heart-pulse"></i>
@@ -24,10 +23,9 @@
 
             <form method="POST">
                 {% csrf_token %}
-
                 <div class="input-group">
                     <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    <input type="text" id="name" name="username" placeholder="Enter your name" required>
                 </div>
 
                 <div class="input-group">
@@ -42,20 +40,18 @@
 
                 <div class="input-group">
                     <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Repeat your password" required>
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Repeat your password" required>
                 </div>
 
                 <div class="selection-container">
-                    <label class="option-card">
-                        <input type="radio" name="user_type" value="need_help" style="display:none">
+                    <div class="option-card">
                         <i class="fa-regular fa-heart"></i>
                         <p>I need help</p>
-                    </label>
-                    <label class="option-card">
-                        <input type="radio" name="user_type" value="want_to_help" style="display:none">
+                    </div>
+                    <div class="option-card">
                         <i class="fa-solid fa-handshake-angle"></i>
                         <p>I want to help</p>
-                    </label>
+                    </div>
                 </div>
 
                 <button type="submit" class="continue-btn">Create Account</button>
@@ -70,6 +66,5 @@
     <footer>
         HelpConnect™ 2026 - Assisting People with Disabilities
     </footer>
-
 </body>
 </html>
