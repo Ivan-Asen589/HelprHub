@@ -16,34 +16,50 @@
     <main>
         <div class="welcome card">
             <h1>Post a new request</h1>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.errors }}
+
                <p class="subtitle">What do you need help with?</p>
                <div class="input-group">
-                <input type="text" id="name" placeholder=" e.g. I need help with groceries, housework, mobility assitance ">
+                <input type="text" id="description" name="description" placeholder=" e.g. I need help with groceries, housework, mobility assitance ">
                </div>
 
                <p class="subtitle">On what dates do you need the help</p>
                <div class="input-group">
-                <input type="date" id="name" placeholder="dd.mm.yy ">
+                <input type="date" id="date" name="date">
                </div>
 
                <p class="subtitle">At what time do you need the help</p>
                <div class="input-group">
-                <input type="time" id="name" placeholder="--:--">
+                <input type="time" id="time" name="time">
                </div>
 
-               <p class="subtitle">Location</p>
+               <p class="subtitle">City</p>
                <div class="input-group">
-                <input type="text" id="name" placeholder="City">
+                <input type="text" id="locationTown" name="locationTown" placeholder="City">
                </div>
 
-                 <p class="subtitle">Location</p>
+               <p class="subtitle">Address</p>
                <div class="input-group">
-                <input type="text" id="name" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
+                <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
                </div>
 
-               <button>Post Request</button>
+               <button type="submit">Post Request</button>
+            </form>
 
                <h3>Your Requests</h3>
+               {% if user_posts %}
+                   {% for post in user_posts %}
+                   <div class="post-card">
+                       <p><strong>{{ post.description }}</strong></p>
+                       <p>{{ post.date }} at {{ post.time }}</p>
+                       <p>{{ post.locationTown }}, {{ post.locationNeighborhood }}</p>
+                   </div>
+                   {% endfor %}
+               {% else %}
+                   <p>You have no requests yet.</p>
+               {% endif %}
 
         </div>
     </main>

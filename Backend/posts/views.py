@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.core.exceptions import PermissionDenied
 from .models import Post
 
 
@@ -14,17 +15,24 @@ class PostDetailView(DetailView):
 
 class PostCreateView(CreateView):
     model = Post
-    template_name = 'posts/post_form.html'
-    fields = ['heading', 'locationTown', 'locationNeighborhood', 'description']
+    template_name = 'nujdaeshti.html'
+    fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
+    success_url = '/helpers/'
 
     def form_valid(self, form):
         form.instance.publisher_id = self.request.session.get('user_id')
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user_id = self.request.session.get('user_id')
+        context['user_posts'] = Post.objects.filter(publisher_id=user_id)
+        return context
+
 class PostUpdateView(UpdateView):
     model = Post
     template_name = 'posts/post_form.html'
-    fields = ['heading', 'locationTown', 'locationNeighborhood', 'description']
+    fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
