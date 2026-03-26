@@ -1,18 +1,25 @@
-from django.shortcuts import render
-from models.py import User
+from django.shortcuts import render, redirect
+from .models import User
+from django.contrib.auth import authenticate, get_user_model, login, logout
 
+
+User = get_user_model()
 # Create your views here.
 """
 conditions:
 SignUp:
 
 """
-def VerifySignUp(username: str, password: str, email=None, phone_number=None):
+def VerifySignUp(request):
+    if request.method != 'POST':
+        return None
+    username=request.POST.get('username')
+    password=request.POST.get('password')
     minLen = 8
     maxLen = 30
-    cond = [False for i in range(6)]
+    cond = [False for i in range(7)]
     
-    cond[0] = not any(elem.username==username for elem in User.objects.all()) #not: username already exists?
+    cond[0] = not any(elem.acc.username==username for elem in UserProperties.objects.all()) #not: username already exists?
     
     if len(username)<=maxLen:
         cond[1]=True #not: username too long?
@@ -31,13 +38,51 @@ def VerifySignUp(username: str, password: str, email=None, phone_number=None):
 
     return cond
 
-def SignUp(username_: str, password_: str, email_=None, phone_number_=None):
-    User.objects.create(
-        username=username_,
-        password=password_,
-        email=email_,
-        phone_number=phone_number_
-    )
+
+def SignUp(request):
+    ver = VerifySignUp(request)
+    if True not in ver:
+        User.objects.create(
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+        )
+        login(authenticate(username=request.POST.get('username'), password=request.POST.get('password')))
+        return redirect('home.html')
+    else:
+        errorsList = []
+        if not ver[0]:
+            errorsList.append('Username already exists!')
+        elif not ver[1]:
+            errorsList.append('Username too long (>30)!')
+        if not ver[2]:
+            errorsList.append('Password too short (<8)!')
+        elif not ver[3]:
+            errorsList.append('Password too long (>30)!')
+        if not ver[4]:
+            errorsList.append('Password has no digit!')
+        if not ver[5]:
+            errorsList.append('Password has no uppercase letter!')
+        if not ver[6]:
+            errorsList.append('Password has no lowercase letter!')
+        return render(request, 'signup.html', {'errors': errorsList})
+    
+
+def LogIn(request):
+    user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+    if user is not None:
+        login(user)
+        return redirect('home.html')
+    else:
+        return render(request, 'login.html', {'error': 'Invalid username or password.'})
+        
+
+    
+
+
+
+
+
 
         
     
