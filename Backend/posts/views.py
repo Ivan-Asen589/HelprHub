@@ -16,11 +16,11 @@ def create_post(request):
             heading=request.POST.get('heading'),
             locationTown=request.POST.get('locationTown'),
             locationNeighborhood=request.POST.get('locationNeighborhood'),
-            description=request.POST.get('description'),
+            description=request.POST.get('description')
         )
         return redirect('post-list')
 
-    return render(request, 'posts/post_form.html')
+    return render(request, 'home.html')
 
 def edit_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -32,7 +32,7 @@ def edit_post(request, pk):
         post.save()
         return redirect('post-list')
 
-    return render(request, 'posts/post_form.html', {'post': post})
+    return render(request, 'home.html', {'post': post})
 
 def delete_post(request, pk):
     post = get_object_or_404(Post, pk=pk)
@@ -40,4 +40,4 @@ def delete_post(request, pk):
         post.delete()
         return redirect('post-list')
 
-    return render(request, 'posts/post_confirm_delete.html', {'post': post})
+    return render(request, 'home.html', {'post': post})
