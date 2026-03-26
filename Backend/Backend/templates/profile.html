@@ -1,52 +1,75 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'style.css' %}"> 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-<main class="profile-container">
-    <div class="profile-card">
-        <div class="avatar-wrapper">
-            <div class="avatar-display">
-                <i class="fas fa-user" id="default-icon"></i>
-                <div class="edit-overlay">
-                    <i class="fas fa-pencil-alt"></i>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Account | HelpConnect</title>
+    <link rel="stylesheet" href="{% static 'styles-profiles.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="header-content">
+            <div class="logo-area">
+                <i class="fa-solid fa-heart-pulse"></i>
+                <span>HelpConnect™</span>
             </div>
-            <h2>{{ user.username }}</h2>
-            <p class="role-badge">{{ user.user_role|title }}</p>
+            <a href="{% url 'profile' %}" class="account-link">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
         </div>
+    </header>
 
-        <form method="POST" class="profile-form">
-            {% csrf_token %}
-            
-            <div class="input-section">
-                <h3>About Me</h3>
-                <textarea name="description" placeholder="Tell us about yourself...">{{ user.description }}</textarea>
-            </div>
+    <main class="profile-wrapper">
+        <div class="profile-card">
+            <form method="POST">
+                {% csrf_token %} <div class="avatar-section">
+                    <div class="avatar-container">
+                        <i class="fa-solid fa-user default-avatar"></i>
+                        <div class="pencil-overlay">
+                            <i class="fa-solid fa-pencil"></i>
+                        </div>
+                    </div>
+                    <h2>{{ user.username }}</h2>
+                </div>
 
-            <div class="input-grid">
-                <div class="input-group">
-                    <label>Full Name</label>
-                    <input type="text" name="first_name" value="{{ user.first_name }}">
+                <div class="form-section">
+                    <h3>About Me</h3>
+                    <textarea name="description" placeholder="Tell us about yourself...">{{ user.description }}</textarea>
+                    
+                    <div class="input-grid">
+                        <div class="field">
+                            <label>Full Name</label>
+                            <input type="text" name="first_name" value="{{ user.first_name }}">
+                        </div>
+                        <div class="field">
+                            <label>Phone Number</label>
+                            <input type="text" name="phone_number" value="{{ user.phone_number }}">
+                        </div>
+                    </div>
                 </div>
-                <div class="input-group">
-                    <label>Phone Number</label>
-                    <input type="text" name="phone_number" value="{{ user.phone_number }}">
-                </div>
-            </div>
 
-            <hr>
-            <h3>Change Password</h3>
-            <div class="input-grid">
-                <div class="input-group">
-                    <label>New Password</label>
-                    <input type="password" name="new_password">
-                </div>
-                <div class="input-group">
-                    <label>Confirm New Password</label>
-                    <input type="password" name="confirm_password">
-                </div>
-            </div>
+                <hr>
 
-            <button type="submit" class="save-btn">Save Changes</button>
-        </form>
-    </div>
-</main>
+                <div class="form-section">
+                    <h3>Security</h3>
+                    <div class="input-grid">
+                        <div class="field">
+                            <label>New Password</label>
+                            <input type="password" name="new_password" placeholder="Leave blank to keep current">
+                        </div>
+                        <div class="field">
+                            <label>Confirm Password</label>
+                            <input type="password" name="confirm_password">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="save-btn">Save Changes</button>
+            </form>
+        </div>
+    </main>
+
+</body>
+</html>

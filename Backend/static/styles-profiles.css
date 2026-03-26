@@ -1,50 +1,86 @@
-.profile-container {
-    padding: 40px 20px;
+/* General Setup */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7fe;
+}
+
+/* Blue Stripe */
+.main-header {
+    background-color: #4461ff;
+    color: white;
+    padding: 15px 0;
+}
+
+.header-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.logo-area {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.logo-area i { margin-right: 10px; }
+
+.account-link {
+    color: white;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+/* Profile Card */
+.profile-wrapper {
     display: flex;
     justify-content: center;
+    padding: 40px 20px;
 }
 
 .profile-card {
     background: white;
     width: 100%;
     max-width: 600px;
-    border-radius: 15px;
+    border-radius: 12px;
     padding: 30px;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
-/* Avatar Hover Effect */
-.avatar-wrapper {
+/* Hover Pencil Effect */
+.avatar-section {
     text-align: center;
     margin-bottom: 30px;
 }
 
-.avatar-display {
-    width: 100px;
-    height: 100px;
-    background: #f0f4ff;
+.avatar-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    background: #e2e8f0;
     border-radius: 50%;
-    margin: 0 auto 15px;
+    margin: 0 auto 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: relative;
     cursor: pointer;
     overflow: hidden;
 }
 
-.avatar-display i#default-icon {
-    font-size: 50px;
-    color: #4461ff;
-}
+.default-avatar { font-size: 60px; color: #94a3b8; }
 
-.edit-overlay {
+.pencil-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(68, 97, 255, 0.8);
+    background: rgba(68, 97, 255, 0.7);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -52,39 +88,41 @@
     transition: 0.3s;
 }
 
-.avatar-display:hover .edit-overlay {
-    opacity: 1;
-}
+.avatar-container:hover .pencil-overlay { opacity: 1; }
 
-.edit-overlay i {
-    color: white;
-    font-size: 24px;
-}
+.pencil-overlay i { color: white; font-size: 24px; }
 
-/* Form Layout */
+/* Form Elements */
 .input-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 15px;
+    gap: 20px;
+    margin-top: 15px;
 }
 
-textarea {
+label { display: block; font-weight: bold; margin-bottom: 5px; color: #334155; }
+
+input, textarea {
     width: 100%;
-    height: 100px;
     padding: 10px;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    resize: none;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
 }
+
+textarea { height: 80px; resize: none; }
 
 .save-btn {
+    width: 100%;
     background: #4461ff;
     color: white;
     border: none;
-    padding: 12px 25px;
+    padding: 14px;
     border-radius: 8px;
+    font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
-    width: 100%;
+    margin-top: 25px;
 }
+
+.save-btn:hover { background: #334dc7; }
