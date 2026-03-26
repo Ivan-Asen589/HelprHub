@@ -1,0 +1,140 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+/* Header */
+header {
+    background-color: #4461ff;
+    padding: 15px 40px;
+    color: white;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* Main/Card Area */
+main {
+    flex-grow: 1; /* Pushes footer to bottom */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.welcome-card {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #1e293b;
+    margin-bottom: 5px;
+}
+
+.subtitle {
+    color: #64748b;
+    margin-bottom: 30px;
+}
+
+/* Inputs */
+.input-group {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.input-group label {
+    display: block;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 8px;
+    color: #334155;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    outline: none;
+}
+
+/* Selection Boxes */
+.selection-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.option-card {
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 25px 10px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option-card i {
+    font-size: 24px;
+    color: #94a3b8;
+    margin-bottom: 10px;
+}
+
+.option-card p {
+    font-weight: bold;
+    color: #1e293b;
+}
+
+.option-card:hover {
+    border-color: #4461ff;
+    background-color: #f0f4ff;
+}
+
+/* Button */
+.continue-btn {
+    width: 100%;
+    background-color: #9eadff; /* Lighter blue like the image */
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 8px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.continue-btn:hover {
+    background-color: #4461ff;
+}
+
+/* Footer */
+footer {
+    background-color: #1e293b;
+    color: #94a3b8;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.8rem;
+}
