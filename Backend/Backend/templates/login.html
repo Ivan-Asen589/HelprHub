@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-content">
             <i class="fa-solid fa-heart-pulse"></i>
@@ -26,8 +25,8 @@
                 {% csrf_token %}
 
                 <div class="input-group">
-                    <label for="name">Your Name</label>
-                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
                 </div>
 
                 <div class="input-group">
@@ -47,6 +46,5 @@
     <footer>
         HelpConnect™ 2026 - Assisting People with Disabilities
     </footer>
-
 </body>
 </html>
