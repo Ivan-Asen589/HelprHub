@@ -14,11 +14,37 @@
     </div>
 </header>
 <main>
-    <i class="fa-regular fa-circle-user"></i>
+    <div class="profile-container">
+    <img src="image.jpg" class="pfp" alt="Profile Picture">
+    
+    <label for="file-upload" class="pfp-overlay">
+        <span class="pencil-icon">✎</span>
+        <span class="text">Change</span>
+    </label>
+
+    <input id="file-upload" type="file" style="display:none;"/>
+</div>
+  
+  <input type="file" id="file-input" style="display: none;" accept="image/*">
+</div>
     <h1>name</h1>
+    <div class="input-group">
+                <label for="name">Change Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your new name">
+                <button>Confirm</button>
+            </div>
     <h2>password</h2>
+    <div class="input-group">
+                <label for="password">Change Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your new password">
+                <div><p><input type="password" id="password" name="password" placeholder="Confirm new password"></p></div>
+                <button>Confirm</button>
+            </div>
     <hr>
     <h2>bio</h2>
+              <div class="input-group">
+                <input type="bio" id="bio" name="bio" placeholder="Enter your bio">
+            </div>
 </main>
 </body>
 </html>
