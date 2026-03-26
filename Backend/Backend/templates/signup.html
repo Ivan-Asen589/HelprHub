@@ -21,7 +21,7 @@
             <h1>Create Account</h1>
             <p class="subtitle">Join our community to help or receive help.</p>
 
-            <form method="POST">
+            <form method="POST" action="/signup/">
                 {% csrf_token %}
                 <div class="input-group">
                     <label for="name">Your Name</label>
@@ -55,6 +55,14 @@
                         <p>I want to help</p>
                     </label>
                 </div>
+
+                {% if errors %}
+                <ul style="color:red; margin-bottom:12px;">
+                    {% for error in errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
 
                 <button type="submit" class="continue-btn">Create Account</button>
             </form>

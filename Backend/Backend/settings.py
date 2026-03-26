@@ -14,7 +14,9 @@ SECRET_KEY = 'django-insecure-9l7_c4g4ijs#n3j11o)7dha4%2bc4j4(@p*sgo-lwspie(ub*j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
 
 # Auth
 AUTH_USER_MODEL = 'users.User'
@@ -89,7 +91,7 @@ STATIC_URL = 'static/'
 # THE PART YOU WERE LOOKING FOR:
 STATICFILES_DIRS = [
     BASE_DIR / "static",
-    BASE_DIR / "Backend" / "static",
+    BASE_DIR / "static",
 ]
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
