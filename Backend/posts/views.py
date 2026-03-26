@@ -1,43 +1,44 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 
-def post_list(request):
-    posts = Post.objects.all()
-    return render(request, 'posts/post_list.html', {'posts': posts})
 
-def create_post(request):
-    if request.method == 'POST':
-        publisher_id = request.session.get('user_id')
-        if not publisher_id:
-            return redirect('login')
+class PostListView(ListView):
+    model = Post
+    template_name = 'posts/post_list.html'
+    context_object_name = 'posts'
 
-        post = Post.objects.create(
-            publisher_id=publisher_id,
-            heading=request.POST.get('heading'),
-            locationTown=request.POST.get('locationTown'),
-            locationNeighborhood=request.POST.get('locationNeighborhood'),
-            description=request.POST.get('description')
-        )
-        return redirect('post-list')
+class PostDetailView(DetailView):
+    model = Post
+    template_name = 'posts/post_detail.html'
 
-    return render(request, 'home.html')
+class PostCreateView(CreateView):
+    model = Post
+    template_name = 'posts/post_form.html'
+    fields = ['heading', 'locationTown', 'locationNeighborhood', 'description']
 
-def edit_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        post.heading = request.POST.get('heading')
-        post.locationTown = request.POST.get('locationTown')
-        post.locationNeighborhood = request.POST.get('locationNeighborhood')
-        post.description = request.POST.get('description')
-        post.save()
-        return redirect('post-list')
+    def form_valid(self, form):
+        form.instance.publisher_id = self.request.session.get('user_id')
+        return super().form_valid(form)
 
-    return render(request, 'home.html', {'post': post})
+class PostUpdateView(UpdateView):
+    model = Post
+    template_name = 'posts/post_form.html'
+    fields = ['heading', 'locationTown', 'locationNeighborhood', 'description']
 
-def delete_post(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    if request.method == 'POST':
-        post.delete()
-        return redirect('post-list')
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset)
+        if post.publisher_id != self.request.session.get('user_id'):
+            raise PermissionDenied
+        return post
 
-    return render(request, 'home.html', {'post': post})
+class PostDeleteView(DeleteView):
+    model = Post
+    template_name = 'posts/post_confirm_delete.html'
+    success_url = '/posts/'
+
+    def get_object(self, queryset=None):
+        post = super().get_object(queryset)
+        if post.publisher_id != self.request.session.get('user_id'):
+            raise PermissionDenied
+        return post
