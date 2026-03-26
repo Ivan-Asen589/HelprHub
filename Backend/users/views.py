@@ -1,51 +1,17 @@
 from django.shortcuts import render, redirect
-from .models import User
 from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.views.generic import DetailView, UpdateView, DeleteView
 
 User = get_user_model()
-# Create your views here.
 
-def LogIn(request):
-    if request.method == 'POST':
-        user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
-        if user is not None:
-            login(request, user)
-            return redirect('home')
-        else:
-            return render(request, 'login.html', {'error': 'Invalid username or password.'})
- 
-def LogOut(request):
-    logout(request)
-    return redirect('login')
 
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'profile.html'
-
-class UserUpdateView(UpdateView):
-    model = User
-    template_name = 'profile.html'
-    fields = ['username', 'password', 'phone_number', 'town', 'neighborhood']
-
-    def get_object(self, queryset=None):
-        return self.request.user
-    
-class UserDeleteView(DeleteView):
-    model = User
-    template_name = 'delete_account.html'
-    success_url = '/login/'
-
-    def get_object(self, queryset=None):
-        return self.request
-    
 def VerifySignUp(request):
     if request.method != 'POST':
         return None
     username = request.POST.get('username')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
-    cond = [False for i in range(7)]
+    cond = [False] * 7
     cond[0] = not User.objects.filter(username=username).exists()
     cond[1] = len(username) <= 30
     cond[2] = len(password) >= 8
@@ -55,9 +21,10 @@ def VerifySignUp(request):
     cond[6] = any(char.islower() for char in password)
     return cond
 
+
 def SignUp(request):
     if request.method != 'POST':
-        return render(request, 'signup.html') 
+        return render(request, 'signup.html')
     ver = VerifySignUp(request)
     user_role = request.POST.get('user_role')
     if False not in ver:
@@ -66,6 +33,7 @@ def SignUp(request):
             email=request.POST.get('email'),
             password=request.POST.get('password'),
         )
+        user.phone_number = request.POST.get('phone_number', '')
         user.type = user_role
         user.save()
         login(request, user)
@@ -80,7 +48,7 @@ def SignUp(request):
         elif not ver[1]:
             errorsList.append('Username too long (>30)!')
         if not ver[2]:
-            errorsList.append('Password too short (<8)!')
+            errorsList.append('Password too short (min 8 chars)!')
         if not ver[3]:
             errorsList.append('Passwords do not match!')
         if not ver[4]:
@@ -90,3 +58,42 @@ def SignUp(request):
         if not ver[6]:
             errorsList.append('Password has no lowercase letter!')
         return render(request, 'signup.html', {'errors': errorsList})
+
+
+def LogIn(request):
+    if request.method == 'POST':
+        user = authenticate(request, username=request.POST.get('username'), password=request.POST.get('password'))
+        if user is not None:
+            login(request, user)
+            return redirect('/')
+        else:
+            return render(request, 'login.html', {'error': 'Invalid username or password.'})
+    return render(request, 'login.html')
+
+
+def LogOut(request):
+    logout(request)
+    return redirect('login')
+
+
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'profile.html'
+
+
+class UserUpdateView(UpdateView):
+    model = User
+    template_name = 'profile.html'
+    fields = ['username', 'phone_number', 'town', 'neighborhood']
+
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'delete_account.html'
+    success_url = '/login/'
+
+    def get_object(self, queryset=None):
+        return self.request.user

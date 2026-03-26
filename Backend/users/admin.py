@@ -1,5 +1,5 @@
 from django.contrib import admin
 from .models import User
 
-# Register your models here.
+# This tells the admin panel to show the User table
 admin.site.register(User)
