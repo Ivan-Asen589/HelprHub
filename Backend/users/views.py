@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.views.generic import DetailView, UpdateView, DeleteView
 
 User = get_user_model()
 
@@ -12,16 +13,15 @@ def VerifySignUp(request):
     
     minLen = 8
     maxLen = 30
-    # Initialize all as False
     cond = [False] * 7
     
     # 0: Check if username exists
     cond[0] = not User.objects.filter(username=username).exists()
     # 1: Username length
-    if len(username) <= maxLen: cond[1] = True
+    cond[1] = len(username) <= maxLen
     # 2 & 3: Password length
-    if len(password) >= minLen: cond[2] = True
-    if len(password) <= maxLen: cond[3] = True
+    cond[2] = len(password) >= minLen
+    cond[3] = len(password) <= maxLen
     # 4, 5, 6: Character checks
     cond[4] = any(char.isdigit() for char in password)
     cond[5] = any(char.isupper() for char in password)
@@ -35,37 +35,36 @@ def SignUp(request):
 
     ver = VerifySignUp(request)
     
-    # FIX: We want ALL conditions to be True to succeed
-    if all(ver):
-        # Use create_user so the password gets hashed (encrypted)
+    if ver and all(ver):
+        # Create user with hashed password
         user = User.objects.create_user(
             username=request.POST.get('username'),
             email=request.POST.get('email'),
             password=request.POST.get('password')
         )
-        # Capture the role from the radio buttons we added
+        # Save the role (Helper or Receiver)
         user.user_role = request.POST.get('user_role') 
         user.save()
         
         login(request, user)
-        return redirect('/') # Redirect to your homepage URL name
+        return redirect('/') 
     else:
         errorsList = []
-        if not ver[0]: errorsList.append('Username already exists!')
-        if not ver[1]: errorsList.append('Username too long!')
-        if not ver[2]: errorsList.append('Password too short (min 8)!')
-        if not ver[4]: errorsList.append('Password needs a digit!')
-        if not ver[5]: errorsList.append('Password needs uppercase!')
-        if not ver[6]: errorsList.append('Password needs lowercase!')
+        if ver:
+            if not ver[0]: errorsList.append('Username already exists!')
+            if not ver[1]: errorsList.append('Username too long!')
+            if not ver[2]: errorsList.append('Password too short (min 8)!')
+            if not ver[4]: errorsList.append('Password needs a digit!')
+            if not ver[5]: errorsList.append('Password needs uppercase!')
+            if not ver[6]: errorsList.append('Password needs lowercase!')
         return render(request, 'signup.html', {'errors': errorsList})
 
 def LogIn(request):
     if request.method == 'POST':
-        email = request.POST.get('email') # Swapped to email
+        email = request.POST.get('email')
         password = request.POST.get('password')
         
-        # Django authenticate usually looks for 'username', 
-        # but if you have a custom user model, it uses that.
+        # Note: If your custom user uses email as the username field, this works.
         user = authenticate(request, username=email, password=password)
         
         if user is not None:
@@ -78,3 +77,24 @@ def LogIn(request):
 def LogOut(request):
     logout(request)
     return redirect('login')
+
+# Profile and Account Management Views
+class UserDetailView(DetailView):
+    model = User
+    template_name = 'profile.html'
+
+class UserUpdateView(UpdateView):
+    model = User
+    template_name = 'profile.html'
+    fields = ['username', 'phone_number', 'town', 'neighborhood']
+
+    def get_object(self, queryset=None):
+        return self.request.user
+    
+class UserDeleteView(DeleteView):
+    model = User
+    template_name = 'delete_account.html'
+    success_url = '/login/'
+
+    def get_object(self, queryset=None):
+        return self.request.user
