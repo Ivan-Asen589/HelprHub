@@ -22,17 +22,21 @@
             <h1>Welcome Back</h1>
             <p class="subtitle">Log in to your account to continue.</p>
 
-            <div class="input-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your name">
-            </div>
+            <form method="POST">
+                {% csrf_token %}
 
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter password">
-            </div>
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter your name" required>
+                </div>
 
-            <button class="continue-btn">Log In</button>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <button type="submit" class="continue-btn">Log In</button>
+            </form>
 
             <p class="login-text">
                 Don't have an account? <a href="/signup/">Sign up</a>

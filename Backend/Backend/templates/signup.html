@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-
     <header>
         <div class="header-content">
             <i class="fa-solid fa-heart-pulse"></i>
@@ -22,38 +21,41 @@
             <h1>Create Account</h1>
             <p class="subtitle">Join our community to help or receive help.</p>
 
-            <div class="input-group">
-                <label for="name">Your Name</label>
-                <input type="text" id="name" placeholder="Enter your name">
-            </div>
-
-            <div class="input-group">
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="name@example.com">
-            </div>
-
-            <div class="input-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" placeholder="Create a password">
-            </div>
-
-            <div class="input-group">
-                <label for="confirm-password">Confirm Password</label>
-                <input type="password" id="confirm-password" placeholder="Repeat your password">
-            </div>
-
-            <div class="selection-container">
-                <div class="option-card">
-                    <i class="fa-regular fa-heart"></i>
-                    <p>I need help</p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="input-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" name="username" placeholder="Enter your name" required>
                 </div>
-                <div class="option-card">
-                    <i class="fa-solid fa-handshake-angle"></i>
-                    <p>I want to help</p>
-                </div>
-            </div>
 
-            <button class="continue-btn">Create Account</button>
+                <div class="input-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Create a password" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Repeat your password" required>
+                </div>
+
+                <div class="selection-container">
+                    <div class="option-card">
+                        <i class="fa-regular fa-heart"></i>
+                        <p>I need help</p>
+                    </div>
+                    <div class="option-card">
+                        <i class="fa-solid fa-handshake-angle"></i>
+                        <p>I want to help</p>
+                    </div>
+                </div>
+
+                <button type="submit" class="continue-btn">Create Account</button>
+            </form>
 
             <p class="login-text">
                 Already have an account? <a href="/login/">Log in</a>
@@ -64,6 +66,5 @@
     <footer>
         HelpConnect™ 2026 - Assisting People with Disabilities
     </footer>
-
 </body>
 </html>
