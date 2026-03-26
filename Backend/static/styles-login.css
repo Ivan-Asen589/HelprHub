@@ -11,10 +11,9 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f8fafc;
-    font-size: 16px; /* Fixed standard size */
+    font-size: 16px; 
 }
 
-/* Header */
 header {
     background-color: #4461ff;
     padding: 15px 40px;
@@ -29,7 +28,6 @@ header {
     font-size: 1.2rem;
 }
 
-/* Main/Card Area */
 main {
     flex-grow: 1;
     display: flex;
@@ -60,7 +58,6 @@ h1 {
     margin-bottom: 25px;
 }
 
-/* Inputs */
 .input-group {
     text-align: left;
     margin-bottom: 15px;
@@ -87,7 +84,6 @@ h1 {
     border-color: #4461ff;
 }
 
-/* Selection Boxes */
 .selection-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -120,7 +116,6 @@ h1 {
     background-color: #f0f4ff;
 }
 
-/* Button */
 .continue-btn {
     width: 100%;
     background-color: #4461ff;
@@ -138,7 +133,6 @@ h1 {
     opacity: 0.9;
 }
 
-/* Login Link Text */
 .login-text {
     margin-top: 20px;
     font-size: 0.9rem;
@@ -151,11 +145,6 @@ h1 {
     font-weight: 600;
 }
 
-.login-text a:hover {
-    text-decoration: underline;
-}
-
-/* Footer */
 footer {
     background-color: #1e293b;
     color: #94a3b8;
