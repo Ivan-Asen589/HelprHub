@@ -7,6 +7,7 @@ class User(AbstractUser):
     phone_number = PhoneNumberField(blank=True)
     town = models.CharField(max_length=30, blank=True)
     neighborhood = models.CharField(max_length=30, blank=True)
+    description = models.TextField(max_length=500, null=True, blank=True)
     USER_TYPE_CHOICES = [
         ('helper', 'Helper'),
         ('receiver', 'Receiver'),

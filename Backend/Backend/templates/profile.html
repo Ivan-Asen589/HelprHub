@@ -1,50 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Need help</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-<header>
-    <div class="header-content">
-        <i class="fa-solid fa-heart-pulse"></i>
-        <span>HelpConnect™</span>
-    </div>
-</header>
-<main>
-    <div class="profile-container">
-    <img src="image.jpg" class="pfp" alt="Profile Picture">
-    
-    <label for="file-upload" class="pfp-overlay">
-        <span class="pencil-icon">✎</span>
-        <span class="text">Change</span>
-    </label>
+<main class="profile-container">
+    <div class="profile-card">
+        <div class="avatar-wrapper">
+            <div class="avatar-display">
+                <i class="fas fa-user" id="default-icon"></i>
+                <div class="edit-overlay">
+                    <i class="fas fa-pencil-alt"></i>
+                </div>
+            </div>
+            <h2>{{ user.username }}</h2>
+            <p class="role-badge">{{ user.user_role|title }}</p>
+        </div>
 
-    <input id="file-upload" type="file" style="display:none;"/>
-</div>
-  
-  <input type="file" id="file-input" style="display: none;" accept="image/*">
-</div>
-    <h1>name</h1>
-    <div class="input-group">
-                <label for="name">Change Name</label>
-                <input type="text" id="name" name="name" placeholder="Enter your new name">
-                <button>Confirm</button>
+        <form method="POST" class="profile-form">
+            {% csrf_token %}
+            
+            <div class="input-section">
+                <h3>About Me</h3>
+                <textarea name="description" placeholder="Tell us about yourself...">{{ user.description }}</textarea>
             </div>
-    <h2>password</h2>
-    <div class="input-group">
-                <label for="password">Change Password</label>
-                <input type="password" id="password" name="password" placeholder="Enter your new password">
-                <div><p><input type="password" id="password" name="password" placeholder="Confirm new password"></p></div>
-                <button>Confirm</button>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" name="first_name" value="{{ user.first_name }}">
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="text" name="phone_number" value="{{ user.phone_number }}">
+                </div>
             </div>
-    <hr>
-    <h2>bio</h2>
-              <div class="input-group">
-                <input type="bio" id="bio" name="bio" placeholder="Enter your bio">
+
+            <hr>
+            <h3>Change Password</h3>
+            <div class="input-grid">
+                <div class="input-group">
+                    <label>New Password</label>
+                    <input type="password" name="new_password">
+                </div>
+                <div class="input-group">
+                    <label>Confirm New Password</label>
+                    <input type="password" name="confirm_password">
+                </div>
             </div>
+
+            <button type="submit" class="save-btn">Save Changes</button>
+        </form>
+    </div>
 </main>
-</body>
-</html>
