@@ -5,7 +5,6 @@
     font-family: 'Segoe UI', Arial, sans-serif;
 }
 
-/* Sticky Footer Logic */
 html, body {
     height: 100%;
 }
@@ -18,7 +17,7 @@ html, body {
 }
 
 main {
-    flex: 1; /* This is the key to pushing the footer down */
+    flex: 1;
     display: flex;
     justify-content: center;
     padding: 40px 20px;
@@ -95,28 +94,21 @@ input {
     border-radius: 10px;
     font-weight: bold;
     cursor: pointer;
-    transition: background 0.2s;
 }
 
 .primary-btn:hover { background-color: #334dc7; }
 
-/* Error Styling */
 .error-box {
     background-color: #fee2e2;
     border-left: 4px solid #ef4444;
     padding: 15px;
     margin-bottom: 20px;
     color: #b91c1c;
-    border-radius: 4px;
 }
 
-/* History cards */
 .requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
 .post-card { background: #f8fafc; padding: 15px; border-radius: 10px; margin-top: 10px; border: 1px solid #e2e8f0; }
-.post-details { color: #64748b; font-size: 0.9rem; margin-bottom: 5px; }
-.post-location { font-size: 0.9rem; font-weight: 500; color: #1e293b; }
 
-/* Footer */
 footer {
     background: #1e293b;
     color: white;
@@ -124,4 +116,3 @@ footer {
     text-align: center;
 }
 .footer-links a { color: #94a3b8; margin: 0 10px; text-decoration: none; font-size: 0.8rem; }
-.footer-links a:hover { color: white; }
