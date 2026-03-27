@@ -97,6 +97,7 @@ def LogOut(request):
     logout(request)
     return redirect('login')
 
+@csrf_protect
 @login_required
 def profile(request):
     """
@@ -133,7 +134,7 @@ def profile(request):
 
     return render(request, 'profile.html', {'user': user})
 
-@login_required
+@csrf_protect
 def delete_account(request):
     """
     Handles account deletion with password verification.
