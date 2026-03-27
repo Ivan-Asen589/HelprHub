@@ -8,7 +8,7 @@ body {
 
 .account-link {
     color: white;
-    font-size: 1.8rem;
+    font-size: 1.8em;
     text-decoration: none;
 }
 
@@ -16,31 +16,31 @@ body {
 .profile-wrapper {
     display: flex;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 2.5em 1.25em;
 }
 
 .profile-card {
     background: white;
     width: 100%;
-    max-width: 600px;
-    border-radius: 12px;
-    padding: 30px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    max-width: 37.5em;
+    border-radius: 0.75em;
+    padding: 1.875em;
+    box-shadow: 0 0.25em 0.9375em rgba(0,0,0,0.1);
 }
 
 /* Hover Pencil Effect */
 .avatar-section {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 1.875em;
 }
 
 .avatar-container {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 7.5em;
+    height: 7.5em;
     background: #e2e8f0;
     border-radius: 50%;
-    margin: 0 auto 10px;
+    margin: 0 auto 0.625em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -48,7 +48,7 @@ body {
     overflow: hidden;
 }
 
-.default-avatar { font-size: 60px; color: #94a3b8; }
+.default-avatar { font-size: 3.75em; color: #94a3b8; }
 
 .pencil-overlay {
     position: absolute;
@@ -66,39 +66,39 @@ body {
 
 .avatar-container:hover .pencil-overlay { opacity: 1; }
 
-.pencil-overlay i { color: white; font-size: 24px; }
+.pencil-overlay i { color: white; font-size: 1.5em; }
 
 /* Form Elements */
 .input-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 15px;
+    gap: 1.25em;
+    margin-top: 0.9375em;
 }
 
-label { display: block; font-weight: bold; margin-bottom: 5px; color: #334155; }
+label { display: block; font-weight: bold; margin-bottom: 0.3125em; color: #334155; }
 
 input, textarea {
     width: 100%;
-    padding: 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
+    padding: 0.625em;
+    border: 0.0625em solid #cbd5e1;
+    border-radius: 0.375em;
     box-sizing: border-box;
 }
 
-textarea { height: 80px; resize: none; }
+textarea { height: 5em; resize: none; }
 
 .save-btn {
     width: 100%;
     background: #4461ff;
     color: white;
     border: none;
-    padding: 14px;
-    border-radius: 8px;
-    font-size: 1rem;
+    padding: 0.875em;
+    border-radius: 0.5em;
+    font-size: 1em;
     font-weight: bold;
     cursor: pointer;
-    margin-top: 25px;
+    margin-top: 1.5625em;
 }
 
 body {
@@ -112,7 +112,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 40px 20px;
+    padding: 2.5em 1.25em;
 }
 
 .profile-wrapper {
@@ -122,19 +122,19 @@ main {
 .save-btn:hover { background: #334dc7; }
 
 .danger-zone {
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #f1f5f9; /* Subtle line to separate from Logout */
+    margin-top: 1.25em;
+    padding-top: 1.25em;
+    border-top: 0.0625em solid #f1f5f9; /* Subtle line to separate from Logout */
     text-align: center;
 }
 
 .delete-btn {
     background: transparent;
     color: #e53e3e;
-    border: 1.5px solid #e53e3e;
-    padding: 10px 24px;
-    border-radius: 8px;
-    font-size: 0.95rem;
+    border: 0.0938em solid #e53e3e;
+    padding: 0.625em 1.5em;
+    border-radius: 0.5em;
+    font-size: 0.95em;
     cursor: pointer;
     transition: all 0.2s ease;
     width: 100%; /* Makes it match the Save button width */
@@ -148,39 +148,39 @@ main {
 
 .modal-card {
     background: #fff;
-    border-radius: 12px;
-    padding: 32px 28px;
-    max-width: 420px;
+    border-radius: 0.75em;
+    padding: 2em 1.75em;
+    max-width: 26.25em;
     width: 90%;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    box-shadow: 0 0.5em 2em rgba(0,0,0,0.18);
     text-align: center;
 }
 
 .modal-card h3 {
-    margin: 0 0 12px;
-    font-size: 1.3rem;
+    margin: 0 0 0.75em;
+    font-size: 1.3em;
     color: #1a202c;
 }
 
 .modal-card p {
     color: #555;
-    margin-bottom: 24px;
+    margin-bottom: 1.5em;
     line-height: 1.5;
 }
 
 .modal-actions {
     display: flex;
-    gap: 12px;
+    gap: 0.75em;
     justify-content: center;
 }
 
 .modal-cancel-btn {
-    padding: 10px 22px;
-    border: 1.5px solid #cbd5e0;
+    padding: 0.625em 1.375em;
+    border: 0.0938em solid #cbd5e0;
     background: transparent;
-    border-radius: 8px;
+    border-radius: 0.5em;
     cursor: pointer;
-    font-size: 0.95rem; 
+    font-size: 0.95em; 
     transition: background 0.2s;
 }
 
@@ -189,57 +189,57 @@ main {
 }
 
 .modal-confirm-btn {
-    padding: 10px 22px;
+    padding: 0.625em 1.375em;
     background: #e53e3e;
     color: #fff;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5em;
     cursor: pointer;
-    font-size: 0.95rem;
+    font-size: 0.95em;
     transition: background 0.2s;
 }
 
 .modal-confirm-btn:hover {
     background: #c53030;
 }
-.username-display { color: #1e293b; margin-top: 10px; font-size: 1.5rem; }
+.username-display { color: #1e293b; margin-top: 0.625em; font-size: 1.5em; }
 .role-badge { 
     display: inline-block; 
     background: #e0e7ff; 
     color: #4461ff; 
-    padding: 4px 12px; 
-    border-radius: 20px; 
-    font-size: 0.85rem; 
+    padding: 0.25em 0.75em; 
+    border-radius: 1.25em; 
+    font-size: 0.85em; 
     font-weight: 600;
 }
-.form-section h3 { font-size: 1.1rem; color: #4461ff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
-.form-divider { border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0; }
-.help-text { font-size: 0.8rem; color: #64748b; margin-top: 8px; }
+.form-section h3 { font-size: 1.1em; color: #4461ff; margin-bottom: 0.9375em; display: flex; align-items: center; gap: 0.5em; }
+.form-divider { border: 0; border-top: 0.0625em solid #e2e8f0; margin: 1.875em 0; }
+.help-text { font-size: 0.8em; color: #64748b; margin-top: 0.5em; }
 
 .logout-section {
-    margin-top: 20px;
-    border-top: 1px solid #f1f5f9;
-    padding-top: 20px;
+    margin-top: 1.25em;
+    border-top: 0.0625em solid #f1f5f9;
+    padding-top: 1.25em;
 }
 
 .logout-btn {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 0.5em;
     width: 100%;
-    padding: 7px;
+    padding: 0.4375em;
     background: transparent;
     color: #ef4444;
-    border: 1.5px solid #ef4444;
-    border-radius: 8px;
-    font-size: 1rem;
+    border: 0.0938em solid #ef4444;
+    border-radius: 0.5em;
+    font-size: 1em;
     font-weight: bold;
     text-decoration: none;
     box-sizing: border-box;
     transition: all 0.2s ease;
     font-weight: 400;
-    font-size: 0.9rem;
+    font-size: 0.9em;
 }
 
 .logout-btn:hover {
@@ -250,31 +250,31 @@ main {
 /* --- ADD THIS TO THE END OF YOUR 338-LINE FILE --- */
 
 .messages-container {
-    margin-bottom: 20px;
+    margin-bottom: 1.25em;
 }
 
 .alert {
-    padding: 12px;
-    border-radius: 8px;
-    margin-bottom: 10px;
-    font-size: 0.9rem;
+    padding: 0.75em;
+    border-radius: 0.5em;
+    margin-bottom: 0.625em;
+    font-size: 0.9em;
     text-align: center;
 }
 
 .alert-error, .alert-danger {
     background-color: #fee2e2;
     color: #b91c1c;
-    border: 1px solid #fecaca;
+    border: 0.0625em solid #fecaca;
 }
 
 .alert-success {
     background-color: #dcfce7;
     color: #15803d;
-    border: 1px solid #bbf7d0;
+    border: 0.0625em solid #bbf7d0;
 }
 
 .modal-card input[type="password"]:focus {
     border-color: #e53e3e !important;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+    box-shadow: 0 0 0 0.1875em rgba(229, 62, 62, 0.1);
 }
