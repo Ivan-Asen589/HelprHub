@@ -17,7 +17,7 @@
     <p class="section-label"><i class="fa-solid fa-circle-play"></i> Your Next Request</p>
 
     {% if next_request %}
-    <div class="next-request-card">
+    <div class="next-request-card" onclick="window.location='/posts/{{ next_request.pk }}/'">
         <div>
             <span class="next-badge">Up next</span>
             <h2>{{ next_request.title }}</h2>
@@ -67,7 +67,7 @@
 
     {% if upcoming_requests %}
         {% for post in upcoming_requests %}
-        <div class="request-card">
+        <div class="request-card" onclick="window.location='/posts/{{ post.pk }}/'">
             <h3>{{ post.title }}</h3>
             <p class="card-desc">{{ post.description|truncatechars:100 }}</p>
             <div class="post-meta">
@@ -100,7 +100,7 @@
 
     {% if past_requests %}
         {% for post in past_requests %}
-        <div class="request-card past">
+        <div class="request-card past" onclick="window.location='/posts/{{ post.pk }}/'">
             <span class="past-badge"><i class="fa-solid fa-check"></i> Completed</span>
             <h3>{{ post.title }}</h3>
             <p class="card-desc">{{ post.description|truncatechars:100 }}</p>

@@ -62,6 +62,7 @@ main {
     align-items: flex-start;
     gap: 1.25em;
     box-shadow: 0 0.5em 1.5em rgba(68, 97, 255, 0.25);
+    cursor: pointer;
 }
 
 .next-request-card .next-badge {
@@ -224,6 +225,7 @@ main {
     border: 0.0625em solid #e2e8f0;
     margin-bottom: 0.875em;
     transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
 }
 
 .request-card:hover {

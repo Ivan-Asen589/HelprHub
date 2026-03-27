@@ -16,6 +16,25 @@
         margin: 0 auto;
     }
 
+    .detail-card h3 {
+        font-size: 0.85rem;
+        font-weight: 400;
+        color: #475569;
+        margin: 0 0 4px 0;
+    }
+
+    .detail-card h3::before {
+        content: '← ';
+    }
+
+    .detail-card h2.section-title {
+        font-size: 1.8rem;
+        color: #1e293b;
+        margin: 0 0 20px 0;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
     .detail-card h2 {
         font-size: 1.6rem;
         color: #1e293b;
@@ -105,10 +124,10 @@
 {% endblock %}
 
 {% block content %}
-<h3><a href="{% url 'helper_selector' %}" style="color: inherit; text-decoration: none;">Back to All Requests</a></h3>
-<h2>Request Details</h2>
-
 <div class="detail-card">
+    <h3><a href="{% url 'helpers' %}" style="color: inherit; margin-bottom: 1em; text-decoration: none;"> To Dashboard</a></h3>
+    <h3><a href="{% url 'helper_selector' %}" style="color:  inherit; margin-top: 1em; text-decoration: none;"> To Requests</a></h3>
+    <h2 class="section-title">Request Details</h2>
     <h2>{{ object.title }}</h2>
     <p class="description">{{ object.description }}</p>
 
