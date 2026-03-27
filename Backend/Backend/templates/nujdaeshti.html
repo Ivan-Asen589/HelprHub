@@ -35,7 +35,7 @@
             <div class="welcome card">
                 <h1>Post a new request</h1>
                 
-                <form method="post">
+                <form method="post" action = '/nujdaeshti/'>
                     {% csrf_token %}
 
                     {% if form.errors %}
@@ -91,6 +91,7 @@
                             <div class="post-details">
                                 <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
                                 <span><i class="fa-regular fa-clock"></i> {{ post.time }}</span>
+                                <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
                             </div>
                             <div class="post-location">
                                 <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
