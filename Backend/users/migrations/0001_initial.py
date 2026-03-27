@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('phone_number', phonenumber_field.modelfields.PhoneNumberField(blank=True, max_length=128, region=None)),
                 ('town', models.CharField(blank=True, max_length=30)),
                 ('neighborhood', models.CharField(blank=True, max_length=30)),
-                ('type', models.CharField(choices=[('helper', 'Helper'), ('receiver', 'Receiver')], default='helper', max_length=10)),
+                ('user_role', models.CharField(choices=[('helper', 'Helper'), ('receiver', 'Receiver')], default='helper', max_length=10)),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
                 ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
             ],

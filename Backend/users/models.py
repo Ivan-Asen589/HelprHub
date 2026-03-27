@@ -13,4 +13,4 @@ class User(AbstractUser):
         ('helper', 'Helper'),
         ('receiver', 'Receiver'),
     ]
-    type = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='helper')
+    user_role = models.CharField(max_length=10, choices=USER_TYPE_CHOICES, default='helper')

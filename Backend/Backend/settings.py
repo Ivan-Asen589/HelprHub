@@ -1,28 +1,15 @@
-"""
-Django settings for Backend project.
-"""
-
 from pathlib import Path
 import os
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+# --- 1. BASE_DIR MUST BE AT THE VERY TOP ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# --- 2. BASIC CONFIG ---
 SECRET_KEY = 'django-insecure-9l7_c4g4ijs#n3j11o)7dha4%2bc4j4(@p*sgo-lwspie(ub*j'
-
-# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
-CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'http://127.0.0.1:8000']
-
-# Auth
-AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend']
-
-# Application definition
+# --- 3. APPS ---
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -35,6 +22,7 @@ INSTALLED_APPS = [
     'interactions',
 ]
 
+# --- 4. MIDDLEWARE ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -47,6 +35,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Backend.urls'
 
+# --- 5. TEMPLATES (Fixing path to use BASE_DIR) ---
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -64,7 +53,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
-# Database
+# --- 6. DATABASE (Fixing the ENGINE error) ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -72,27 +61,24 @@ DATABASES = {
     }
 }
 
-# Password validation
-AUTH_PASSWORD_VALIDATORS = [
-    {'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'},
-    {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
+# --- 7. AUTH & REDIRECTS ---
+AUTH_USER_MODEL = 'users.User'
+AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend', 'django.contrib.auth.backends.ModelBackend']
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'profile'
+LOGOUT_REDIRECT_URL = 'login'
+
+# --- 8. STATIC FILES ---
+STATIC_URL = 'static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
 ]
+
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
-
-# --- STATIC FILES CONFIGURATION ---
-STATIC_URL = 'static/'
-
-# THE PART YOU WERE LOOKING FOR:
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-    BASE_DIR / "static",
-]
-
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
