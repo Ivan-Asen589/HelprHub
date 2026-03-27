@@ -25,6 +25,7 @@ INSTALLED_APPS = [
 # --- 4. MIDDLEWARE ---
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # For serving static files in production
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,6 +77,7 @@ LOGOUT_REDIRECT_URL = 'login'
 
 # --- 8. STATIC FILES (CSS, JS, Images) ---
 STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
 # --- 9. MEDIA FILES (User Uploads like Profile Pictures) ---
