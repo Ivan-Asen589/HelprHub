@@ -164,11 +164,11 @@ button:hover {
 
 .primary-btn:hover { background-color: #334dc7; transform: translateY(-1px); }
 
-.requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
+.requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 2px; }
 
 .post-card {
     background: #f8fafc;
-    padding: 20px;
+    padding: 2px;
     border-radius: 12px;
     margin-top: 15px;
     border: 1px solid #e2e8f0;
@@ -186,13 +186,12 @@ footer {
 textarea {
     width: 100%;
     height: 120px; 
-    padding: 10px;
+    padding: 3px;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
-    resize: vertical;
-    padding: 30px 20px;
-    text-align: center;
+    resize: none;
+    text-align: left;
 }
 
 .footer-links { margin-top: 10px; }
@@ -205,7 +204,13 @@ textarea {
 .footer-links a:hover { color: white; }
 
 .required-dot {
-    color: #ef4444; /* A bright red */
+    color: #ef4444; 
     margin-left: 4px;
     font-weight: bold;
 }
+
+#delete {
+    background-color: red;
+
+}
+
