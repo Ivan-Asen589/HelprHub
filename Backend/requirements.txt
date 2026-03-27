@@ -1,6 +1,8 @@
 asgiref==3.11.1
 Django==6.0.3
 django-phonenumber-field==8.4.0
+gunicorn==25.3.0
+packaging==26.0
 phonenumbers==9.0.26
 pillow==12.1.1
 sqlparse==0.5.5
