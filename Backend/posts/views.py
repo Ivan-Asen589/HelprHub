@@ -17,16 +17,17 @@ class PostCreateView(CreateView):
     model = Post
     template_name = 'nujdaeshti.html'
     fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
-    success_url = '/helpers/'
+    success_url = '/nujdaeshti/'
 
     def form_valid(self, form):
-        form.instance.publisher_id = self.request.session.get('user_id')
+        if not self.request.user.is_authenticated:
+            return redirect('/login/')
+        form.instance.publisher = self.request.user
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        user_id = self.request.session.get('user_id')
-        context['user_posts'] = Post.objects.filter(publisher_id=user_id)
+        context['user_posts'] = Post.objects.filter(publisher=self.request.user)
         return context
 
 class PostUpdateView(UpdateView):
@@ -36,7 +37,7 @@ class PostUpdateView(UpdateView):
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
-        if post.publisher_id != self.request.session.get('user_id'):
+        if post.publisher != self.request.user:
             raise PermissionDenied
         return post
 
@@ -47,6 +48,6 @@ class PostDeleteView(DeleteView):
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
-        if post.publisher_id != self.request.session.get('user_id'):
+        if post.publisher != self.request.user:
             raise PermissionDenied
         return post

@@ -81,6 +81,7 @@ input, textarea {
     border: 1px solid #cbd5e1;
     font-size: 15px;
     transition: all 0.3s;
+    resize: none;
 }
 
 input:focus, textarea:focus {
@@ -154,3 +155,8 @@ footer {
     font-size: 0.85rem;
 }
 .footer-links a:hover { color: white; }
+
+.status {
+    color: inherit;
+    margin-top:0.7em;
+}
