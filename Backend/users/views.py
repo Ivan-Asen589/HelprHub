@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
-from django.views.generic import DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
 
@@ -98,6 +97,7 @@ def LogOut(request):
     logout(request)
     return redirect('login')
 
+@csrf_protect
 @login_required
 def profile(request):
     """
@@ -134,13 +134,23 @@ def profile(request):
 
     return render(request, 'profile.html', {'user': user})
 
-class UserDeleteView(DeleteView):
+@csrf_protect
+def delete_account(request):
     """
-    Handles account deletion.
+    Handles account deletion with password verification.
     """
-    model = User
-    template_name = 'delete_account.html'
-    success_url = reverse_lazy('login')
-
-    def get_object(self, queryset=None):
-        return self.request.user
+    if request.method == 'POST':
+        entered_password = request.POST.get('password_confirm')
+        user = request.user
+        
+        # Verify the password before deleting
+        if user.check_password(entered_password):
+            user.delete()
+            messages.success(request, "Your account has been successfully deleted.")
+            return redirect('login')
+        else:
+            # If the password is wrong, show an error and stay on profile
+            messages.error(request, "Incorrect password. Account deletion failed.")
+            return redirect('profile')
+            
+    return redirect('profile')

@@ -165,6 +165,56 @@ button:hover {
 
 .primary-btn:hover { background-color: #334dc7; transform: translateY(-1px); }
 
+.create-post-btn-full {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+#post-form-section {
+    border-top: 1px solid #e2e8f0;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+#post-form-section h2 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #1a202c;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.form-actions button {
+    flex: 1;
+    margin-top: 0;
+    padding: 14px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.form-actions .primary-btn {
+    background-color: #4461ff;
+    color: white;
+}
+
+.form-actions .primary-btn:hover { background-color: #334dc7; transform: translateY(-1px); }
+
+.cancel-btn {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+
+.cancel-btn:hover { background-color: #cbd5e0; }
+
 .requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
 
 .post-card {
@@ -245,3 +295,37 @@ textarea {
 .status {
     margin: 10px 0;
 }
+
+.secondary-btn {
+    display: block;
+    margin-top: 25px;
+    padding: 14px;
+    background-color: #e2e8f0;
+    color: #1e293b;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.secondary-btn:hover { background-color: #cbd5e1; transform: translateY(-1px); }
+
+.delete-btn {
+    margin-top: 15px;
+    padding: 14px;
+    width: 100%;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.delete-btn:hover { background-color: #dc2626; transform: translateY(-1px); }
