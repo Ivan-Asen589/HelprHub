@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.urls import reverse_lazy
 from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
 
@@ -17,10 +18,10 @@ def VerifySignUp(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
-    
+
     minLen = 8
     maxLen = 30
-    
+
     # Initialize 8 conditions to match the error handling in SignUp
     cond = [False] * 8
 
@@ -83,14 +84,14 @@ def LogIn(request):
         email = request.POST.get('email')
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
-        
+
         if user is not None:
             login(request, user, backend='users.backends.EmailBackend')
             if user.user_role == 'helper':
                 return redirect('helper_selector')
             return redirect('receivers')
         return render(request, 'login.html', {'errors': ['Invalid email or password.'], 'email': email})
-    
+
     return render(request, 'login.html')
 
 def LogOut(request):
@@ -106,10 +107,20 @@ def profile(request):
     user = request.user
     if request.method == 'POST':
         # Update text fields
-        user.first_name = request.POST.get('first_name', user.first_name)
-        user.phone_number = request.POST.get('phone_number', user.phone_number)
+        new_username = request.POST.get('username', '').strip()
+        if new_username and new_username != user.username:
+            if User.objects.filter(username=new_username).exists():
+                messages.error(request, "That username is already taken.")
+                return redirect('profile')
+            user.username = new_username
         user.description = request.POST.get('description', user.description)
-        
+
+        phone = request.POST.get('phone_number', '').strip()
+        if phone:
+            user.phone_number = phone
+        else:
+            user.phone_number = ''
+
         # Handle image upload
         if 'profile_picture' in request.FILES:
             user.profile_picture = request.FILES['profile_picture']
@@ -117,19 +128,24 @@ def profile(request):
         # Handle password change
         new_pw = request.POST.get('new_password')
         confirm_pw = request.POST.get('confirm_password')
-        
+
         if new_pw:
-            if new_pw == confirm_pw:
-                user.set_password(new_pw)
-                user.save()
-                update_session_auth_hash(request, user) # Prevents logout after password change
-                messages.success(request, "Profile and password updated!")
-            else:
+            if new_pw != confirm_pw:
                 messages.error(request, "Passwords do not match.")
-        else:
+                return redirect('profile')
+            user.set_password(new_pw)
+
+        try:
+            user.full_clean()
             user.save()
+            if new_pw:
+                update_session_auth_hash(request, user)
             messages.success(request, "Profile updated successfully!")
-            
+        except ValidationError as e:
+            for field, errors in e.message_dict.items():
+                for error in errors:
+                    messages.error(request, f"{field}: {error}")
+
         return redirect('profile')
 
     return render(request, 'profile.html', {'user': user})
@@ -142,7 +158,7 @@ def delete_account(request):
     if request.method == 'POST':
         entered_password = request.POST.get('password_confirm')
         user = request.user
-        
+
         # Verify the password before deleting
         if user.check_password(entered_password):
             user.delete()
@@ -152,7 +168,8 @@ def delete_account(request):
             # If the password is wrong, show an error and stay on profile
             messages.error(request, "Incorrect password. Account deletion failed.")
             return redirect('profile')
-            
+
     return redirect('profile')
+
 def contact_us(request):
     return render(request, 'contact_us.html')
