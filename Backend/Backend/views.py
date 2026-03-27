@@ -1,3 +1,4 @@
+from posts.models import Post
 from django.shortcuts import render, redirect
 from django.contrib.auth import login as auth_login
 from django.contrib.auth.forms import AuthenticationForm
@@ -9,6 +10,15 @@ def index(request):
     return render(request, 'home.html', {})
 
 def signup(request):
+    return render(request, 'signup.html', {})
+# def AddUser()
+def nujdaeshti(request):
+    return render(request, 'nujdaeshti.html', {})
+def pomagashti(request):
+    return render(request, 'pomagashti.html', {})
+def helper_selector(request):
+    posts = Post.objects.all()
+    return render(request, 'helper_selector.html', {'posts': posts})
     if request.method == 'POST':
         form = UserSignUpForm(request.POST)
         if form.is_valid():
