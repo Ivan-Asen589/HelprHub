@@ -23,6 +23,10 @@ def VerifySignUp(request):
 
 
 def SignUp(request):
+    if request.user.is_authenticated:
+        if request.user.user_role == 'helper':
+            return redirect('helper_selector')
+        return redirect('nujdaeshti')
     if request.method != 'POST':
         return render(request, 'signup.html')
     ver = VerifySignUp(request)
@@ -61,6 +65,10 @@ def SignUp(request):
 
 
 def LogIn(request):
+    if request.user.is_authenticated:
+        if request.user.user_role == 'helper':
+            return redirect('helper_selector')
+        return redirect('nujdaeshti')
     if request.method == 'POST':
         user = authenticate(request, email=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
