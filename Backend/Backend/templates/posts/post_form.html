@@ -22,6 +22,9 @@
         <div class="error-box">
             <p><strong>Please fix the following:</strong></p>
             <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
                 {% for field in form %}
                     {% for error in field.errors %}
                         <li>{{ error }}</li>
@@ -42,8 +45,12 @@
                 <input type="date" id="id_date" name="date" value="{{ form.date.value }}">
             </div>
             <div class="input-field">
-                <label for="id_time">Time</label>
-                <input type="time" id="id_time" name="time" value="{{ form.time.value }}">
+                <label for="id_start_time">Start Time</label>
+                <input type="time" id="id_start_time" name="start_time" value="{{ form.start_time.value }}">
+            </div>
+            <div class="input-field">
+                <label for="id_end_time">End Time</label>
+                <input type="time" id="id_end_time" name="end_time" value="{{ form.end_time.value }}">
             </div>
         </div>
 

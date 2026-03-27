@@ -31,6 +31,9 @@
         <div class="error-box">
             <p><strong>Please fix the following:</strong></p>
             <ul>
+                {% for error in form.non_field_errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
                 {% for field in form %}
                     {% for error in field.errors %}
                         <li>{{ error }}</li>
@@ -44,28 +47,32 @@
 
         <label for="description">What do you need help with?<span class="required-dot">*</span></label>
         <div class="input-group">
-            <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required></textarea>
+            <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required>{{ form.description.value|default:'' }}</textarea>
         </div>
 
         <div class="input-row">
             <div class="input-field">
                 <label for="date">Date<span class="required-dot">*</span></label>
-                <input type="date" id="date" name="date" lang="en" required>
+                <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}" required>
             </div>
             <div class="input-field">
-                <label for="time">Time<span class="required-dot">*</span></label>
-                <input type="time" id="time" name="time" required>
+                <label for="start_time">Start Time<span class="required-dot">*</span></label>
+                <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}" required>
+            </div>
+            <div class="input-field">
+                <label for="end_time">End Time<span class="required-dot">*</span></label>
+                <input type="time" id="end_time" name="end_time" value="{{ form.end_time.value|default:'' }}" required>
             </div>
         </div>
 
         <label for="locationTown">City<span class="required-dot">*</span></label>
         <div class="input-group">
-            <input type="text" id="locationTown" name="locationTown" placeholder="City" required>
+            <input type="text" id="locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value|default:'' }}" required>
         </div>
 
         <label for="locationNeighborhood">Address<span class="required-dot">*</span></label>
         <div class="input-group">
-            <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" required>
+            <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value|default:'' }}" required>
         </div>
 
         <button type="submit" class="primary-btn">Post Request</button>
@@ -85,7 +92,7 @@
                 <hr id='post-divider'>
                 <div class="post-details">
                     <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
-                    <span><i class="fa-regular fa-clock"></i> {{ post.time }}</span>
+                    <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
                     <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
                 </div>
                 <div class="post-location">

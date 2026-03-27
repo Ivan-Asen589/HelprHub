@@ -66,7 +66,7 @@ class PostCreateView(RoleRequiredMixin, CreateView):
     required_role = 'receiver'
     model = Post
     template_name = 'nujdaeshti.html'
-    fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
+    fields = ['description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
     success_url = '/nujdaeshti/'
 
     def form_valid(self, form):
@@ -84,7 +84,7 @@ class PostUpdateView(RoleRequiredMixin, UpdateView):
     required_role = 'receiver'
     model = Post
     template_name = 'posts/post_form.html'
-    fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
+    fields = ['description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
     success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):
