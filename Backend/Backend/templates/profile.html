@@ -9,13 +9,12 @@
 </head>
 <body>
 
-<header class="main-blue-header">
+<header>
     <div class="header-content">
         <div class="logo">
             <i class="fa-solid fa-heart-pulse"></i>
             <span>HelpConnect™</span>
         </div>
-        
         <div class="nav-icons">
             <a href="{% url 'nujdaeshti' %}" class="header-icon">
                 <i class="fa-solid fa-hand-holding-heart"></i>
@@ -26,11 +25,12 @@
         </div>
     </div>
 </header>
+
 <main class="profile-wrapper">
     <div class="profile-card">
-        <form method="POST" enctype="multipart/form-data"> 
+        <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
-            
+
             <div class="avatar-section">
                 <div class="avatar-container" onclick="document.getElementById('fileInput').click();">
                     <div id="avatar-display">
@@ -55,7 +55,6 @@
                     <label>About Me</label>
                     <textarea name="description" placeholder="Share a bit about your background or how you can help others...">{{ user.description }}</textarea>
                 </div>
-                
                 <div class="input-grid">
                     <div class="field">
                         <label>Name</label>
@@ -87,6 +86,12 @@
 
             <button type="submit" class="save-btn">Save Changes</button>
         </form>
+
+        <div class="danger-zone">
+            <button type="button" class="delete-btn" onclick="document.getElementById('deleteModal').style.display='flex'">
+                Delete Account
+            </button>
+        </div>
     </div>
     <a href="{% url 'login' %}" class="header-icon" title="Logout">
     <i class="fa-solid fa-right-from-bracket"></i>
@@ -98,22 +103,37 @@
     </a>
 </div>
 </main>
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-            </div>
+
+<div id="deleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
+    <div class="modal-card">
+        <h3>Delete Account</h3>
+        <p>Are you sure you want to permanently delete your account? This action cannot be undone.</p>
+        <div class="modal-actions">
+            <button type="button" class="modal-cancel-btn" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
+            <form method="POST" action="{% url 'delete_account' %}">
+                {% csrf_token %}
+                <button type="submit" class="modal-confirm-btn">Yes, Delete My Account</button>
+            </form>
         </div>
-    </footer>
-    <script>
+    </div>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+</footer>
+
+<script>
 function previewImage(event) {
     const reader = new FileReader();
     reader.onload = function() {
         const output = document.getElementById('avatar-display');
-        // Replace the Icon with the actual Image
         output.innerHTML = `<img src="${reader.result}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">`;
     };
     reader.readAsDataURL(event.target.files[0]);
