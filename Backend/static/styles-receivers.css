@@ -31,7 +31,7 @@ main {
     box-shadow: 0 0.25em 0.75em rgba(0,0,0,0.1);
 }
 
-/* Date/Time Layouts */
+/* Layout for Date and Time */
 .date-container {
     display: flex;
     justify-content: flex-start;
@@ -52,8 +52,12 @@ main {
     flex: 1;
 }
 
-/* Form Headings and Labels */
-h1 { font-size: 1.8em; margin-bottom: 1.5625em; color: #1e293b; }
+/* Headings and Labels */
+h1 { 
+    font-size: 1.8em; 
+    margin-bottom: 1.5625em; 
+    color: #1e293b; 
+}
 
 label {
     display: block;
@@ -64,7 +68,7 @@ label {
     font-size: 0.95em;
 }
 
-/* Input Styles */
+/* Inputs */
 input, textarea {
     width: 100%;
     padding: 0.75em;
@@ -81,18 +85,18 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-/* Button Container */
+/* Buttons */
 .form-actions {
     display: flex;
     gap: 0.9375em;
     margin-top: 1.5625em;
 }
 
-.form-actions .primary-btn, .form-actions .cancel-btn {
+.form-actions .primary-btn, 
+.form-actions .cancel-btn {
     flex: 1;
 }
 
-/* Blue Button */
 .primary-btn {
     padding: 0.875em;
     background-color: #4461ff;
@@ -107,9 +111,11 @@ input:focus, textarea:focus {
     text-decoration: none;
 }
 
-.primary-btn:hover { background-color: #334dc7; transform: translateY(-0.0625em); }
+.primary-btn:hover { 
+    background-color: #334dc7; 
+    transform: translateY(-0.0625em); 
+}
 
-/* Grey Cancel Button */
 .cancel-btn {
     background-color: #e2e8f0;
     color: #475569;
@@ -120,17 +126,45 @@ input:focus, textarea:focus {
     cursor: pointer;
     transition: 0.2s;
     padding: 0.875em;
+    display: inline-block;
+    text-align: center;
 }
 
-.cancel-btn:hover { background-color: #cbd5e1; }
+.cancel-btn:hover { 
+    background-color: #cbd5e1; 
+}
+
+/* Strong Red Delete Button */
+.delete-btn {
+    width: 100%;
+    padding: 0.875em;
+    background-color: #dc2626; /* Strong Red */
+    color: white;
+    border: none;
+    border-radius: 0.625em;
+    font-weight: bold;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: center;
+}
+
+.delete-btn:hover {
+    background-color: #b91c1c; /* Darker Red on hover */
+    transform: translateY(-0.0625em);
+}
 
 .create-post-btn-full {
     width: 100%;
     margin-bottom: 1.25em;
 }
 
-/* Post Cards below the form */
-.requests-section { margin-top: 2.5em; border-top: 0.0625em solid #e2e8f0; padding-top: 1.25em; }
+/* Post Cards (List View) */
+.requests-section { 
+    margin-top: 2.5em; 
+    border-top: 0.0625em solid #e2e8f0; 
+    padding-top: 1.25em; 
+}
 
 .post-card {
     position: relative;

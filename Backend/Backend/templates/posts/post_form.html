@@ -5,6 +5,24 @@
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'styles-receivers.css' %}">
+<style>
+    .required-dot {
+        color: #ef4444;
+        margin-left: 3px;
+        font-weight: bold;
+    }
+    .post-details-preview {
+        margin-bottom: 20px;
+        color: #64748b;
+        font-size: 0.95em;
+    }
+    /* Confirmation Section Styling */
+    .danger-zone {
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 2px dashed #fee2e2;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -22,62 +40,64 @@
         <div class="error-box">
             <p><strong>Please fix the following:</strong></p>
             <ul>
-                {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
                 {% for field in form %}
                     {% for error in field.errors %}
-                        <li>{{ error }}</li>
+                        <li>{{ field.label }}: {{ error }}</li>
                     {% endfor %}
                 {% endfor %}
             </ul>
         </div>
         {% endif %}
 
-        <label for="id_title">Title</label>
+        <label for="id_title">Title<span class="required-dot">*</span></label>
         <div class="input-group">
-            <input type="text" id="id_title" name="title" placeholder="e.g. Help with groceries" value="{{ form.title.value }}">
+            <input type="text" id="id_title" name="title" value="{{ form.title.value|default:'' }}" required>
         </div>
 
-        <label for="id_description">What do you need help with?</label>
+        <label for="id_description">What do you need help with?<span class="required-dot">*</span></label>
         <div class="input-group">
-            <textarea id="id_description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value }}</textarea>
+            <textarea id="id_description" name="description" required>{{ form.description.value|default:'' }}</textarea>
+        </div>
+
+        <div class="date-container">
+            <div class="input-field">
+                <label for="id_date">Date<span class="required-dot">*</span></label>
+                <input type="date" id="id_date" name="date" value="{{ form.date.value|date:'Y-m-d' }}" required>
+            </div>
         </div>
 
         <div class="input-row">
             <div class="input-field">
-                <label for="id_date">Date</label>
-                <input type="date" id="id_date" name="date" value="{{ form.date.value }}">
+                <label for="id_start_time">Start Time<span class="required-dot">*</span></label>
+                <input type="time" id="id_start_time" name="start_time" value="{{ form.start_time.value|date:'H:i' }}" required>
             </div>
             <div class="input-field">
-                <label for="id_start_time">Start Time</label>
-                <input type="time" id="id_start_time" name="start_time" value="{{ form.start_time.value }}">
-            </div>
-            <div class="input-field">
-                <label for="id_end_time">End Time</label>
-                <input type="time" id="id_end_time" name="end_time" value="{{ form.end_time.value }}">
+                <label for="id_end_time">End Time<span class="required-dot">*</span></label>
+                <input type="time" id="id_end_time" name="end_time" value="{{ form.end_time.value|date:'H:i' }}" required>
             </div>
         </div>
 
-        <label for="id_locationTown">City</label>
+        <label for="id_locationTown">City<span class="required-dot">*</span></label>
         <div class="input-group">
-            <input type="text" id="id_locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value }}">
+            <input type="text" id="id_locationTown" name="locationTown" value="{{ form.locationTown.value|default:'' }}" required>
         </div>
 
-        <label for="id_locationNeighborhood">Address</label>
+        <label for="id_locationNeighborhood">Address<span class="required-dot">*</span></label>
         <div class="input-group">
-            <input type="text" id="id_locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value }}">
+            <input type="text" id="id_locationNeighborhood" name="locationNeighborhood" value="{{ form.locationNeighborhood.value|default:'' }}" required>
         </div>
 
-        <div class="input-row">
+        <div class="form-actions">
             <button type="submit" class="primary-btn">Save Changes</button>
-            <a href="{% url 'receivers' %}" class="secondary-btn">Cancel</a>
+            <a href="{% url 'receivers' %}" class="cancel-btn" style="text-decoration: none; text-align: center; display: flex; align-items: center; justify-content: center;">Cancel</a>
         </div>
     </form>
 
-    <form method="post" action="{% url 'delete_post' object.pk %}">
-        {% csrf_token %}
-        <button type="submit" class="delete-btn">Delete Post</button>
-    </form>
+    <div class="danger-zone">
+        <form method="post" action="{% url 'delete_post' object.pk %}" onsubmit="return confirm('Warning: Are you sure you want to permanently delete this post?');">
+            {% csrf_token %}
+            <button type="submit" class="delete-btn">Delete Post</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
