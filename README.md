@@ -40,10 +40,9 @@ HelprHub/
 │   ├── Backend/          # Django project config (settings, urls, main views)
 │   ├── users/            # User model, auth, profile management
 │   ├── posts/            # Help request posts (CRUD, filtering, volunteering)
-│   ├── interactions/     # (In development)
 │   ├── static/           # CSS stylesheets
 │   └── templates/        # HTML templates
-└── README.md
+└── README.md`
 ```
 
 ---

@@ -19,7 +19,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'posts',
-    'interactions',
 ]
 
 # --- 4. MIDDLEWARE ---
