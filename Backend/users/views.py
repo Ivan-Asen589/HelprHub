@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, get_user_model, login, logout
+from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
+from django.contrib.auth.decorators import login_required
 from django.views.generic import DetailView, UpdateView, DeleteView
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 User = get_user_model()
-
 
 def VerifySignUp(request):
     if request.method != 'POST':
@@ -20,7 +22,6 @@ def VerifySignUp(request):
     cond[5] = any(char.isupper() for char in password)
     cond[6] = any(char.islower() for char in password)
     return cond
-
 
 def SignUp(request):
     if request.method != 'POST':
@@ -43,22 +44,14 @@ def SignUp(request):
             return redirect('nujdaeshti')
     else:
         errorsList = []
-        if not ver[0]:
-            errorsList.append('Username already exists!')
-        elif not ver[1]:
-            errorsList.append('Username too long (>30)!')
-        if not ver[2]:
-            errorsList.append('Password too short (min 8 chars)!')
-        if not ver[3]:
-            errorsList.append('Passwords do not match!')
-        if not ver[4]:
-            errorsList.append('Password has no digit!')
-        if not ver[5]:
-            errorsList.append('Password has no uppercase letter!')
-        if not ver[6]:
-            errorsList.append('Password has no lowercase letter!')
+        if not ver[0]: errorsList.append('Username already exists!')
+        elif not ver[1]: errorsList.append('Username too long (>30)!')
+        if not ver[2]: errorsList.append('Password too short (min 8 chars)!')
+        if not ver[3]: errorsList.append('Passwords do not match!')
+        if not ver[4]: errorsList.append('Password has no digit!')
+        if not ver[5]: errorsList.append('Password has no uppercase letter!')
+        if not ver[6]: errorsList.append('Password has no lowercase letter!')
         return render(request, 'signup.html', {'errors': errorsList})
-
 
 def LogIn(request):
     if request.method == 'POST':
@@ -71,30 +64,53 @@ def LogIn(request):
         return render(request, 'login.html', {'errors': ['Invalid email or password.']})
     return render(request, 'login.html')
 
-
 def LogOut(request):
     logout(request)
     return redirect('login')
 
+# --- PROFILE LOGIC ---
 
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'profile.html'
+@login_required
+def profile(request):
+    """
+    Handles displaying and updating the profile.
+    This replaces the need for DetailView and UpdateView in one simple function.
+    """
+    user = request.user
+    if request.method == 'POST':
+        # Update text fields
+        user.first_name = request.POST.get('first_name', user.first_name)
+        user.phone_number = request.POST.get('phone_number', user.phone_number)
+        user.description = request.POST.get('description', user.description)
+        
+        # Handle image upload
+        if 'profile_picture' in request.FILES:
+            user.profile_picture = request.FILES['profile_picture']
 
+        # Handle password change
+        new_pw = request.POST.get('new_password')
+        confirm_pw = request.POST.get('confirm_password')
+        
+        if new_pw:
+            if new_pw == confirm_pw:
+                user.set_password(new_pw)
+                user.save()
+                update_session_auth_hash(request, user) # Don't log them out
+                messages.success(request, "Profile and password updated!")
+            else:
+                messages.error(request, "Passwords do not match.")
+        else:
+            user.save()
+            messages.success(request, "Profile updated successfully!")
+            
+        return redirect('profile')
 
-class UserUpdateView(UpdateView):
-    model = User
-    template_name = 'profile.html'
-    fields = ['username', 'phone_number', 'town', 'neighborhood']
-
-    def get_object(self, queryset=None):
-        return self.request.user
-
+    return render(request, 'profile.html', {'user': user})
 
 class UserDeleteView(DeleteView):
     model = User
     template_name = 'delete_account.html'
-    success_url = '/login/'
+    success_url = reverse_lazy('login')
 
     def get_object(self, queryset=None):
         return self.request.user

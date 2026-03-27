@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from . import views
 from posts.views import PostCreateView
-from users.views import SignUp, LogIn
+from users.views import SignUp, LogIn, profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,5 +13,5 @@ urlpatterns = [
     path('pomagashti/', views.pomagashti, name='pomagashti'),
     path('helper-selector/', views.helper_selector, name='helper_selector'),
     path('posts/', include('posts.urls')),
-    path('profile/', views.profile, name='profile'),
+    path('profile/', profile, name='profile'),
 ]
