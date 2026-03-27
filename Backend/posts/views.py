@@ -33,7 +33,7 @@ class PostListView(RoleRequiredMixin, ListView):
                 default=0,
                 output_field=IntegerField(),
             )
-        ).order_by('is_past', 'date', 'time')
+        ).order_by('is_past', 'date', 'start_time')
         username = self.request.GET.get('username', '').strip()
         city = self.request.GET.get('city', '').strip()
         date = self.request.GET.get('date', '').strip()
@@ -77,7 +77,7 @@ class PostCreateView(RoleRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_posts'] = Post.objects.filter(publisher=self.request.user)
+        context['user_posts'] = Post.objects.filter(publisher=self.request.user).order_by('date', 'start_time')
         return context
 
 class PostUpdateView(RoleRequiredMixin, UpdateView):

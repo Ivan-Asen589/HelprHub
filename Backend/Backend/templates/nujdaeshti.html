@@ -9,122 +9,67 @@
 
 {% block content %}
 <div class="welcome card">
-    <h1>Post a new request</h1>
+    <button id="create-post-btn" class="primary-btn create-post-btn-full" onclick="showPostForm()">+ Create Post</button>
 
-    <form method="post" action='/nujdaeshti/'>
-        {% csrf_token %}
+    <div id="post-form-section" style="display:none;">
+        <h2>Post a new request</h2>
+        <form method="post" action='/nujdaeshti/'>
+            {% csrf_token %}
 
-        {% if form.errors %}
-        <div class="error-box">
-            <p><strong>Please fix the following:</strong></p>
-            <ul>
-                {% for error in form.non_field_errors %}
-                    <li>{{ error }}</li>
-                {% endfor %}
-                {% for field in form %}
-                    {% for error in field.errors %}
+            {% if form.errors %}
+            <div class="error-box">
+                <p><strong>Please fix the following:</strong></p>
+                <ul>
+                    {% for error in form.non_field_errors %}
                         <li>{{ error }}</li>
                     {% endfor %}
-                {% endfor %}
-            </ul>
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Need help</title>
-    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        
-        .required-dot {
-            color: #ef4444;
-            margin-left: 3px;
-            font-weight: bold;
-        }
-        .form-note {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-    <div class="page-container">
-<header>
-    <div class="header-content">
-        <div class="logo">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <span>HelpConnect™</span>
-=======
->>>>>>> 0490b066c3b7627c91b790d006ec5c118d6b70b1
-        </div>
-        {% endif %}
-
-        <label for="description">What do you need help with?</label>
-        <div class="input-group">
-            <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value|default:'' }}</textarea>
-        </div>
-
-        <div class="input-row">
-            <div class="input-field">
-                <label for="date">Date</label>
-                <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}">
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                </ul>
             </div>
-            <div class="input-field">
-                <label for="start_time">Start Time</label>
-                <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}">
+            {% endif %}
+
+            <label for="description">What do you need help with?</label>
+            <div class="input-group">
+                <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value|default:'' }}</textarea>
             </div>
-            <div class="input-field">
-                <label for="end_time">End Time</label>
-                <input type="time" id="end_time" name="end_time" value="{{ form.end_time.value|default:'' }}">
+
+            <div class="input-row">
+                <div class="input-field">
+                    <label for="date">Date</label>
+                    <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}">
+                </div>
+                <div class="input-field">
+                    <label for="start_time">Start Time</label>
+                    <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}">
+                </div>
+                <div class="input-field">
+                    <label for="end_time">End Time</label>
+                    <input type="time" id="end_time" name="end_time" value="{{ form.end_time.value|default:'' }}">
+                </div>
             </div>
-        </div>
 
-        <label for="locationTown">City</label>
-        <div class="input-group">
-            <input type="text" id="locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value|default:'' }}">
-        </div>
+            <label for="locationTown">City</label>
+            <div class="input-group">
+                <input type="text" id="locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value|default:'' }}">
+            </div>
 
-        <label for="locationNeighborhood">Address</label>
-        <div class="input-group">
-            <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value|default:'' }}">
-        </div>
+            <label for="locationNeighborhood">Address</label>
+            <div class="input-group">
+                <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value|default:'' }}">
+            </div>
 
-        <button type="submit" class="primary-btn">Post Request</button>
-    </form>
-<<<<<<< HEAD
-                <div class="input-row">
-    <div class="input-field">
-        <label>Date<span class="required-dot">*</span></label>
-        <input type="date" id="dateStart" name="dateStart" lang="en" required>
-        <input type="date" id="dateEnd" name="dateEnd" lang="en" required>
+            <div class="form-actions">
+                <button type="submit" class="primary-btn">Post Request</button>
+                <button type="button" class="cancel-btn" onclick="hidePostForm()">Cancel</button>
+            </div>
+        </form>
     </div>
-    <div class="input-field">
-        <label>Time<span class="required-dot">*</span></label>
-        <input type="time" id="timeStart" name="timeStart" required>
-        <input type="time" id="timeEnd" name="timeEnd" required>
-    </div>
-</div>
-
-                    <label for="locationTown">City<span class="required-dot">*</span></label>
-                    <div class="input-group">
-                        <input type="text" id="locationTown" name="locationTown" placeholder="City" required>
-                    </div>
-
-                    <label for="locationNeighborhood">Address<span class="required-dot">*</span></label>
-                    <div class="input-group">
-                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" required>
-                    </div>
-
-                    <button type="submit" class="primary-btn">Post Request</button>
-                    <button type="submit" class="primary-btn" id="delete">Delete Request</button>
-                </form>
-
+    <h1>Your Requests</h1>
                 <div class="requests-section">
-                    <h3>Your Requests</h3>
                     {% if user_posts %}
                         {% for post in user_posts %}
                         <div class="post-card">
@@ -135,12 +80,8 @@
                                 </a>
                             </div>
                             <div class="post-details">
-                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}
-                                      <i class="fa-regular fa-calendar"></i> {{ post.date }}
-                                </span>      
-                                <span><i class="fa-regular fa-clock"></i> {{ post.time }}
-                                      <i class="fa-regular fa-clock"></i> {{ post.time }}
-                                </span>
+                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
+                                <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
                                 <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
                             </div>
                             <div class="post-location">
@@ -151,34 +92,20 @@
                     {% else %}
                         <p class="no-requests">You have no requests yet.</p>
                     {% endif %}
-=======
-
->>>>>>> 0490b066c3b7627c91b790d006ec5c118d6b70b1
-    <div class="requests-section">
-        <h3>Your Requests</h3>
-        {% if user_posts %}
-            {% for post in user_posts %}
-            <div class="post-card">
-                <div class="post-header">
-                    <strong>{{ post.description }}</strong>
-                    <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
-                        <i class="fa-solid fa-pencil"></i>
-                    </a>
-                </div>
-                <hr id='post-divider'></hr>
-                <div class="post-details">
-                    <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
-                    <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
-                    <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
-                </div>
-                <div class="post-location">
-                    <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
-                </div>
-            </div>
-            {% endfor %}
-        {% else %}
-            <p class="no-requests">You have no requests yet.</p>
-        {% endif %}
     </div>
 </div>
+
+<script>
+    function showPostForm() {
+        document.getElementById('post-form-section').style.display = 'block';
+        document.getElementById('create-post-btn').style.display = 'none';
+    }
+    function hidePostForm() {
+        document.getElementById('post-form-section').style.display = 'none';
+        document.getElementById('create-post-btn').style.display = '';
+    }
+    {% if form.errors %}
+    showPostForm();
+    {% endif %}
+</script>
 {% endblock %}
