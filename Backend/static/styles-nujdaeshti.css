@@ -175,6 +175,30 @@ button:hover {
     border: 1px solid #e2e8f0;
 }
 
+.post-card {
+    position: relative;
+}
+
+.post-header {
+    padding-right: 30px;
+}
+
+.post-header strong {
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.edit-btn:hover { color: #4461ff; }
+
 .post-details { margin: 10px 0; color: #64748b; font-size: 0.9rem; }
 .post-details span { margin-right: 15px; }
 .post-location { font-size: 0.9rem; color: #475569; }
@@ -212,3 +236,12 @@ textarea {
     font-weight: bold;
 }
 
+#post-divider {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #9da1a7;
+}
+
+.status {
+    margin: 10px 0;
+}
