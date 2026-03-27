@@ -12,7 +12,7 @@ class Post(models.Model):
     date = models.DateField(default=datetime.date.today)
     start_time = models.TimeField(default=datetime.time.min)
     end_time = models.TimeField(default=datetime.time.min)
-    volunteer = models.ForeignKey('users.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='volunteered_posts')
+    volunteer = models.ForeignKey('users.User', on_delete=models.SET_NULL, null=True, blank=True, related_name='posts_volunteered')
 
     def clean(self):
         errors = {}

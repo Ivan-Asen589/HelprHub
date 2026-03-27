@@ -1,10 +1,23 @@
 {% extends 'home.html' %}
 {% load static %}
 
-{% block title %}HelprHub - Need help{% endblock %}
+{% block title %}HelpConnect - Need help{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+<style>
+    .required-dot {
+        color: #ef4444;
+        margin-left: 3px;
+        font-weight: bold;
+    }
+    .form-note {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-bottom: 15px;
+        text-align: left;
+    }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -32,34 +45,36 @@
             </div>
             {% endif %}
 
-            <label for="description">What do you need help with?</label>
+            <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
+
+            <label for="description">What do you need help with?<span class="required-dot">*</span></label>
             <div class="input-group">
-                <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value|default:'' }}</textarea>
+                <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required>{{ form.description.value|default:'' }}</textarea>
             </div>
 
             <div class="input-row">
                 <div class="input-field">
-                    <label for="date">Date</label>
-                    <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}">
+                    <label for="date">Date<span class="required-dot">*</span></label>
+                    <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}" required>
                 </div>
                 <div class="input-field">
-                    <label for="start_time">Start Time</label>
-                    <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}">
+                    <label for="start_time">Start Time<span class="required-dot">*</span></label>
+                    <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}" required>
                 </div>
                 <div class="input-field">
-                    <label for="end_time">End Time</label>
-                    <input type="time" id="end_time" name="end_time" value="{{ form.end_time.value|default:'' }}">
+                    <label for="end_time">End Time<span class="required-dot">*</span></label>
+                    <input type="time" id="end_time" name="end_time" value="{{ form.end_time.value|default:'' }}" required>
                 </div>
             </div>
 
-            <label for="locationTown">City</label>
+            <label for="locationTown">City<span class="required-dot">*</span></label>
             <div class="input-group">
-                <input type="text" id="locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value|default:'' }}">
+                <input type="text" id="locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value|default:'' }}" required>
             </div>
 
-            <label for="locationNeighborhood">Address</label>
+            <label for="locationNeighborhood">Address<span class="required-dot">*</span></label>
             <div class="input-group">
-                <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value|default:'' }}">
+                <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value|default:'' }}" required>
             </div>
 
             <div class="form-actions">
@@ -69,29 +84,30 @@
         </form>
     </div>
     <h1>Your Requests</h1>
-                <div class="requests-section">
-                    {% if user_posts %}
-                        {% for post in user_posts %}
-                        <div class="post-card">
-                            <div class="post-header">
-                                <strong>{{ post.description }}</strong>
-                                <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
-                                    <i class="fa-solid fa-pencil"></i>
-                                </a>
-                            </div>
-                            <div class="post-details">
-                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
-                                <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
-                                <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
-                            </div>
-                            <div class="post-location">
-                                <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    {% else %}
-                        <p class="no-requests">You have no requests yet.</p>
-                    {% endif %}
+    <div class="requests-section">
+        {% if user_posts %}
+            {% for post in user_posts %}
+            <div class="post-card">
+                <div class="post-header">
+                    <strong>{{ post.description }}</strong>
+                    <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                </div>
+                <hr id='post-divider'>
+                <div class="post-details">
+                    <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
+                    <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
+                    <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
+                </div>
+                <div class="post-location">
+                    <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-requests">You have no requests yet.</p>
+        {% endif %}
     </div>
 </div>
 
