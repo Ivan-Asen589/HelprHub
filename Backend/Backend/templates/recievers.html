@@ -4,7 +4,7 @@
 {% block title %}HelpConnect - Need help{% endblock %}
 
 {% block extra_head %}
-<link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+<link rel="stylesheet" href="{% static 'styles-recievers.css' %}">
 <style>
     .required-dot {
         color: #ef4444;
@@ -26,7 +26,7 @@
 
     <div id="post-form-section" style="display:none;">
         <h2>Post a new request</h2>
-        <form method="post" action='/nujdaeshti/'>
+        <form method="post" action='/recievers/'>
             {% csrf_token %}
 
             {% if form.errors %}
