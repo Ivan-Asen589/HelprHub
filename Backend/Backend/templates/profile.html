@@ -88,6 +88,15 @@
             <button type="submit" class="save-btn">Save Changes</button>
         </form>
     </div>
+    <a href="{% url 'login' %}" class="header-icon" title="Logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+</a>
+
+<div class="logout-section">
+    <a href="{% url 'login' %}" class="logout-link">
+        <i class="fa-solid fa-power-off"></i> Sign Out of Account
+    </a>
+</div>
 </main>
     <footer class="main-footer">
         <div class="footer-content">
