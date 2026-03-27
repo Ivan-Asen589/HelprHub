@@ -11,137 +11,153 @@ body {
     flex-direction: column;
     min-height: 100vh;
     background-color: #f8fafc;
-    font-size: 1em;
+    font-size: 16px; /* Standardizing base size */
 }
-
 
 main {
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 2.5em 1.25em;
+    padding: 2.5rem 1.25rem;
 }
 
 .welcome-card {
     background: white;
     width: 100%;
-    max-width: 31.25em;
-    padding: 2.1875em;
-    border-radius: 0.9375em;
-    box-shadow: 0 0.625em 1.5625em rgba(0, 0, 0, 0.05);
+    max-width: 500px;
+    padding: 2.2rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
     text-align: center;
 }
 
 h1 {
-    font-size: 1.8em;
+    font-size: 1.8rem;
     color: #1e293b;
-    margin-bottom: 0.3125em;
+    margin-bottom: 0.4rem;
 }
 
 .subtitle {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     color: #64748b;
-    margin-bottom: 1.5625em;
+    margin-bottom: 1.6rem;
 }
 
+/* Input Fields */
 .input-group {
     text-align: left;
-    margin-bottom: 0.9375em;
+    margin-bottom: 1rem;
 }
 
 .input-group label {
     display: block;
     font-weight: 600;
-    font-size: 0.85em;
-    margin-bottom: 0.375em;
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
     color: #334155;
 }
 
 .input-group input {
     width: 100%;
-    padding: 0.625em;
-    border: 0.0625em solid #e2e8f0;
-    border-radius: 0.5em;
+    padding: 0.75rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
     outline: none;
-    transition: 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-size: 0.95rem;
 }
 
 .input-group input:focus {
     border-color: #4461ff;
+    box-shadow: 0 0 0 3px rgba(68, 97, 255, 0.1);
 }
 
+/* The Red Asterisk */
+.required-dot {
+    color: #ef4444; /* Bright Red */
+    margin-left: 4px;
+    font-weight: bold;
+}
+
+/* Selection Cards (I need help / I want to help) */
 .selection-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.9375em;
-    margin: 1.25em 0;
+    gap: 1rem;
+    margin: 1.5rem 0;
 }
 
 .option-card {
-    border: 0.0625em solid #e2e8f0;
-    border-radius: 0.75em;
-    padding: 1.25em 0.625em;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.75rem;
+    padding: 1.25rem 0.5rem;
     cursor: pointer;
-    transition: 0.2s;
-    display: block; /* Important: makes the label behave like a box */
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .option-card i {
-    font-size: 1.375em;
+    font-size: 1.4rem;
     color: #94a3b8;
-    margin-bottom: 0.5em;
-    transition: 0.2s;
+    margin-bottom: 0.6rem;
+    transition: color 0.2s;
 }
 
 .option-card p {
-    font-size: 0.9em;
+    font-size: 0.9rem;
     font-weight: bold;
     color: #1e293b;
-    transition: 0.2s;
+    transition: color 0.2s;
 }
 
-/* --- THE NEW SELECTION LOGIC --- */
-
-/* 1. Changes the border and background when the radio inside is checked */
-.option-card:has(input[type="radio"]:checked) {
-    border-color: #4461ff;
-    background-color: #f0f4ff;
-    box-shadow: 0 0 0.625em rgba(68, 97, 255, 0.1);
-}
-
-/* 2. Changes the icon and text color when checked */
-.option-card input[type="radio"]:checked ~ i,
-.option-card input[type="radio"]:checked ~ p {
-    color: #4461ff;
-}
-
-/* 3. Normal hover state (kept from your original) */
+/* Hover and Checked Logic for Cards */
 .option-card:hover {
     border-color: #4461ff;
     background-color: #f0f4ff;
 }
 
+/* When the hidden radio button is checked */
+.option-card:has(input[type="radio"]:checked) {
+    border-color: #4461ff;
+    background-color: #f0f4ff;
+    box-shadow: 0 0 10px rgba(68, 97, 255, 0.1);
+}
+
+.option-card input[type="radio"]:checked ~ i,
+.option-card input[type="radio"]:checked ~ p {
+    color: #4461ff;
+}
+
+/* Buttons */
 .continue-btn {
     width: 100%;
     background-color: #4461ff;
     color: white;
     border: none;
-    padding: 0.875em;
-    border-radius: 0.5em;
+    padding: 0.9rem;
+    border-radius: 0.6rem;
     font-weight: bold;
-    font-size: 1em;
+    font-size: 1rem;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background-color 0.2s, transform 0.1s;
 }
 
 .continue-btn:hover {
     background-color: #3350e6;
 }
 
+.continue-btn:active {
+    transform: scale(0.98);
+}
+
+/* Footer Link Text */
 .login-text {
-    margin-top: 1.25em;
-    font-size: 0.9em;
+    margin-top: 1.4rem;
+    font-size: 0.9rem;
     color: #64748b;
 }
 
@@ -151,8 +167,23 @@ h1 {
     font-weight: 600;
 }
 
-.required-dot {
-    color: #ef4444; /* A bright red */
-    margin-left: 0.25em;
-    font-weight: bold;
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+/* Error Messages (Modern Style) */
+.error-box {
+    background-color: #fee2e2;
+    border-left: 4px solid #ef4444;
+    padding: 0.8rem;
+    margin-bottom: 1.25rem;
+    text-align: left;
+    border-radius: 0.4rem;
+}
+
+.error-list {
+    color: #b91c1c;
+    list-style: none;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
