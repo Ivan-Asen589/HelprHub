@@ -1,28 +1,60 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Welcome</title>
-    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}HelprHub - Welcome{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'header_footer.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block extra_head %}{% endblock %}
 </head>
 <body>
 
-    <header>
-        <div class="header-content">
+<header>
+    <div class="header-content">
+        <div class="logo">
             <i class="fa-solid fa-heart-pulse"></i>
-            <span>HelpConnect™</span>
+            <a id="logo-link" href="{% url 'index' %}">HelprHub</a>
         </div>
-    </header>
-
+        <div class="nav-icons">
+            {% if user.is_authenticated %}
+                {% if user.user_role == 'receiver' %}
+                    <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </a>
+                {% else %}
+                    <a href="{% url 'helper_selector' %}" class="header-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="header-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+            {% else %}
+                <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</header>
     <main>
-       
+        {% block content %}
+        {% endblock %}
     </main>
 
-    <footer>
-        HelpConnect™ 2026 - Assisting People with Disabilities
-    </footer>
+<footer>
+    <div class="footer-content">
+        <p>HelprHub™ 2026 - Assisting People with Disabilities</p>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
+        </div>
+    </div>
+</footer>
 
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>

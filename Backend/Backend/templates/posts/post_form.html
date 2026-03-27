@@ -1,107 +1,71 @@
+{% extends 'home.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Edit Request</title>
-    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <div class="page-container">
-        <header>
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fa-solid fa-heart-pulse"></i>
-                    <span>HelpConnect™</span>
-                </div>
-                <div class="nav-icons">
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'nujdaeshti' %}" class="header-icon" title="Post a Request">
-                            <i class="fa-solid fa-hand-holding-heart"></i>
-                        </a>
-                        <a href="{% url 'profile' %}" class="header-icon" title="My Profile">
-                            <i class="fa-solid fa-circle-user"></i>
-                        </a>
-                    {% endif %}
-                </div>
-            </div>
-        </header>
 
-        <main>
-            <div class="welcome card">
-                <h1>Edit Request</h1>
+{% block title %}HelprHub - Edit Request{% endblock %}
 
-                <div class="post-details-preview">
-                    <p><strong>Volunteer:</strong> {% if object.volunteer %}{{ object.volunteer.username }}{% else %}Not yet assigned{% endif %}</p>
-                </div>
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+{% endblock %}
 
-                <form method="post">
-                    {% csrf_token %}
+{% block content %}
+<div class="welcome card">
+    <h1>Edit Request</h1>
 
-                    {% if form.errors %}
-                    <div class="error-box">
-                        <p><strong>Please fix the following:</strong></p>
-                        <ul>
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
-
-                    <label for="id_description">What do you need help with?</label>
-                    <div class="input-group">
-                        <textarea id="id_description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value }}</textarea>
-                    </div>
-
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="id_date">Date</label>
-                            <input type="date" id="id_date" name="date" value="{{ form.date.value }}">
-                        </div>
-                        <div class="input-field">
-                            <label for="id_time">Time</label>
-                            <input type="time" id="id_time" name="time" value="{{ form.time.value }}">
-                        </div>
-                    </div>
-
-                    <label for="id_locationTown">City</label>
-                    <div class="input-group">
-                        <input type="text" id="id_locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value }}">
-                    </div>
-
-                    <label for="id_locationNeighborhood">Address</label>
-                    <div class="input-group">
-                        <input type="text" id="id_locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value }}">
-                    </div>
-
-                    <div class="input-row">
-                        <button type="submit" class="primary-btn">Save Changes</button>
-                        <a href="{% url 'nujdaeshti' %}" class="secondary-btn">Cancel</a>
-                    </div>
-                </form>
-
-                <form method="post" action="{% url 'delete_post' object.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="delete-btn">Delete Post</button>
-                </form>
-            </div>
-        </main>
-
-        <footer class="main-footer">
-            <div class="footer-content">
-                <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
-        </footer>
+    <div class="post-details-preview">
+        <p><strong>Volunteer:</strong> {% if object.volunteer %}{{ object.volunteer.username }}{% else %}Not yet assigned{% endif %}</p>
     </div>
-</body>
-</html>
+
+    <form method="post">
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <div class="error-box">
+            <p><strong>Please fix the following:</strong></p>
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <label for="id_description">What do you need help with?</label>
+        <div class="input-group">
+            <textarea id="id_description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value }}</textarea>
+        </div>
+
+        <div class="input-row">
+            <div class="input-field">
+                <label for="id_date">Date</label>
+                <input type="date" id="id_date" name="date" value="{{ form.date.value }}">
+            </div>
+            <div class="input-field">
+                <label for="id_time">Time</label>
+                <input type="time" id="id_time" name="time" value="{{ form.time.value }}">
+            </div>
+        </div>
+
+        <label for="id_locationTown">City</label>
+        <div class="input-group">
+            <input type="text" id="id_locationTown" name="locationTown" placeholder="City" value="{{ form.locationTown.value }}">
+        </div>
+
+        <label for="id_locationNeighborhood">Address</label>
+        <div class="input-group">
+            <input type="text" id="id_locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" value="{{ form.locationNeighborhood.value }}">
+        </div>
+
+        <div class="input-row">
+            <button type="submit" class="primary-btn">Save Changes</button>
+            <a href="{% url 'nujdaeshti' %}" class="secondary-btn">Cancel</a>
+        </div>
+    </form>
+
+    <form method="post" action="{% url 'delete_post' object.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="delete-btn">Delete Post</button>
+    </form>
+</div>
+{% endblock %}
