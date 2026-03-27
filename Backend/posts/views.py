@@ -36,10 +36,7 @@ class PostListView(RoleRequiredMixin, ListView):
             qs = qs.filter(locationTown__icontains=city)
         if date:
             qs = qs.filter(date=date)
-        if self.request.GET.get('no_volunteer') or not self.request.GET:
-            qs = qs.filter(volunteer__isnull=True)
-        if self.request.GET.get('my_volunteered') and self.request.user.is_authenticated:
-            qs = qs.filter(volunteer=self.request.user)
+        qs = qs.filter(volunteer__isnull=True)
         return qs
 
     def get_context_data(self, **kwargs):
@@ -47,8 +44,6 @@ class PostListView(RoleRequiredMixin, ListView):
         context['filter_username'] = self.request.GET.get('username', '')
         context['filter_city'] = self.request.GET.get('city', '')
         context['filter_date'] = self.request.GET.get('date', '')
-        context['filter_no_volunteer'] = self.request.GET.get('no_volunteer', '')
-        context['filter_my_volunteered'] = self.request.GET.get('my_volunteered', '')
         return context
 
 class PostDetailView(DetailView):

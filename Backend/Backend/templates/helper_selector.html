@@ -8,24 +8,21 @@
 {% endblock %}
 
 {% block content %}
-<h3>Back to Dashboard</h3>
+<a id='backToDashboard' href="{% url 'helpers' %}">Back to Dashboard</a>
 <h2>All Requests</h2>
 <form method="get" action="">
     <input type="text" name="username" placeholder="Filter by Name" value="{{ filter_username }}">
     <input type="text" name="city" placeholder="Filter by place" value="{{ filter_city }}">
     <input type="date" name="date" value="{{ filter_date }}">
-    <label><input type="checkbox" name="no_volunteer" value="1" {% if filter_no_volunteer or not request.GET %}checked{% endif %}> No volunteer assigned</label>
-    <label><input type="checkbox" name="my_volunteered" value="1" {% if filter_my_volunteered %}checked{% endif %}> My signed-up requests</label>
-    <button type="submit">Search</button>
+<button type="submit">Search</button>
     <a href="?">Clear</a>
 </form>
 <hr>
 {% if posts %}
     {% for post in posts %}
-    <div class="card request-card">
-        <div id='title' style='display: flex; justify-content: space-between;'>
+    <div class="card request-card" onclick="window.location='/posts/{{ post.pk }}/'">
+        <div id='title'>
             <h3>{{ post.title }}</h3>
-            <a href="/posts/{{ post.pk }}/" style="color: inherit;"><i class="fa-solid fa-pencil"></i></a>
     </div>
         <p>{{ post.description|truncatechars:100 }}</p>
         <div class="post-details">
