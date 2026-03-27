@@ -20,11 +20,8 @@ class PostCreateView(CreateView):
     success_url = '/nujdaeshti/'
 
     def form_valid(self, form):
-<<<<<<< HEAD
-=======
         if not self.request.user.is_authenticated:
             return redirect('/login/')
->>>>>>> 2d9d1ad3891a3cbf4e8bb248428463281077b294
         form.instance.publisher = self.request.user
         return super().form_valid(form)
 
