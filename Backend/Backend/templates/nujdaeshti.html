@@ -1,6 +1,5 @@
 {% extends 'home.html' %}
 {% load static %}
-<<<<<<< HEAD
 
 {% block title %}HelprHub - Need help{% endblock %}
 
@@ -25,7 +24,6 @@
                     {% endfor %}
                 {% endfor %}
             </ul>
-=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -56,7 +54,6 @@
         <div class="logo">
             <i class="fa-solid fa-heart-pulse"></i>
             <span>HelpConnect™</span>
->>>>>>> c026d9555dddd5140c61990bc35e0a4f3383e738
         </div>
         {% endif %}
 
@@ -88,20 +85,18 @@
 
         <button type="submit" class="primary-btn">Post Request</button>
     </form>
-
-<<<<<<< HEAD
-                    <div class="input-row">
-                        <div class="input-field">
-                            <label for="date">Date<span class="required-dot">*</span></label>
-                            <input type="date" id="date" name="date" lang="en" required>
-                            <input type="date" id="date" name="date" lang="en" required>
-                        </div>
-                        <div class="input-field">
-                            <label for="time">Time<span class="required-dot">*</span></label>
-                            <input type="time" id="time" name="time" required>
-                            <input type="time" id="time" name="time" required>
-                        </div>
-                    </div>
+                <div class="input-row">
+    <div class="input-field">
+        <label>Date<span class="required-dot">*</span></label>
+        <input type="date" id="dateStart" name="dateStart" lang="en" required>
+        <input type="date" id="dateEnd" name="dateEnd" lang="en" required>
+    </div>
+    <div class="input-field">
+        <label>Time<span class="required-dot">*</span></label>
+        <input type="time" id="timeStart" name="timeStart" required>
+        <input type="time" id="timeEnd" name="timeEnd" required>
+    </div>
+</div>
 
                     <label for="locationTown">City<span class="required-dot">*</span></label>
                     <div class="input-group">
@@ -145,7 +140,6 @@
                     {% else %}
                         <p class="no-requests">You have no requests yet.</p>
                     {% endif %}
-=======
     <div class="requests-section">
         <h3>Your Requests</h3>
         {% if user_posts %}
@@ -164,7 +158,6 @@
                 </div>
                 <div class="post-location">
                     <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
->>>>>>> 324630d86a48fc582bddfc485fb376c6dbb81388
                 </div>
             </div>
             {% endfor %}
