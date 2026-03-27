@@ -1,11 +1,11 @@
 {% extends 'home.html' %}
 {% load static %}
 
-{% block title %}HelprHub - All Requests{% endblock %}
+{% block title %}HelprHub - All Requests{% end title %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{% static 'styles-helper_selector.css' %}">
-{% endblock %}
+{% end extra_head %}
 
 {% block content %}
 <h3>Back to Dashboard</h3>
@@ -52,4 +52,4 @@
 {% else %}
     <p class="subtitle">No requests found.</p>
 {% endif %}
-{% endblock %}
+{% endif %}

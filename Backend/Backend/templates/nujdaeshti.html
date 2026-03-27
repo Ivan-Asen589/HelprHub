@@ -27,6 +27,39 @@
                     {% endfor %}
                 {% endfor %}
             </ul>
+<<<<<<< HEAD
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpConnect - Need help</title>
+    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        
+        .required-dot {
+            color: #ef4444;
+            margin-left: 3px;
+            font-weight: bold;
+        }
+        .form-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>HelpConnect™</span>
+=======
+>>>>>>> 0490b066c3b7627c91b790d006ec5c118d6b70b1
         </div>
         {% endif %}
 
@@ -62,7 +95,65 @@
 
         <button type="submit" class="primary-btn">Post Request</button>
     </form>
+<<<<<<< HEAD
+                <div class="input-row">
+    <div class="input-field">
+        <label>Date<span class="required-dot">*</span></label>
+        <input type="date" id="dateStart" name="dateStart" lang="en" required>
+        <input type="date" id="dateEnd" name="dateEnd" lang="en" required>
+    </div>
+    <div class="input-field">
+        <label>Time<span class="required-dot">*</span></label>
+        <input type="time" id="timeStart" name="timeStart" required>
+        <input type="time" id="timeEnd" name="timeEnd" required>
+    </div>
+</div>
 
+                    <label for="locationTown">City<span class="required-dot">*</span></label>
+                    <div class="input-group">
+                        <input type="text" id="locationTown" name="locationTown" placeholder="City" required>
+                    </div>
+
+                    <label for="locationNeighborhood">Address<span class="required-dot">*</span></label>
+                    <div class="input-group">
+                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" required>
+                    </div>
+
+                    <button type="submit" class="primary-btn">Post Request</button>
+                    <button type="submit" class="primary-btn" id="delete">Delete Request</button>
+                </form>
+
+                <div class="requests-section">
+                    <h3>Your Requests</h3>
+                    {% if user_posts %}
+                        {% for post in user_posts %}
+                        <div class="post-card">
+                            <div class="post-header">
+                                <strong>{{ post.description }}</strong>
+                                <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
+                            </div>
+                            <div class="post-details">
+                                <span><i class="fa-regular fa-calendar"></i> {{ post.date }}
+                                      <i class="fa-regular fa-calendar"></i> {{ post.date }}
+                                </span>      
+                                <span><i class="fa-regular fa-clock"></i> {{ post.time }}
+                                      <i class="fa-regular fa-clock"></i> {{ post.time }}
+                                </span>
+                                <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
+                            </div>
+                            <div class="post-location">
+                                <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="no-requests">You have no requests yet.</p>
+                    {% endif %}
+=======
+
+>>>>>>> 0490b066c3b7627c91b790d006ec5c118d6b70b1
     <div class="requests-section">
         <h3>Your Requests</h3>
         {% if user_posts %}
