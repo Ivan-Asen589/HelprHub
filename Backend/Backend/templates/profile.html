@@ -9,6 +9,16 @@
 
 {% block content %}
 <div class="profile-card">
+    {% if messages %}
+    <div class="messages-container">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
@@ -34,7 +44,7 @@
             <h3><i class="fa-solid fa-address-card"></i> Personal Information</h3>
             <div class="field">
                 <label>About Me</label>
-                <textarea name="description" placeholder="Share a bit about your background or how you can help others...">{{ user.description }}</textarea>
+                <textarea name="description" placeholder="Share a bit about your background...">{{ user.description }}</textarea>
             </div>
             <div class="input-grid">
                 <div class="field">
@@ -83,15 +93,22 @@
 
 <div id="deleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
     <div class="modal-card">
-        <h3>Delete Account</h3>
-        <p>Are you sure you want to permanently delete your account? This action cannot be undone.</p>
-        <div class="modal-actions">
-            <button type="button" class="modal-cancel-btn" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
-            <form method="POST" action="{% url 'delete_account' %}">
-                {% csrf_token %}
-                <button type="submit" class="modal-confirm-btn">Yes, Delete My Account</button>
-            </form> 
-        </div>
+        <i class="fa-solid fa-circle-exclamation" style="font-size: 2.5rem; color: #e53e3e; margin-bottom: 15px;"></i>
+        <h3>Confirm Deletion</h3>
+        <p>This will permanently remove your account. Please enter your <strong>current password</strong> to confirm.</p>
+        
+        <form method="POST" action="{% url 'delete_account' %}">
+            {% csrf_token %}
+            <div class="field" style="margin-bottom: 20px;">
+                <input type="password" name="password_confirm" placeholder="Enter password" required 
+                       style="width: 100%; padding: 12px; border: 1.5px solid #cbd5e0; border-radius: 8px; box-sizing: border-box;">
+            </div>
+            
+            <div class="modal-actions">
+                <button type="button" class="modal-cancel-btn" onclick="document.getElementById('deleteModal').style.display='none'">Cancel</button>
+                <button type="submit" class="modal-confirm-btn">Delete Permanently</button>
+            </div>
+        </form> 
     </div>
 </div>
 {% endblock %}

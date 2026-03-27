@@ -335,3 +335,34 @@ main {
     color: #b91c1c;
     border-color: #b91c1c;
 }
+/* --- ADD THIS TO THE END OF YOUR 338-LINE FILE --- */
+
+.messages-container {
+    margin-bottom: 20px;
+}
+
+.alert {
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.alert-error, .alert-danger {
+    background-color: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
+}
+
+.alert-success {
+    background-color: #dcfce7;
+    color: #15803d;
+    border: 1px solid #bbf7d0;
+}
+
+.modal-card input[type="password"]:focus {
+    border-color: #e53e3e !important;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
