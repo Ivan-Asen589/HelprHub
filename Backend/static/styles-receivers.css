@@ -23,12 +23,6 @@ main {
     padding: 2.5em 1.25em;
 }
 
-.account-icon {
-    color: white;
-    font-size: 1.8em;
-    text-decoration: none;
-}
-
 .card {
     background: white;
     padding: 1.875em;
@@ -37,7 +31,7 @@ main {
     box-shadow: 0 0.25em 0.75em rgba(0,0,0,0.1);
 }
 
-/* New Layout: Date Aligned Left */
+/* Date/Time Layouts */
 .date-container {
     display: flex;
     justify-content: flex-start;
@@ -45,10 +39,9 @@ main {
 }
 
 .date-container .input-field {
-    width: 48%; /* Matches width of Start Time input */
+    width: 48%;
 }
 
-/* New Layout: Start/End Time Row */
 .input-row {
     display: flex;
     gap: 4%;
@@ -59,7 +52,7 @@ main {
     flex: 1;
 }
 
-/* Form Elements */
+/* Form Headings and Labels */
 h1 { font-size: 1.8em; margin-bottom: 1.5625em; color: #1e293b; }
 
 label {
@@ -71,6 +64,7 @@ label {
     font-size: 0.95em;
 }
 
+/* Input Styles */
 input, textarea {
     width: 100%;
     padding: 0.75em;
@@ -87,13 +81,18 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-/* Button Layout - Restored to match previous screenshot */
+/* Button Container */
 .form-actions {
     display: flex;
     gap: 0.9375em;
     margin-top: 1.5625em;
 }
 
+.form-actions .primary-btn, .form-actions .cancel-btn {
+    flex: 1;
+}
+
+/* Blue Button */
 .primary-btn {
     padding: 0.875em;
     background-color: #4461ff;
@@ -104,18 +103,14 @@ input:focus, textarea:focus {
     font-size: 1em;
     cursor: pointer;
     transition: 0.2s;
+    text-align: center;
+    text-decoration: none;
 }
 
 .primary-btn:hover { background-color: #334dc7; transform: translateY(-0.0625em); }
 
-.create-post-btn-full {
-    width: 100%;
-    margin-bottom: 1.25em;
-}
-
-/* The Grey Cancel Button from previous screenshot */
+/* Grey Cancel Button */
 .cancel-btn {
-    flex: 1;
     background-color: #e2e8f0;
     color: #475569;
     border: none;
@@ -124,16 +119,17 @@ input:focus, textarea:focus {
     font-size: 1em;
     cursor: pointer;
     transition: 0.2s;
+    padding: 0.875em;
 }
 
 .cancel-btn:hover { background-color: #cbd5e1; }
 
-.form-actions .primary-btn {
-    flex: 1;
-    margin-top: 0;
+.create-post-btn-full {
+    width: 100%;
+    margin-bottom: 1.25em;
 }
 
-/* Posts section */
+/* Post Cards below the form */
 .requests-section { margin-top: 2.5em; border-top: 0.0625em solid #e2e8f0; padding-top: 1.25em; }
 
 .post-card {
@@ -156,23 +152,6 @@ input:focus, textarea:focus {
 .post-details { margin: 0.625em 0; color: #64748b; font-size: 0.9em; }
 .post-details span { margin-right: 0.9375em; }
 .post-location { font-size: 0.9em; color: #475569; }
-
-textarea {
-    width: 100%;
-    border-radius: 0.5em;
-    border: 0.0625em solid #ccc;
-    font-size: 0.875em;
-    resize: none;
-    padding: 1.25em;
-    text-align: left;
-    height: auto;
-}
-
-.required-dot {
-    color: #ef4444;
-    margin-left: 0.25em;
-    font-weight: bold;
-}
 
 #post-divider {
     margin: 0.9375em 0;

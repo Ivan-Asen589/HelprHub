@@ -126,11 +126,45 @@
     function showPostForm() {
         document.getElementById('post-form-section').style.display = 'block';
         document.getElementById('create-post-btn').style.display = 'none';
+        updateDateTimeConstraints();
     }
+    
     function hidePostForm() {
         document.getElementById('post-form-section').style.display = 'none';
         document.getElementById('create-post-btn').style.display = '';
     }
+
+    function updateDateTimeConstraints() {
+        const dateInput = document.getElementById('date');
+        const startTimeInput = document.getElementById('start_time');
+        const endTimeInput = document.getElementById('end_time');
+        
+        const now = new Date();
+        const today = now.toISOString().split('T')[0];
+        
+        // Prevent past dates
+        dateInput.min = today;
+
+        dateInput.addEventListener('input', function() {
+            if (this.value === today) {
+                const currentTime = new Date().toTimeString().slice(0,5);
+                startTimeInput.min = currentTime;
+            } else {
+                startTimeInput.min = "";
+            }
+        });
+
+        startTimeInput.addEventListener('input', function() {
+            endTimeInput.min = this.value;
+        });
+    }
+
+    window.onload = function() {
+        if (document.getElementById('post-form-section').style.display !== 'none') {
+            updateDateTimeConstraints();
+        }
+    };
+
     {% if form.errors %}
     showPostForm();
     {% endif %}
