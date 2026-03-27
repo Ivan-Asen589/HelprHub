@@ -1,0 +1,162 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}HelprHub - {{ object.title }}{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-helper_selector.css' %}">
+<style>
+    .detail-card {
+        background: white;
+        border-radius: 12px;
+        padding: 32px 36px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+        border: 1px solid #e2e8f0;
+        max-width: 700px;
+        margin: 0 auto;
+    }
+
+    .detail-card h2 {
+        font-size: 1.6rem;
+        color: #1e293b;
+        margin-bottom: 16px;
+    }
+
+    .detail-card .description {
+        font-size: 1rem;
+        color: #334155;
+        line-height: 1.6;
+        margin-bottom: 24px;
+        white-space: pre-wrap;
+    }
+
+    .detail-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px 24px;
+        margin-bottom: 24px;
+    }
+
+    .detail-item label {
+        display: block;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #94a3b8;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 4px;
+    }
+
+    .detail-item p {
+        font-size: 0.95rem;
+        color: #1e293b;
+        margin: 0;
+    }
+
+    .volunteer-section {
+        border-top: 1px solid #e2e8f0;
+        padding-top: 20px;
+        margin-top: 20px;
+    }
+
+    .volunteer-section p {
+        font-size: 0.95rem;
+        color: #475569;
+        margin-bottom: 12px;
+    }
+
+    .btn-primary {
+        display: inline-block;
+        padding: 10px 24px;
+        background-color: #4461ff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: none;
+        transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-primary:hover {
+        background-color: #334dc7;
+        transform: translateY(-1px);
+    }
+
+    .btn-danger {
+        display: inline-block;
+        padding: 10px 24px;
+        background-color: #ef4444;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.2s, transform 0.1s;
+    }
+
+    .btn-danger:hover {
+        background-color: #dc2626;
+        transform: translateY(-1px);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<h3><a href="{% url 'helper_selector' %}" style="color: inherit; text-decoration: none;">Back to All Requests</a></h3>
+<h2>Request Details</h2>
+
+<div class="detail-card">
+    <h2>{{ object.title }}</h2>
+    <p class="description">{{ object.description }}</p>
+
+    <div class="detail-grid">
+        <div class="detail-item">
+            <label>Date</label>
+            <p>{{ object.date }}</p>
+        </div>
+        <div class="detail-item">
+            <label>Start Time</label>
+            <p>{{ object.start_time }}</p>
+        </div>
+        <div class="detail-item">
+            <label>End Time</label>
+            <p>{{ object.end_time }}</p>
+        </div>
+        <div class="detail-item">
+            <label>City</label>
+            <p>{{ object.locationTown }}{% if object.locationNeighborhood %}, {{ object.locationNeighborhood }}{% endif %}</p>
+        </div>
+        <div class="detail-item">
+            <label>Posted by</label>
+            <p>{{ object.publisher }}</p>
+        </div>
+        <div class="detail-item">
+            <label>Contact</label>
+            <p>{{ object.publisher.phone_number }}</p>
+        </div>
+    </div>
+
+    <div class="volunteer-section">
+        {% if object.volunteer %}
+            <p><strong>Volunteer:</strong> {{ object.volunteer }}</p>
+            {% if object.volunteer == request.user %}
+                <form method="post" action="/posts/{{ object.pk }}/optout/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-danger">Opt out</button>
+                </form>
+            {% endif %}
+        {% else %}
+            <p>No volunteer assigned yet.</p>
+            {% if request.user.is_authenticated and object.publisher != request.user %}
+                <form method="post" action="/posts/{{ object.pk }}/volunteer/">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-primary">Volunteer</button>
+                </form>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

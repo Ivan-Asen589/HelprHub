@@ -40,7 +40,7 @@ def SignUp(request):
     if request.user.is_authenticated:
         if request.user.user_role == 'helper':
             return redirect('helper_selector')
-        return redirect('nujdaeshti')
+        return redirect('recievers')
 
     if request.method != 'POST':
         return render(request, 'signup.html')
@@ -59,7 +59,7 @@ def SignUp(request):
         login(request, user, backend='users.backends.EmailBackend')
         if user.user_role == 'helper':
             return redirect('helper_selector')
-        return redirect('nujdaeshti')
+        return redirect('recievers')
     else:
         errorsList = []
         if not ver[0]: errorsList.append('Username already exists!')
@@ -77,7 +77,7 @@ def LogIn(request):
     if request.user.is_authenticated:
         if request.user.user_role == 'helper':
             return redirect('helper_selector')
-        return redirect('nujdaeshti')
+        return redirect('recievers')
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -88,7 +88,7 @@ def LogIn(request):
             login(request, user, backend='users.backends.EmailBackend')
             if user.user_role == 'helper':
                 return redirect('helper_selector')
-            return redirect('nujdaeshti')
+            return redirect('recievers')
         return render(request, 'login.html', {'errors': ['Invalid email or password.'], 'email': email})
     
     return render(request, 'login.html')
@@ -154,3 +154,5 @@ def delete_account(request):
             return redirect('profile')
             
     return redirect('profile')
+def contact_us(request):
+    return render(request, 'contact_us.html')

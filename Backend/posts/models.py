@@ -6,6 +6,7 @@ from django.utils import timezone
 
 class Post(models.Model):
     publisher = models.ForeignKey('users.User', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default=None, null=True)  # Added default value to avoid issues with blank titles
     locationTown = models.CharField(max_length=30)
     locationNeighborhood = models.CharField(max_length=30)
     description = models.CharField(max_length=3000)

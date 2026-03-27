@@ -12,10 +12,10 @@ def index(request):
 def signup(request):
     return render(request, 'signup.html', {})
 # def AddUser()
-def nujdaeshti(request):
-    return render(request, 'nujdaeshti.html', {})
-def pomagashti(request):
-    return render(request, 'pomagashti.html', {})
+def recievers(request):
+    return render(request, 'recievers.html', {})
+def helpers(request):
+    return render(request, 'helpers.html', {})
 def helper_selector(request):
     posts = Post.objects.all()
     return render(request, 'helper_selector.html', {'posts': posts})
@@ -26,9 +26,9 @@ def helper_selector(request):
             auth_login(request, user, backend='users.backends.EmailBackend')
             # Redirect based on 'type' field in your model
             if user.user_role == 'helper':
-                return redirect('pomagashti')
+                return redirect('helpers')
             else:
-                return redirect('nujdaeshti')
+                return redirect('recievers')
     else:
         form = UserSignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -58,12 +58,12 @@ def profile(request):
     return render(request, 'profile.html', {})
 
 @login_required
-def nujdaeshti(request):
-    return render(request, 'nujdaeshti.html', {})
+def recievers(request):
+    return render(request, 'recievers.html', {})
 
 @login_required
-def pomagashti(request):
-    return render(request, 'pomagashti.html', {})
+def helpers(request):
+    return render(request, 'helpers.html', {})
 
 @login_required
 def helper_selector(request):

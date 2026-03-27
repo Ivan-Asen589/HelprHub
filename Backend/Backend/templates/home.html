@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}HelprHub - Welcome{% endblock %}</title>
+    {% block extra_head %}<link rel="stylesheet" href="{% static 'styles-home.css' %}">{% endblock %}
     <link rel="stylesheet" href="{% static 'header_footer.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    {% block extra_head %}<link rel="stylesheet" href="{% static 'styles-home.css' %}">{% endblock %}
 </head>
 <body>
 
@@ -20,7 +20,7 @@
         <div class="nav-icons">
             {% if user.is_authenticated %}
                 {% if user.user_role == 'receiver' %}
-                    <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                    <a href="{% url 'recievers' %}" class="header-icon">
                         <i class="fa-solid fa-hand-holding-heart"></i>
                     </a>
                 {% else %}
@@ -32,7 +32,7 @@
                     <i class="fa-solid fa-circle-user"></i>
                 </a>
             {% else %}
-                <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                <a href="{% url 'recievers' %}" class="header-icon">
                     <i class="fa-solid fa-hand-holding-heart"></i>
                 </a>
             {% endif %}
@@ -51,7 +51,7 @@
                     {% if not user.is_authenticated %}
                         <a href="{% url 'signup' %}" class="cta-primary">Get Started Today</a>
                     {% else %}
-                        <a href="{% url 'nujdaeshti' %}" class="cta-primary">Go to Dashboard</a>
+                        <a href="{% url 'recievers' %}" class="cta-primary">Go to Dashboard</a>
                     {% endif %}
                 </div>
             </div>
@@ -60,7 +60,7 @@
 
     <section class="features">
         <div class="section-title">
-            <h2>Why HelpConnect™?</h2>
+            <h2>Why HelprHub?</h2>
             <div class="underline"></div>
         </div>
         <div class="feature-grid">
@@ -70,7 +70,7 @@
                 <p>Request help for specific daily tasks or errands directly from local helpers.</p>
             </div>
             <div class="feature-card">
-                <i class="fa-solid fa-shield-halved"></i>
+                <i class="fa-solid fa-user-shield"></i>
                 <h3>Verified Safety</h3>
                 <p>We prioritize community safety with secure profiles and transparent communication.</p>
             </div>
@@ -86,13 +86,14 @@
 
 <footer>
     <div class="footer-content">
-        <p>HelprHub™ 2026 - Assisting People with Disabilities</p>
+        <p>HelprHub 2026 - Assisting People with Disabilities</p>
         <div class="footer-links">
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
-            <a href="#">Contact Us</a>
+            <a href="{% url 'contact_us' %}">Contact Us</a>
+        </div>
     </div>
-</header>
+</footer>
 
 {% block extra_scripts %}{% endblock %}
 </body>
