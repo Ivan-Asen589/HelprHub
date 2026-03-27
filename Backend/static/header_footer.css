@@ -24,6 +24,10 @@ body {
     height: 100%;
 }
 
+input, textarea, select, button {
+    font-size: inherit;
+}
+
 body {
     display: flex;
     flex-direction: column;
