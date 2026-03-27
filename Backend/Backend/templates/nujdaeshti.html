@@ -1,4 +1,31 @@
+{% extends 'home.html' %}
 {% load static %}
+<<<<<<< HEAD
+
+{% block title %}HelprHub - Need help{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="welcome card">
+    <h1>Post a new request</h1>
+
+    <form method="post" action='/nujdaeshti/'>
+        {% csrf_token %}
+
+        {% if form.errors %}
+        <div class="error-box">
+            <p><strong>Please fix the following:</strong></p>
+            <ul>
+                {% for field in form %}
+                    {% for error in field.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+=======
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,49 +56,40 @@
         <div class="logo">
             <i class="fa-solid fa-heart-pulse"></i>
             <span>HelpConnect™</span>
+>>>>>>> c026d9555dddd5140c61990bc35e0a4f3383e738
         </div>
-        
-        <div class="nav-icons">
-            {% if user.is_authenticated %}
-                <a href="{% url 'nujdaeshti' %}" class="header-icon" title="Post a Request">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                </a>
+        {% endif %}
 
-                <a href="{% url 'profile' %}" class="header-icon" title="My Profile">
-                    <i class="fa-solid fa-circle-user"></i>
-                </a>
-            {% endif %}
+        <label for="description">What do you need help with?</label>
+        <div class="input-group">
+            <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance"></textarea>
         </div>
-    </div>
-</header>
 
-        <main>
-            <div class="welcome card">
-                <h1>Post a new request</h1>
-                
-                <form method="post" action='/nujdaeshti/'>
-                    {% csrf_token %}
+        <div class="input-row">
+            <div class="input-field">
+                <label for="date">Date</label>
+                <input type="date" id="date" name="date" lang="en">
+            </div>
+            <div class="input-field">
+                <label for="time">Time</label>
+                <input type="time" id="time" name="time">
+            </div>
+        </div>
 
-                    {% if form.errors %}
-                    <div class="error-box">
-                        <p><strong>Please fix the following:</strong></p>
-                        <ul>
-                            {% for field in form %}
-                                {% for error in field.errors %}
-                                    <li>{{ error }}</li>
-                                {% endfor %}
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    {% endif %}
+        <label for="locationTown">City</label>
+        <div class="input-group">
+            <input type="text" id="locationTown" name="locationTown" placeholder="City">
+        </div>
 
-                    <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
+        <label for="locationNeighborhood">Address</label>
+        <div class="input-group">
+            <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
+        </div>
 
-                    <label for="description">What do you need help with?<span class="required-dot">*</span></label>
-                    <div class="input-group">
-                        <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required></textarea>
-                    </div>
+        <button type="submit" class="primary-btn">Post Request</button>
+    </form>
 
+<<<<<<< HEAD
                     <div class="input-row">
                         <div class="input-field">
                             <label for="date">Date<span class="required-dot">*</span></label>
@@ -127,20 +145,32 @@
                     {% else %}
                         <p class="no-requests">You have no requests yet.</p>
                     {% endif %}
+=======
+    <div class="requests-section">
+        <h3>Your Requests</h3>
+        {% if user_posts %}
+            {% for post in user_posts %}
+            <div class="post-card">
+                <div class="post-header">
+                    <strong>{{ post.description }}</strong>
+                    <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
+                        <i class="fa-solid fa-pencil"></i>
+                    </a>
+                </div>
+                <div class="post-details">
+                    <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
+                    <span><i class="fa-regular fa-clock"></i> {{ post.time }}</span>
+                    <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
+                </div>
+                <div class="post-location">
+                    <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
+>>>>>>> 324630d86a48fc582bddfc485fb376c6dbb81388
                 </div>
             </div>
-        </main>
-
-        <footer class="main-footer">
-            <div class="footer-content">
-                <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
-                <div class="footer-links">
-                    <a href="#">Privacy Policy</a>
-                    <a href="#">Terms of Service</a>
-                    <a href="#">Contact Us</a>
-                </div>
-            </div>
-        </footer>
+            {% endfor %}
+        {% else %}
+            <p class="no-requests">You have no requests yet.</p>
+        {% endif %}
     </div>
-</body>
-</html>
+</div>
+{% endblock %}

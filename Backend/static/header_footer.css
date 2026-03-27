@@ -1,0 +1,102 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    background-color: #4461ff !important; /* Forces the blue color */
+    width: 100% !important;
+    display: block !important;
+    padding: 20px 0;
+    margin: 0;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    background-color: transparent !important; /* Ensures the inner part doesn't turn white */
+}
+
+.logo span, .logo i, .nav-icons i {
+    color: white !important;
+}
+
+.nav-icons {
+    display: flex;
+    gap: 20px;
+    font-size: 1.3rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    font-size: 1.4rem;
+}
+
+
+.account-link {
+    color: white;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+footer {
+    background-color: #334155; /* A dark slate color to contrast the blue header */
+    color: white;
+    padding: 30px 0;
+    margin-top: 0;
+
+}
+
+.footer-content {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.footer-content p {
+    margin: 0 0 15px 0;
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+}
+
+#logo-link {
+    color: white !important;
+    text-decoration: none;
+}

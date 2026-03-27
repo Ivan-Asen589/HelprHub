@@ -4,32 +4,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home | HelpConnect</title>
-    <link rel="stylesheet" href="{% static 'styles-home.css' %}">
+    <title>{% block title %}HelprHub - Welcome{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'header_footer.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    {% block extra_head %}<link rel="stylesheet" href="{% static 'styles-home.css' %}">{% endblock %}
 </head>
 <body>
 
-<header class="main-blue-header">
+<header>
     <div class="header-content">
         <div class="logo">
             <i class="fa-solid fa-heart-pulse"></i>
-            <span>HelpConnect™</span>
+            <a id="logo-link" href="{% url 'index' %}">HelprHub</a>
         </div>
-        <nav class="nav-links">
+        <div class="nav-icons">
             {% if user.is_authenticated %}
-                <a href="{% url 'nujdaeshti' %}">Dashboard</a>
-                <a href="{% url 'profile' %}">My Account</a>
-                <a href="{% url 'logout' %}" class="logout-pill">Logout</a>
+                {% if user.user_role == 'receiver' %}
+                    <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </a>
+                {% else %}
+                    <a href="{% url 'helper_selector' %}" class="header-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </a>
+                {% endif %}
+                <a href="{% url 'profile' %}" class="header-icon">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
             {% else %}
-                <a href="{% url 'login' %}">Login</a>
-                <a href="{% url 'signup' %}" class="signup-btn">Join Community</a>
+                <a href="{% url 'nujdaeshti' %}" class="header-icon">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </a>
             {% endif %}
-        </nav>
+        </div>
     </div>
 </header>
-
-<main>
+    
+    <main>
+    {% block content %}
     <section class="hero">
         <div class="hero-overlay">
             <div class="hero-container">
@@ -69,18 +81,19 @@
             </div>
         </div>
     </section>
-</main>
+    {% endblock %}
+    </main>
 
-<footer class="main-footer">
+<footer>
     <div class="footer-content">
-        <p>HelpConnect™ 2026 - Empowering Independence</p>
+        <p>HelprHub™ 2026 - Assisting People with Disabilities</p>
         <div class="footer-links">
-            <a href="#">About Us</a>
             <a href="#">Privacy Policy</a>
-            <a href="#">Contact</a>
-        </div>
+            <a href="#">Terms of Service</a>
+            <a href="#">Contact Us</a>
     </div>
-</footer>
+</header>
 
+{% block extra_scripts %}{% endblock %}
 </body>
 </html>

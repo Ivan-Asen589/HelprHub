@@ -1,126 +1,70 @@
+{% extends 'home.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HelpConnect - Sign Up</title>
-    <link rel="stylesheet" href="{% static 'styles-signup.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        /* Small style for the red asterisk */
-        .required-dot {
-            color: #ef4444;
-            margin-left: 3px;
-            font-weight: bold;
-        }
-        .form-note {
-            font-size: 0.85rem;
-            color: #64748b;
-            margin-bottom: 15px;
-            text-align: left;
-        }
-    </style>
-</head>
-<body>
-<header>
-    <div class="header-content">
-        <div class="logo">
-            <i class="fa-solid fa-heart-pulse"></i>
-            <span>HelpConnect™</span>
+
+{% block title %}HelprHub - Sign Up{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-signup.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="welcome-card">
+    <h1>Create Account</h1>
+    <p class="subtitle">Join our community to help or receive help.</p>
+
+    <form method="POST" action="/signup/">
+        {% csrf_token %}
+        <div class="input-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="username" placeholder="Enter your name" required>
         </div>
-        
-        <div class="nav-icons">
-            {% if user.is_authenticated %}
-                <a href="{% url 'nujdaeshti' %}" class="header-icon" title="Post a Request">
-                    <i class="fa-solid fa-hand-holding-heart"></i>
-                </a>
 
-                <a href="{% url 'profile' %}" class="header-icon" title="My Profile">
-                    <i class="fa-solid fa-circle-user"></i>
-                </a>
-            {% endif %}
+        <div class="input-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="name@example.com" required>
         </div>
-    </div>
-</header>
 
-    <main>
-        <div class="welcome-card">
-            <h1>Create Account</h1>
-            <p class="subtitle">Join our community to help or receive help.</p>
-
-            <form method="POST" action="/signup/">
-                {% csrf_token %}
-                
-                <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
-
-                <div class="input-group">
-                    <label for="name">Your Name<span class="required-dot">*</span></label>
-                    <input type="text" id="name" name="username" placeholder="Enter your name" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="email">Email Address<span class="required-dot">*</span></label>
-                    <input type="email" id="email" name="email" placeholder="name@example.com" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="phone2numeric">Phone Number<span class="required-dot">*</span></label>
-                    <input type="phone2numeric" id="phone2numeric" name="phone_number" placeholder="Enter your phone number" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="password">Password<span class="required-dot">*</span></label>
-                    <input type="password" id="password" name="password" placeholder="Create a password" required>
-                </div>
-
-                <div class="input-group">
-                    <label for="confirm-password">Confirm Password<span class="required-dot">*</span></label>
-                    <input type="password" id="confirm-password" name="confirm_password" placeholder="Repeat your password" required>
-                </div>
-
-                <div class="input-group">
-                    <label>Account Type<span class="required-dot">*</span></label>
-                    <div class="selection-container">
-                        <label class="option-card">
-                            <input type="radio" name="user_role" value="receiver" required style="display:none;">
-                            <i class="fa-regular fa-heart"></i>
-                            <p>I need help</p>
-                        </label>
-                        <label class="option-card">
-                            <input type="radio" name="user_role" value="helper" required style="display:none;">
-                            <i class="fa-solid fa-handshake-angle"></i>
-                            <p>I want to help</p>
-                        </label>
-                    </div>
-                </div>
-
-                {% if errors %}
-                <ul style="color:red; margin-bottom:12px;">
-                    {% for error in errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-
-                <button type="submit" class="continue-btn">Create Account</button>
-            </form>
-
-            <p class="login-text">
-                Already have an account? <a href="/login/">Log in</a>
-            </p>
+        <div class="input-group">
+            <label for="phone2numeric">Phone Number</label>
+            <input type="phone2numeric" id="phone2numeric" name="phone_number" placeholder="Enter your phone number" required>
         </div>
-    </main>
 
-    <footer class="main-footer">
-        <div class="footer-content">
-            <p>HelpConnect™ 2026 - Assisting People with Disabilities</p>
-            <div class="footer-links">
-                <a href="#">Privacy Policy</a>
-                <a href="#">Terms of Service</a>
-                <a href="#">Contact Us</a>
-            </div>
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Create a password" required>
         </div>
-    </footer>
-</body>
-</html>
+
+        <div class="input-group">
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm_password" placeholder="Repeat your password" required>
+        </div>
+
+        <div class="selection-container">
+            <label class="option-card">
+                <input type="radio" name="user_role" value="receiver" required style="display:none;">
+                <i class="fa-regular fa-heart"></i>
+                <p>I need help</p>
+            </label>
+            <label class="option-card">
+                <input type="radio" name="user_role" value="helper" required style="display:none;">
+                <i class="fa-solid fa-handshake-angle"></i>
+                <p>I want to help</p>
+            </label>
+        </div>
+
+        {% if errors %}
+        <ul style="color:red; margin-bottom:12px;">
+            {% for error in errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <button type="submit" class="continue-btn">Create Account</button>
+    </form>
+
+    <p class="login-text">
+        Already have an account? <a href="/login/">Log in</a>
+    </p>
+</div>
+{% endblock %}
