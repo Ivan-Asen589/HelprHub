@@ -22,6 +22,7 @@ header {
 
 .header-content {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 10px;
     font-weight: bold;
