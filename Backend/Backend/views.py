@@ -1,17 +1,51 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import login as auth_login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.decorators import login_required
+# This looks in the current folder (users) for forms.py
+from users.forms import UserSignUpForm 
+
 def index(request):
     return render(request, 'home.html', {})
 
-def login(request):
-    return render(request, 'login.html', {})
 def signup(request):
-    return render(request, 'signup.html', {})
-# def AddUser()
-def nujdaeshti(request):
-    return render(request, 'nujdaeshti.html', {})
-def pomagashti(request):
-    return render(request, 'pomagashti.html', {})
-def helper_selector(request):
-    return render(request, 'helper_selector.html', {})
+    if request.method == 'POST':
+        form = UserSignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            auth_login(request, user, backend='users.backends.EmailBackend')
+            # Redirect based on 'type' field in your model
+            if user.user_role == 'helper':
+                return redirect('pomagashti')
+            else:
+                return redirect('nujdaeshti')
+    else:
+        form = UserSignUpForm()
+    return render(request, 'signup.html', {'form': form})
+
+def login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            auth_login(request, user)
+            return redirect('profile')
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+@login_required
 def profile(request):
     return render(request, 'profile.html', {})
+
+@login_required
+def nujdaeshti(request):
+    return render(request, 'nujdaeshti.html', {})
+
+@login_required
+def pomagashti(request):
+    return render(request, 'pomagashti.html', {})
+
+@login_required
+def helper_selector(request):
+    return render(request, 'helper_selector.html', {})

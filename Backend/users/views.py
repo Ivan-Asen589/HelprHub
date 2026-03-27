@@ -34,9 +34,9 @@ def SignUp(request):
             password=request.POST.get('password'),
         )
         user.phone_number = request.POST.get('phone_number', '')
-        user.type = user_role
+        user.user_role = user_role
         user.save()
-        login(request, user)
+        login(request, user, backend='users.backends.EmailBackend')
         if user_role == 'helper':
             return redirect('helper_selector')
         else:
@@ -65,7 +65,7 @@ def LogIn(request):
         user = authenticate(request, email=request.POST.get('email'), password=request.POST.get('password'))
         if user is not None:
             login(request, user)
-            if user.type == 'helper':
+            if user.user_role == 'helper':
                 return redirect('helper_selector')
             else:
                 return redirect('nujdaeshti')

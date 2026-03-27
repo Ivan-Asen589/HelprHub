@@ -10,17 +10,26 @@
 </head>
 <body>
     <div class="page-container">
-        <header>
-            <div class="header-content">
-                <div class="logo">
-                    <i class="fa-solid fa-heart-pulse"></i>
-                    <span>HelpConnect™</span>
-                </div>
-                <a href="{% url 'profile' %}" class="account-icon">
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>HelpConnect™</span>
+        </div>
+        
+        <div class="nav-icons">
+            {% if user.is_authenticated %}
+                <a href="{% url 'nujdaeshti' %}" class="header-icon" title="Post a Request">
+                    <i class="fa-solid fa-hand-holding-heart"></i>
+                </a>
+
+                <a href="{% url 'profile' %}" class="header-icon" title="My Profile">
                     <i class="fa-solid fa-circle-user"></i>
                 </a>
-            </div>
-        </header>
+            {% endif %}
+        </div>
+    </div>
+</header>
 
         <main>
             <div class="welcome card">
