@@ -6,8 +6,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- 2. BASIC CONFIG ---
 SECRET_KEY = 'django-insecure-9l7_c4g4ijs#n3j11o)7dha4%2bc4j4(@p*sgo-lwspie(ub*j'
-DEBUG = True
-ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
+ALLOWED_HOSTS = ['*']
 
 # --- 3. APPS ---
 INSTALLED_APPS = [
