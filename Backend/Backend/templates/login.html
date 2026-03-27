@@ -56,6 +56,10 @@
                 </ul>
                 {% endif %}
 
+                {% if error %}
+                <p style="color:red; margin-bottom:12px;">{{ error }}</p>
+                {% endif %}
+
                 <button type="submit" class="continue-btn">Log In</button>
             </form>
 
