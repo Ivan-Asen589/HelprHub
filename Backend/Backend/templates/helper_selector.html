@@ -27,7 +27,7 @@
             <h3>{{ post.title }}</h3>
             <a href="/posts/{{ post.pk }}/" style="color: inherit;"><i class="fa-solid fa-pencil"></i></a>
     </div>
-        <p>{{ post.description }}</p>
+        <p>{{ post.description|truncatechars:100 }}</p>
         <div class="post-details">
             <div><p class="subtitle">{{ post.date }}</p></div>
             <div><p class="subtitle">{{ post.start_time }}</p></div>
