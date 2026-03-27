@@ -5,30 +5,37 @@ body {
     background-color: #f4f7fe;
 }
 
-/* Blue Stripe */
-.main-header {
-    background-color: #4461ff;
-    color: white;
-    padding: 15px 0;
+header {
+    background-color: #4461ff !important; /* Forces the blue color */
+    width: 100% !important;
+    display: block !important;
+    padding: 20px 0;
+    margin: 0;
 }
 
 .header-content {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 40px;
+    background-color: transparent !important; /* Ensures the inner part doesn't turn white */
 }
 
-.logo-area {
+/* Ensure the logo text and icons are definitely white */
+.logo span, .logo i, .nav-icons i {
+    color: white !important;
+}
+
+.logo {
     display: flex;
     align-items: center;
-    font-size: 1.4rem;
+    gap: 10px;
     font-weight: bold;
+    font-size: 1.4rem;
 }
 
-.logo-area i { margin-right: 10px; }
 
 .account-link {
     color: white;
@@ -193,3 +200,38 @@ body {
 }
 
 .save-btn:hover { background: #334dc7; }
+.username-display { color: #1e293b; margin-top: 10px; font-size: 1.5rem; }
+.role-badge { 
+    display: inline-block; 
+    background: #e0e7ff; 
+    color: #4461ff; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    font-size: 0.85rem; 
+    font-weight: 600;
+}
+.form-section h3 { font-size: 1.1rem; color: #4461ff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
+.form-divider { border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0; }
+.help-text { font-size: 0.8rem; color: #64748b; margin-top: 8px; }
+.logout-section {
+    margin-top: 20px;
+    text-align: center;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 20px;
+}
+
+.logout-link {
+    color: #ef4444; /* Professional Red */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logout-link:hover {
+    color: #b91c1c;
+    transform: translateY(-1px);
+}

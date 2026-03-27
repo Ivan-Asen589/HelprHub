@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
 from django.db.models import Case, When, IntegerField
@@ -7,7 +8,19 @@ from django.utils import timezone
 from .models import Post
 
 
-class PostListView(ListView):
+class RoleRequiredMixin(LoginRequiredMixin):
+    required_role = None
+
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.is_authenticated:
+            return self.handle_no_permission()
+        if self.required_role and request.user.user_role != self.required_role:
+            raise PermissionDenied
+        return super().dispatch(request, *args, **kwargs)
+
+
+class PostListView(RoleRequiredMixin, ListView):
+    required_role = 'helper'
     model = Post
     template_name = 'helper_selector.html'
     context_object_name = 'posts'
@@ -49,7 +62,8 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'posts/post_detail.html'
 
-class PostCreateView(CreateView):
+class PostCreateView(RoleRequiredMixin, CreateView):
+    required_role = 'receiver'
     model = Post
     template_name = 'nujdaeshti.html'
     fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
@@ -66,10 +80,12 @@ class PostCreateView(CreateView):
         context['user_posts'] = Post.objects.filter(publisher=self.request.user)
         return context
 
-class PostUpdateView(UpdateView):
+class PostUpdateView(RoleRequiredMixin, UpdateView):
+    required_role = 'receiver'
     model = Post
     template_name = 'posts/post_form.html'
     fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
+    success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
@@ -80,7 +96,7 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'posts/post_confirm_delete.html'
-    success_url = '/posts/'
+    success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
