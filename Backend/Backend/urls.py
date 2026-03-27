@@ -3,7 +3,7 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-from users.views import SignUp, LogIn, LogOut, UserDeleteView
+from users.views import SignUp, LogIn, LogOut, delete_account
 from posts.views import PostCreateView, PostListView
 
 urlpatterns = [
@@ -18,7 +18,7 @@ urlpatterns = [
     path('posts/', include('posts.urls')),
     path('profile/', views.profile, name='profile'),
     path('profiles/', views.profile),
-    path('profile/delete/', UserDeleteView.as_view(), name='delete_account'),
+    path('delete_account/', delete_account, name='delete_account'),
     path('403/', views.error_403, name='error_403'),
     path('404/', views.error_404, name='error_404'),
 ]
