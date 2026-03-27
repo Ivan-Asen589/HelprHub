@@ -93,6 +93,15 @@
             </button>
         </div>
     </div>
+    <a href="{% url 'login' %}" class="header-icon" title="Logout">
+    <i class="fa-solid fa-right-from-bracket"></i>
+</a>
+
+<div class="logout-section">
+    <a href="{% url 'login' %}" class="logout-link">
+        <i class="fa-solid fa-power-off"></i> Sign Out of Account
+    </a>
+</div>
 </main>
 
 <div id="deleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">

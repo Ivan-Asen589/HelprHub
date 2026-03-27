@@ -1,7 +1,7 @@
 from pathlib import Path
 import os
 
-# --- 1. BASE_DIR MUST BE AT THE VERY TOP ---
+# --- 1. BASE_DIR ---
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # --- 2. BASIC CONFIG ---
@@ -35,17 +35,19 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Backend.urls'
 
-# --- 5. TEMPLATES (Fixing path to use BASE_DIR) ---
+# --- 5. TEMPLATES ---
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / "Backend" / "templates"],
+        'DIRS': [BASE_DIR / "templates", BASE_DIR / "Backend" / "templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media', # Added for profile pictures
             ],
         },
     },
@@ -53,7 +55,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'Backend.wsgi.application'
 
-# --- 6. DATABASE (Fixing the ENGINE error) ---
+# --- 6. DATABASE (Corrected) ---
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -63,21 +65,25 @@ DATABASES = {
 
 # --- 7. AUTH & REDIRECTS ---
 AUTH_USER_MODEL = 'users.User'
-AUTHENTICATION_BACKENDS = ['users.backends.EmailBackend', 'django.contrib.auth.backends.ModelBackend']
+AUTHENTICATION_BACKENDS = [
+    'users.backends.EmailBackend', 
+    'django.contrib.auth.backends.ModelBackend'
+]
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'profile'
 LOGOUT_REDIRECT_URL = 'login'
 
-# --- 8. STATIC FILES ---
+# --- 8. STATIC FILES (CSS, JS, Images) ---
 STATIC_URL = 'static/'
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 
+# --- 9. MEDIA FILES (User Uploads like Profile Pictures) ---
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+
+# --- 10. OTHER DEFAULTS ---
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
