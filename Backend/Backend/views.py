@@ -12,8 +12,8 @@ def index(request):
 def signup(request):
     return render(request, 'signup.html', {})
 # def AddUser()
-def recievers(request):
-    return render(request, 'recievers.html', {})
+def receivers(request):
+    return render(request, 'receivers.html', {})
 def helpers(request):
     return render(request, 'helpers.html', {})
 def helper_selector(request):
@@ -28,7 +28,7 @@ def helper_selector(request):
             if user.user_role == 'helper':
                 return redirect('helpers')
             else:
-                return redirect('recievers')
+                return redirect('receivers')
     else:
         form = UserSignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -58,12 +58,26 @@ def profile(request):
     return render(request, 'profile.html', {})
 
 @login_required
-def recievers(request):
-    return render(request, 'recievers.html', {})
+def receivers(request):
+    return render(request, 'receivers.html', {})
 
 @login_required
 def helpers(request):
-    return render(request, 'helpers.html', {})
+    from django.utils import timezone
+    today = timezone.now().date()
+    volunteered_upcoming = Post.objects.filter(
+        volunteer=request.user, date__gte=today
+    ).order_by('date', 'start_time')
+    next_request = volunteered_upcoming.first()
+    upcoming_requests = volunteered_upcoming
+    past_requests = Post.objects.filter(
+        volunteer=request.user, date__lt=today
+    ).order_by('-date', '-start_time')
+    return render(request, 'helper_dashboard.html', {
+        'next_request': next_request,
+        'upcoming_requests': upcoming_requests,
+        'past_requests': past_requests,
+    })
 
 @login_required
 def helper_selector(request):

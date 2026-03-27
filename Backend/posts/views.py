@@ -58,9 +58,9 @@ class PostDetailView(DetailView):
 class PostCreateView(RoleRequiredMixin, CreateView):
     required_role = 'receiver'
     model = Post
-    template_name = 'recievers.html'
+    template_name = 'receivers.html'
     fields = ['title', 'description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
-    success_url = '/recievers/'
+    success_url = '/receivers/'
 
     def form_valid(self, form):
         if not self.request.user.is_authenticated:
@@ -78,7 +78,7 @@ class PostUpdateView(RoleRequiredMixin, UpdateView):
     model = Post
     template_name = 'posts/post_form.html'
     fields = ['title', 'description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
-    success_url = '/recievers/'
+    success_url = '/receivers/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
@@ -89,7 +89,7 @@ class PostUpdateView(RoleRequiredMixin, UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'posts/post_confirm_delete.html'
-    success_url = '/recievers/'
+    success_url = '/receivers/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)

@@ -1,0 +1,122 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}HelprHub - My Dashboard{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-helper_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="dashboard-header">
+    <p class="eyebrow">Helper Dashboard</p>
+    <h1>Welcome back, {{ request.user.username }}!</h1>
+</div>
+
+<section class="next-request-section">
+    <p class="section-label"><i class="fa-solid fa-circle-play"></i> Your Next Request</p>
+
+    {% if next_request %}
+    <div class="next-request-card">
+        <div>
+            <span class="next-badge">Up next</span>
+            <h2>{{ next_request.title }}</h2>
+            <p>{{ next_request.description|truncatechars:120 }}</p>
+            <div class="next-request-meta">
+                <span><i class="fa-solid fa-calendar-day"></i> {{ next_request.date }}</span>
+                <span><i class="fa-solid fa-clock"></i> {{ next_request.start_time }} – {{ next_request.end_time }}</span>
+                <span><i class="fa-solid fa-location-dot"></i> {{ next_request.locationTown }}{% if next_request.locationNeighborhood %}, {{ next_request.locationNeighborhood }}{% endif %}</span>
+                <span><i class="fa-solid fa-user"></i> {{ next_request.publisher }}</span>
+                {% if next_request.publisher.phone_number %}
+                <span><i class="fa-solid fa-phone"></i> {{ next_request.publisher.phone_number }}</span>
+                {% endif %}
+            </div>
+        </div>
+        <form method="post" action="/posts/{{ next_request.pk }}/optout/">
+            {% csrf_token %}
+            <button type="submit" class="next-optout-btn">
+                <i class="fa-solid fa-xmark"></i> Opt out
+            </button>
+        </form>
+    </div>
+    {% else %}
+    <div class="no-next-card">
+        <i class="fa-regular fa-calendar-xmark"></i>
+        <p>You have no upcoming requests. Find something to help with!</p>
+        <a href="{% url 'helper_selector' %}" class="find-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Browse Requests
+        </a>
+    </div>
+    {% endif %}
+</section>
+
+<div class="quick-actions">
+    <a href="{% url 'helper_selector' %}" class="action-card">
+        <div class="action-icon">
+            <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
+        <div class="action-text">
+            <h3>Find New Requests</h3>
+            <p>Browse all open requests in your area</p>
+        </div>
+    </a>
+</div>
+
+<section class="requests-section">
+    <p class="section-label"><i class="fa-solid fa-calendar-check"></i> Upcoming Commitments</p>
+
+    {% if upcoming_requests %}
+        {% for post in upcoming_requests %}
+        <div class="request-card">
+            <h3>{{ post.title }}</h3>
+            <p class="card-desc">{{ post.description|truncatechars:100 }}</p>
+            <div class="post-meta">
+                <span class="meta-item"><i class="fa-solid fa-calendar-day"></i> {{ post.date }}</span>
+                <span class="meta-item"><i class="fa-solid fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
+                <span class="meta-item"><i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</span>
+                <span class="meta-item"><i class="fa-solid fa-user"></i> {{ post.publisher }}</span>
+                {% if post.publisher.phone_number %}
+                <span class="meta-item"><i class="fa-solid fa-phone"></i> {{ post.publisher.phone_number }}</span>
+                {% endif %}
+            </div>
+            <div class="card-actions">
+                <form method="post" action="/posts/{{ post.pk }}/optout/">
+                    {% csrf_token %}
+                    <button type="submit" class="optout-btn">Opt out</button>
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <i class="fa-regular fa-calendar"></i>
+            No upcoming commitments yet.
+        </div>
+    {% endif %}
+</section>
+
+<section class="requests-section">
+    <p class="section-label"><i class="fa-solid fa-clock-rotate-left"></i> Past Volunteering</p>
+
+    {% if past_requests %}
+        {% for post in past_requests %}
+        <div class="request-card past">
+            <span class="past-badge"><i class="fa-solid fa-check"></i> Completed</span>
+            <h3>{{ post.title }}</h3>
+            <p class="card-desc">{{ post.description|truncatechars:100 }}</p>
+            <div class="post-meta">
+                <span class="meta-item"><i class="fa-solid fa-calendar-day"></i> {{ post.date }}</span>
+                <span class="meta-item"><i class="fa-solid fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
+                <span class="meta-item"><i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</span>
+                <span class="meta-item"><i class="fa-solid fa-user"></i> {{ post.publisher }}</span>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <div class="empty-state">
+            <i class="fa-regular fa-clock"></i>
+            No past volunteering history yet.
+        </div>
+    {% endif %}
+</section>
+{% endblock %}

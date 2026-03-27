@@ -12,7 +12,7 @@ urlpatterns = [
     path('login/', LogIn, name='login'),
     path('logout/', LogOut, name='logout'),
     path('signup/', SignUp, name='signup'),
-    path('recievers/', PostCreateView.as_view(), name='recievers'),
+    path('receivers/', PostCreateView.as_view(), name='receivers'),
     path('helpers/', views.helpers, name='helpers'),
     path('helper_selector/', PostListView.as_view(), name='helper_selector'),
     path('posts/', include('posts.urls')),

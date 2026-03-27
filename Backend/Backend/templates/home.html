@@ -20,11 +20,11 @@
         <div class="nav-icons">
             {% if user.is_authenticated %}
                 {% if user.user_role == 'receiver' %}
-                    <a href="{% url 'recievers' %}" class="header-icon">
+                    <a href="{% url 'receivers' %}" class="header-icon">
                         <i class="fa-solid fa-hand-holding-heart"></i>
                     </a>
                 {% else %}
-                    <a href="{% url 'helper_selector' %}" class="header-icon">
+                    <a href="{% url 'helpers' %}" class="header-icon">
                         <i class="fa-solid fa-hand-holding-heart"></i>
                     </a>
                 {% endif %}
@@ -32,7 +32,7 @@
                     <i class="fa-solid fa-circle-user"></i>
                 </a>
             {% else %}
-                <a href="{% url 'recievers' %}" class="header-icon">
+                <a href="{% url 'receivers' %}" class="header-icon">
                     <i class="fa-solid fa-hand-holding-heart"></i>
                 </a>
             {% endif %}
@@ -50,8 +50,10 @@
                 <div class="hero-actions">
                     {% if not user.is_authenticated %}
                         <a href="{% url 'signup' %}" class="cta-primary">Get Started Today</a>
+                    {% elif user.user_role == 'receiver' %}
+                        <a href="{% url 'receivers' %}" class="cta-primary">Go to Dashboard</a>
                     {% else %}
-                        <a href="{% url 'recievers' %}" class="cta-primary">Go to Dashboard</a>
+                        <a href="{% url 'helpers' %}" class="cta-primary">Go to Dashboard</a>
                     {% endif %}
                 </div>
             </div>
