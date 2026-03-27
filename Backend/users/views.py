@@ -12,21 +12,12 @@ def VerifySignUp(request):
         return None
     username=request.POST.get('username')
     password=request.POST.get('password')
-    minLen = 8
-    maxLen = 30
-    cond = [False for i in range(7)]
-    
-    cond[0] = not any(elem.acc.username==username for elem in UserProperties.objects.all()) #not: username already exists?
-    
-    if len(username)<=maxLen:
-        cond[1]=True #not: username too long?
-    
-    if len(password)>=minLen:
-        cond[2]=True
-    
-    if len(password)<=maxLen:
-        cond[3]=True
-    
+    confirm_password = request.POST.get('confirm_password')
+    cond = [False] * 7
+    cond[0] = not User.objects.filter(username=username).exists()
+    cond[1] = len(username) <= 30
+    cond[2] = len(password) >= 8
+    cond[3] = password == confirm_password
     cond[4] = any(char.isdigit() for char in password)
     cond[5] = any(char.isupper() for char in password)
     cond[6] = any(char.islower() for char in password)
