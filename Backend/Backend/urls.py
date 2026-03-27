@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from . import views
+from users.views import SignUp, LogIn, profile
 from posts.views import PostCreateView, PostListView
 from users.views import SignUp, LogIn, UserDeleteView
 
@@ -14,5 +15,6 @@ urlpatterns = [
     path('helper_selector/', PostListView.as_view(), name='helper_selector'),
     path('posts/', include('posts.urls')),
     path('profile/', views.profile, name='profile'),
+    path('profiles/', views.profile),
     path('profile/delete/', UserDeleteView.as_view(), name='delete_account'),
 ]
