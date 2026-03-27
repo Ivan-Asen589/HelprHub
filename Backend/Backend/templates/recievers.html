@@ -51,17 +51,22 @@
             <div class="input-group">
                 <input type="text" id="title" name="title" placeholder="e.g. Help with groceries" value="{{ form.title.value|default:'' }}" required>
             </div>
-            <hr></hr>
+            
+            <hr id="post-divider">
+
             <label for="description">What do you need help with?<span class="required-dot">*</span></label>
             <div class="input-group">
                 <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required>{{ form.description.value|default:'' }}</textarea>
             </div>
 
-            <div class="input-row">
+            <div class="date-container">
                 <div class="input-field">
                     <label for="date">Date<span class="required-dot">*</span></label>
                     <input type="date" id="date" name="date" lang="en" value="{{ form.date.value|default:'' }}" required>
                 </div>
+            </div>
+
+            <div class="input-row">
                 <div class="input-field">
                     <label for="start_time">Start Time<span class="required-dot">*</span></label>
                     <input type="time" id="start_time" name="start_time" value="{{ form.start_time.value|default:'' }}" required>
@@ -88,6 +93,7 @@
             </div>
         </form>
     </div>
+
     <h1>Your Requests</h1>
     <div class="requests-section">
         {% if user_posts %}

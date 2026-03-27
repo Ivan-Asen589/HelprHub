@@ -37,32 +37,29 @@ main {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-h1 {
-    margin-bottom: 20px;
-}
-
-h3 {
-    margin-top: 30px;
-}
-
-.subtitle {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    font-weight: 500;
-}
-
-.input-group {
+/* New Layout: Date Aligned Left */
+.date-container {
+    display: flex;
+    justify-content: flex-start;
     margin-bottom: 10px;
 }
 
-input {
-    padding: 35px;
-    border-radius: 15px;
-    width: 100%;
-    max-width: 650px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+.date-container .input-field {
+    width: 48%; /* Matches width of Start Time input */
 }
 
+/* New Layout: Start/End Time Row */
+.input-row {
+    display: flex;
+    gap: 4%;
+    margin-bottom: 10px;
+}
+
+.input-row .input-field {
+    flex: 1;
+}
+
+/* Form Elements */
 h1 { font-size: 1.8rem; margin-bottom: 25px; color: #1e293b; }
 
 label {
@@ -90,46 +87,14 @@ input:focus, textarea:focus {
     outline: none;
 }
 
-button {
-    margin-top: 15px;
-    padding: 10px;
-    width: 100%;
-    background-color: #3f5efb;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: 0.3s;
+/* Button Layout - Restored to match previous screenshot */
+.form-actions {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
 }
-
-button:hover {
-    background-color: #2f4be0;
-}
-
-.post-card {
-    background: #f1f3f9;
-    padding: 15px;
-}
-
-.input-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.error-box {
-    background-color: #fee2e2;
-    border-left: 4px solid #ef4444;
-    color: #b91c1c;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-}
-.error-box ul { margin-left: 20px; font-size: 0.9rem; }
 
 .primary-btn {
-    margin-top: 25px;
     padding: 14px;
     background-color: #4461ff;
     color: white;
@@ -145,32 +110,14 @@ button:hover {
 
 .create-post-btn-full {
     width: 100%;
-    margin-top: 0;
     margin-bottom: 20px;
 }
 
-#post-form-section {
-    border-top: 1px solid #e2e8f0;
-    padding-top: 20px;
-    margin-bottom: 10px;
-}
-
-#post-form-section h2 {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-    color: #1a202c;
-}
-
-.form-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 20px;
-}
-
-.form-actions button {
+/* The Grey Cancel Button from previous screenshot */
+.cancel-btn {
     flex: 1;
-    margin-top: 0;
-    padding: 14px;
+    background-color: #e2e8f0;
+    color: #475569;
     border: none;
     border-radius: 10px;
     font-weight: bold;
@@ -179,23 +126,18 @@ button:hover {
     transition: 0.2s;
 }
 
+.cancel-btn:hover { background-color: #cbd5e1; }
+
 .form-actions .primary-btn {
-    background-color: #4461ff;
-    color: white;
+    flex: 1;
+    margin-top: 0;
 }
 
-.form-actions .primary-btn:hover { background-color: #334dc7; transform: translateY(-1px); }
-
-.cancel-btn {
-    background-color: #e2e8f0;
-    color: #4a5568;
-}
-
-.cancel-btn:hover { background-color: #cbd5e0; }
-
+/* Posts section */
 .requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
 
 .post-card {
+    position: relative;
     background: #f8fafc;
     padding: 20px;
     border-radius: 12px;
@@ -203,29 +145,13 @@ button:hover {
     border: 1px solid #e2e8f0;
 }
 
-.post-card {
-    position: relative;
-}
-
-.post-header {
-    padding-right: 30px;
-}
-
-.post-header strong {
-    font-weight: normal;
-    font-size: 0.9rem;
-}
-
 .edit-btn {
     position: absolute;
     top: 12px;
     right: 12px;
     color: #94a3b8;
-    font-size: 0.85rem;
     text-decoration: none;
 }
-
-.edit-btn:hover { color: #4461ff; }
 
 .post-details { margin: 10px 0; color: #64748b; font-size: 0.9rem; }
 .post-details span { margin-right: 15px; }
@@ -233,8 +159,6 @@ button:hover {
 
 textarea {
     width: 100%;
-    height: 120px; 
-    padding: 0;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
@@ -244,9 +168,8 @@ textarea {
     height: auto;
 }
 
-
 .required-dot {
-    color: #ef4444; /* A bright red */
+    color: #ef4444;
     margin-left: 4px;
     font-weight: bold;
 }
@@ -254,43 +177,14 @@ textarea {
 #post-divider {
     margin: 15px 0;
     border: none;
-    border-top: 1px solid #9da1a7;
+    border-top: 1px solid #e2e8f0;
 }
 
-.status {
-    margin: 10px 0;
+.error-box {
+    background-color: #fee2e2;
+    border-left: 4px solid #ef4444;
+    color: #b91c1c;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
 }
-
-.secondary-btn {
-    display: block;
-    margin-top: 25px;
-    padding: 14px;
-    background-color: #e2e8f0;
-    color: #1e293b;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    text-align: center;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-.secondary-btn:hover { background-color: #cbd5e1; transform: translateY(-1px); }
-
-.delete-btn {
-    margin-top: 15px;
-    padding: 14px;
-    width: 100%;
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: bold;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.delete-btn:hover { background-color: #dc2626; transform: translateY(-1px); }

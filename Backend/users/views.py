@@ -154,3 +154,5 @@ def delete_account(request):
             return redirect('profile')
             
     return redirect('profile')
+def contact_us(request):
+    return render(request, 'contact_us.html')
