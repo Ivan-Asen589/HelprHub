@@ -94,7 +94,7 @@
         </form>
     </div>
 
-    <h1>Your Requests</h1>
+    <h1 id='your-requests'>Your Requests</h1>
     <div class="requests-section">
         {% if user_posts %}
             {% for post in user_posts %}
@@ -107,9 +107,10 @@
                     </a>
                 </div>
                 <div class="post-details">
+                    <hr style='margin: 1em 0;'></hr>
                     <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
-                    <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
-                    <h4 class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
+                    <span style='margin-bottom: 0.5em;'><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>
+                    <h4 style='margin-top: 0.5em;' class='status'>Volunteer: {% if post.volunteer %}{{ post.volunteer.username }}{% else %}Not yet assigned{% endif %}</h4>
                 </div>
                 <div class="post-location">
                     <i class="fa-solid fa-location-dot"></i> {{ post.locationTown }}, {{ post.locationNeighborhood }}
@@ -126,12 +127,20 @@
     function showPostForm() {
         document.getElementById('post-form-section').style.display = 'block';
         document.getElementById('create-post-btn').style.display = 'none';
+        document.getElementById('your-requests').style.display = 'none';
+        for (let i = 0; i < document.querySelectorAll('.post-card').length; i++) {
+            document.querySelectorAll('.post-card')[i].style.display = 'none';
+        }
         updateDateTimeConstraints();
     }
     
     function hidePostForm() {
         document.getElementById('post-form-section').style.display = 'none';
         document.getElementById('create-post-btn').style.display = '';
+        document.getElementById('your-requests').style.display = 'block';
+        for (let i = 0; i < document.querySelectorAll('.post-card').length; i++) {
+            document.querySelectorAll('.post-card')[i].style.display = 'block';
+        }
     }
 
     function updateDateTimeConstraints() {
