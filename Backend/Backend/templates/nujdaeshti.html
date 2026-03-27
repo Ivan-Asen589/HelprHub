@@ -1,5 +1,6 @@
 {% extends 'home.html' %}
 {% load static %}
+<<<<<<< HEAD
 
 {% block title %}HelprHub - Need help{% endblock %}
 
@@ -24,6 +25,38 @@
                     {% endfor %}
                 {% endfor %}
             </ul>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HelpConnect - Need help</title>
+    <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Consistency: Same red asterisk style as Signup/Login */
+        .required-dot {
+            color: #ef4444;
+            margin-left: 3px;
+            font-weight: bold;
+        }
+        .form-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-container">
+<header>
+    <div class="header-content">
+        <div class="logo">
+            <i class="fa-solid fa-heart-pulse"></i>
+            <span>HelpConnect™</span>
+>>>>>>> c026d9555dddd5140c61990bc35e0a4f3383e738
         </div>
         {% endif %}
 

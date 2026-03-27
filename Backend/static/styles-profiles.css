@@ -202,7 +202,9 @@ body {
 .save-btn:hover { background: #334dc7; }
 
 .danger-zone {
-    margin-top: 16px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9; /* Subtle line to separate from Logout */
     text-align: center;
 }
 
@@ -214,13 +216,14 @@ body {
     border-radius: 8px;
     font-size: 0.95rem;
     cursor: pointer;
-    transition: background 0.2s, color 0.2s;
-    width:100%;
+    transition: all 0.2s ease;
+    width: 100%; /* Makes it match the Save button width */
 }
 
 .delete-btn:hover {
-    background: #e53e3e;
-    color: #fff;
+    background: #fff5f5; /* Light red tint on hover */
+    color: #c53030;
+    border-color: #c53030;
 }
 
 .modal-card {

@@ -1,0 +1,113 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8fafc;
+}
+
+/* Header & Nav */
+.main-blue-header {
+    background-color: #4461ff;
+    padding: 15px 0;
+    color: white;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+}
+
+.logo { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 1.5rem; }
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    margin-left: 25px;
+    font-weight: 500;
+}
+
+.signup-btn {
+    background: white;
+    color: #4461ff !important;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+/* Hero Section */
+.hero {
+    height: 75vh;
+    background: url('https://images.unsplash.com/photo-1573497619154-72647c9dce19?q=80&w=2070&auto=format&fit=crop') center/cover;
+    position: relative;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(68, 97, 255, 0.9), rgba(68, 97, 255, 0.4));
+    display: flex;
+    align-items: center;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    color: white;
+}
+
+.hero h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 20px; }
+.hero p { max-width: 600px; font-size: 1.2rem; margin-bottom: 35px; opacity: 0.9; }
+
+.cta-primary {
+    background: #ffcc00; /* Yellow "Pop" color */
+    color: #1e293b;
+    padding: 18px 35px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    transition: transform 0.2s;
+    display: inline-block;
+}
+
+.cta-primary:hover { transform: scale(1.05); }
+
+/* Features */
+.features { padding: 80px 20px; text-align: center; }
+.section-title h2 { color: #1e293b; font-size: 2.2rem; margin-bottom: 10px; }
+.underline { width: 60px; height: 4px; background: #4461ff; margin: 0 auto 50px; }
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.feature-card {
+    background: white;
+    padding: 50px 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover { transform: translateY(-10px); }
+.feature-card i { font-size: 3rem; color: #4461ff; margin-bottom: 25px; }
+.feature-card h3 { color: #1e293b; margin-bottom: 15px; }
+.feature-card p { color: #64748b; line-height: 1.6; }
+
+/* Footer */
+.main-footer {
+    background: #1e293b;
+    color: white;
+    padding: 50px 0;
+    margin-top: 60px;
+    text-align: center;
+}
+.footer-links { display: flex; justify-content: center; gap: 30px; margin-top: 20px; }
+.footer-links a { color: #94a3b8; text-decoration: none; font-size: 0.9rem; }

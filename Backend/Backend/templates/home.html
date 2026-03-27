@@ -7,7 +7,7 @@
     <title>{% block title %}HelprHub - Welcome{% endblock %}</title>
     <link rel="stylesheet" href="{% static 'header_footer.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}<link rel="stylesheet" href="{% static 'styles-home.css' %}">{% endblock %}
 </head>
 <body>
 
@@ -39,9 +39,49 @@
         </div>
     </div>
 </header>
+    
     <main>
-        {% block content %}
-        {% endblock %}
+    {% block content %}
+    <section class="hero">
+        <div class="hero-overlay">
+            <div class="hero-container">
+                <h1>Connecting Hearts, <br>Changing Lives.</h1>
+                <p>A dedicated platform where people with disabilities find reliable support, and kind-hearted volunteers find a way to give back.</p>
+                <div class="hero-actions">
+                    {% if not user.is_authenticated %}
+                        <a href="{% url 'signup' %}" class="cta-primary">Get Started Today</a>
+                    {% else %}
+                        <a href="{% url 'nujdaeshti' %}" class="cta-primary">Go to Dashboard</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="section-title">
+            <h2>Why HelpConnect™?</h2>
+            <div class="underline"></div>
+        </div>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <i class="fa-solid fa-handshake-angle"></i>
+                <h3>Direct Assistance</h3>
+                <p>Request help for specific daily tasks or errands directly from local helpers.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h3>Verified Safety</h3>
+                <p>We prioritize community safety with secure profiles and transparent communication.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fa-solid fa-earth-europe"></i>
+                <h3>Community Driven</h3>
+                <p>Building a network of empathy and support across Bulgaria and beyond.</p>
+            </div>
+        </div>
+    </section>
+    {% endblock %}
     </main>
 
 <footer>
@@ -51,9 +91,18 @@
             <a href="#">Privacy Policy</a>
             <a href="#">Terms of Service</a>
             <a href="#">Contact Us</a>
-        </div>
+        <nav class="nav-links">
+            {% if user.is_authenticated %}
+                <a href="{% url 'nujdaeshti' %}">Dashboard</a>
+                <a href="{% url 'profile' %}">My Account</a>
+                <a href="{% url 'logout' %}" class="logout-pill">Logout</a>
+            {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                <a href="{% url 'signup' %}" class="signup-btn">Join Community</a>
+            {% endif %}
+        </nav>
     </div>
-</footer>
+</header>
 
 {% block extra_scripts %}{% endblock %}
 </body>

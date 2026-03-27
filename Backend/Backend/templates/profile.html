@@ -68,21 +68,17 @@
         <button type="submit" class="save-btn">Save Changes</button>
     </form>
 
+    <div class="logout-section">
+        <a href="{% url 'logout' %}" class="logout-btn">
+            <i class="fa-solid fa-right-from-bracket"></i> Sign Out
+        </a>
+    </div>
+
     <div class="danger-zone">
         <button type="button" class="delete-btn" onclick="document.getElementById('deleteModal').style.display='flex'">
             Delete Account
         </button>
     </div>
-</div>
-
-<a href="{% url 'login' %}" class="header-icon" title="Logout">
-    <i class="fa-solid fa-right-from-bracket"></i>
-</a>
-
-<div class="logout-section">
-    <a href="{% url 'login' %}" class="logout-link">
-        <i class="fa-solid fa-power-off"></i> Sign Out of Account
-    </a>
 </div>
 
 <div id="deleteModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:1000; align-items:center; justify-content:center;">
@@ -94,7 +90,7 @@
             <form method="POST" action="{% url 'delete_account' %}">
                 {% csrf_token %}
                 <button type="submit" class="modal-confirm-btn">Yes, Delete My Account</button>
-            </form>
+            </form> 
         </div>
     </div>
 </div>

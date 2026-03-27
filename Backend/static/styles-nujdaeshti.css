@@ -203,3 +203,9 @@ textarea {
     font-size: 0.85rem;
 }
 .footer-links a:hover { color: white; }
+
+.required-dot {
+    color: #ef4444; /* A bright red */
+    margin-left: 4px;
+    font-weight: bold;
+}
