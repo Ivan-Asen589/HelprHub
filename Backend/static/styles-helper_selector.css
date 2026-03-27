@@ -1,3 +1,25 @@
+#toast-container {
+    position: fixed;
+    top: 1.5em;
+    right: 1.5em;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.toast {
+    background-color: #22c55e;
+    color: white;
+    padding: 0.875em 1.25em;
+    border-radius: 0.5em;
+    font-size: 0.9em;
+    font-weight: 600;
+    box-shadow: 0 0.25em 1em rgba(0,0,0,0.15);
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
 body {
     background-color: #f5f7fb;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

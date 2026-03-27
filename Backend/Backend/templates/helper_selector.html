@@ -8,6 +8,13 @@
 {% endblock %}
 
 {% block content %}
+{% if messages %}
+<div id="toast-container">
+    {% for message in messages %}
+    <div class="toast">{{ message }}</div>
+    {% endfor %}
+</div>
+{% endif %}
 <a id='backToDashboard' href="{% url 'helpers' %}">Back to Dashboard</a>
 <h2>All Requests</h2>
 <form method="get" action="">
@@ -56,4 +63,15 @@
 {% else %}
     <p class="subtitle">No requests found.</p>
 {% endif %}
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    setTimeout(function() {
+        document.querySelectorAll('.toast').forEach(function(t) {
+            t.style.opacity = '0';
+            setTimeout(function() { t.remove(); }, 500);
+        });
+    }, 3000);
+</script>
 {% endblock %}

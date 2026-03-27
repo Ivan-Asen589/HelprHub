@@ -3,6 +3,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.utils import timezone
 from .models import Post
 
@@ -98,6 +99,7 @@ def volunteer_signup(request, pk):
     if post.volunteer is None and post.publisher != request.user:
         post.volunteer = request.user
         post.save()
+        messages.success(request, f'You are now a volunteer for "{post.title}"!')
     return redirect('/helper_selector/')
 
 @login_required
