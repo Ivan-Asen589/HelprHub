@@ -1,0 +1,57 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block title %}HelprHub - Contact Us{% endblock %}
+
+{% block extra_head %}
+<link rel="stylesheet" href="{% static 'styles-recievers.css' %}">
+<style>
+    .contact-card {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 30px;
+    }
+    .contact-info {
+        margin-top: 30px;
+        border-top: 1px solid #e2e8f0;
+        padding-top: 20px;
+        text-align: center;
+        color: #475569;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="card contact-card">
+    <h1>Contact Us</h1>
+    <p style="color: #64748b; margin-bottom: 25px;">
+        Have questions? Send us a message and we'll get back to you soon.
+    </p>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        <label for="name">Your Name</label>
+        <div class="input-group">
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+        </div>
+
+        <label for="email">Email Address</label>
+        <div class="input-group">
+            <input type="email" id="email" name="email" placeholder="email@example.com" required>
+        </div>
+
+        <label for="message">Message</label>
+        <div class="input-group">
+            <textarea id="message" name="message" placeholder="How can we help you?" style="height: 150px; padding: 15px;"></textarea>
+        </div>
+
+        <button type="submit" class="primary-btn">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+        <p>Email: support@helprhub.com</p>
+        <p style="margin-top: 10px;">Location: Sofia, Bulgaria</p>
+    </div>
+</div>
+{% endblock %}
