@@ -70,6 +70,7 @@ class PostUpdateView(UpdateView):
     model = Post
     template_name = 'posts/post_form.html'
     fields = ['description', 'date', 'time', 'locationTown', 'locationNeighborhood']
+    success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)
@@ -80,7 +81,7 @@ class PostUpdateView(UpdateView):
 class PostDeleteView(DeleteView):
     model = Post
     template_name = 'posts/post_confirm_delete.html'
-    success_url = '/posts/'
+    success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):
         post = super().get_object(queryset)

@@ -87,6 +87,9 @@
                         <div class="post-card">
                             <div class="post-header">
                                 <strong>{{ post.description }}</strong>
+                                <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
+                                    <i class="fa-solid fa-pencil"></i>
+                                </a>
                             </div>
                             <div class="post-details">
                                 <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>

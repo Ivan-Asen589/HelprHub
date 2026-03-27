@@ -35,6 +35,7 @@
             <p class="subtitle">Time: {{ post.time }}</p>
             <p class="subtitle">Area: {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</p>
             <p class="subtitle">Posted by: {{ post.publisher }}</p>
+            <p class="subtitle">Phone: {{ post.publisher.phone_number }}</p>
             {% if post.volunteer %}
                 <p class="subtitle">Volunteer: {{ post.volunteer }}</p>
                 {% if post.volunteer == request.user %}
