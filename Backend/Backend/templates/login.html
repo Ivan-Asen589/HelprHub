@@ -7,6 +7,20 @@
     <title>HelpConnect - Log In</title>
     <link rel="stylesheet" href="{% static 'styles-signup.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Consistency: Same red asterisk style as Signup */
+        .required-dot {
+            color: #ef4444;
+            margin-left: 3px;
+            font-weight: bold;
+        }
+        .form-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <header>
@@ -38,13 +52,15 @@
             <form method="POST" action='/login/'>
                 {% csrf_token %}
 
+                <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
+
                 <div class="input-group">
-                    <label for="email">Email Address</label>
+                    <label for="email">Email Address<span class="required-dot">*</span></label>
                     <input type="email" id="email" name="email" placeholder="name@example.com" required>
                 </div>
 
                 <div class="input-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password<span class="required-dot">*</span></label>
                     <input type="password" id="password" name="password" placeholder="Enter password" required>
                 </div>
 

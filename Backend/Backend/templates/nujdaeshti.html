@@ -7,6 +7,20 @@
     <title>HelpConnect - Need help</title>
     <link rel="stylesheet" href="{% static 'styles-nujdaeshti.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Consistency: Same red asterisk style as Signup/Login */
+        .required-dot {
+            color: #ef4444;
+            margin-left: 3px;
+            font-weight: bold;
+        }
+        .form-note {
+            font-size: 0.85rem;
+            color: #64748b;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
     <div class="page-container">
@@ -35,7 +49,7 @@
             <div class="welcome card">
                 <h1>Post a new request</h1>
                 
-                <form method="post" action = '/nujdaeshti/'>
+                <form method="post" action='/nujdaeshti/'>
                     {% csrf_token %}
 
                     {% if form.errors %}
@@ -51,30 +65,32 @@
                     </div>
                     {% endif %}
 
-                    <label for="description">What do you need help with?</label>
+                    <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
+
+                    <label for="description">What do you need help with?<span class="required-dot">*</span></label>
                     <div class="input-group">
-                        <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance"></textarea>
+                        <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required></textarea>
                     </div>
 
                     <div class="input-row">
                         <div class="input-field">
-                            <label for="date">Date</label>
-                            <input type="date" id="date" name="date" lang="en">
+                            <label for="date">Date<span class="required-dot">*</span></label>
+                            <input type="date" id="date" name="date" lang="en" required>
                         </div>
                         <div class="input-field">
-                            <label for="time">Time</label>
-                            <input type="time" id="time" name="time">
+                            <label for="time">Time<span class="required-dot">*</span></label>
+                            <input type="time" id="time" name="time" required>
                         </div>
                     </div>
 
-                    <label for="locationTown">City</label>
+                    <label for="locationTown">City<span class="required-dot">*</span></label>
                     <div class="input-group">
-                        <input type="text" id="locationTown" name="locationTown" placeholder="City">
+                        <input type="text" id="locationTown" name="locationTown" placeholder="City" required>
                     </div>
 
-                    <label for="locationNeighborhood">Address</label>
+                    <label for="locationNeighborhood">Address<span class="required-dot">*</span></label>
                     <div class="input-group">
-                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A">
+                        <input type="text" id="locationNeighborhood" name="locationNeighborhood" placeholder="e.g. J.K Durvenica, ul. Durvenica Blok 16, Vhod A" required>
                     </div>
 
                     <button type="submit" class="primary-btn">Post Request</button>

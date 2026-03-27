@@ -200,6 +200,88 @@ body {
 }
 
 .save-btn:hover { background: #334dc7; }
+
+.danger-zone {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #f1f5f9; /* Subtle line to separate from Logout */
+    text-align: center;
+}
+
+.delete-btn {
+    background: transparent;
+    color: #e53e3e;
+    border: 1.5px solid #e53e3e;
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    width: 100%; /* Makes it match the Save button width */
+}
+
+.delete-btn:hover {
+    background: #fff5f5; /* Light red tint on hover */
+    color: #c53030;
+    border-color: #c53030;
+}
+
+.modal-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 32px 28px;
+    max-width: 420px;
+    width: 90%;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    text-align: center;
+}
+
+.modal-card h3 {
+    margin: 0 0 12px;
+    font-size: 1.3rem;
+    color: #1a202c;
+}
+
+.modal-card p {
+    color: #555;
+    margin-bottom: 24px;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+}
+
+.modal-cancel-btn {
+    padding: 10px 22px;
+    border: 1.5px solid #cbd5e0;
+    background: transparent;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem; 
+    transition: background 0.2s;
+}
+
+.modal-cancel-btn:hover {
+    background: #f7fafc;
+}
+
+.modal-confirm-btn {
+    padding: 10px 22px;
+    background: #e53e3e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.2s;
+}
+
+.modal-confirm-btn:hover {
+    background: #c53030;
+}
 .username-display { color: #1e293b; margin-top: 10px; font-size: 1.5rem; }
 .role-badge { 
     display: inline-block; 
@@ -213,6 +295,7 @@ body {
 .form-section h3 { font-size: 1.1rem; color: #4461ff; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; }
 .form-divider { border: 0; border-top: 1px solid #e2e8f0; margin: 30px 0; }
 .help-text { font-size: 0.8rem; color: #64748b; margin-top: 8px; }
+
 .logout-section {
     margin-top: 20px;
     text-align: center;
@@ -221,7 +304,7 @@ body {
 }
 
 .logout-link {
-    color: #ef4444; /* Professional Red */
+    color: #ef4444;
     text-decoration: none;
     font-weight: 600;
     font-size: 0.9rem;

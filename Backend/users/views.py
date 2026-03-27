@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, get_user_model, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from django.contrib import messages
@@ -13,16 +14,21 @@ def VerifySignUp(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
     confirm_password = request.POST.get('confirm_password')
-    cond = [False] * 7
-    cond[0] = not User.objects.filter(username=username).exists()
-    cond[1] = len(username) <= 30
-    cond[2] = len(password) >= 8
-    cond[3] = password == confirm_password
-    cond[4] = any(char.isdigit() for char in password)
-    cond[5] = any(char.isupper() for char in password)
-    cond[6] = any(char.islower() for char in password)
+    minLen = 8
+    maxLen = 30
+    cond = [False for i in range(7)]
+
+    cond[0] = not User.objects.filter(username=username).exists()  # username not already used
+    cond[1] = len(username) <= maxLen
+    cond[2] = len(password) >= minLen
+    cond[3] = len(password) <= maxLen
+    cond[4] = password == confirm_password
+    cond[5] = any(char.isdigit() for char in password)
+    cond[6] = any(char.isupper() for char in password)
+    cond.append(any(char.islower() for char in password))
     return cond
 
+@csrf_protect
 def SignUp(request):
     if request.user.is_authenticated:
         if request.user.user_role == 'helper':
@@ -31,32 +37,41 @@ def SignUp(request):
     if request.method != 'POST':
         return render(request, 'signup.html')
     ver = VerifySignUp(request)
-    user_role = request.POST.get('user_role')
-    if False not in ver:
+    if all(ver):
         user = User.objects.create_user(
             username=request.POST.get('username'),
             email=request.POST.get('email'),
-            password=request.POST.get('password'),
+            password=request.POST.get('password')
         )
         user.phone_number = request.POST.get('phone_number', '')
-        user.user_role = user_role
+        user.user_role = request.POST.get('user_role', 'receiver')
         user.save()
+
         login(request, user, backend='users.backends.EmailBackend')
-        if user_role == 'helper':
+        if user.user_role == 'helper':
             return redirect('helper_selector')
-        else:
-            return redirect('nujdaeshti')
+        return redirect('nujdaeshti')
     else:
         errorsList = []
-        if not ver[0]: errorsList.append('Username already exists!')
-        elif not ver[1]: errorsList.append('Username too long (>30)!')
-        if not ver[2]: errorsList.append('Password too short (min 8 chars)!')
-        if not ver[3]: errorsList.append('Passwords do not match!')
-        if not ver[4]: errorsList.append('Password has no digit!')
-        if not ver[5]: errorsList.append('Password has no uppercase letter!')
-        if not ver[6]: errorsList.append('Password has no lowercase letter!')
+        if not ver[0]:
+            errorsList.append('Username already exists!')
+        if not ver[1]:
+            errorsList.append('Username too long (>30)!')
+        if not ver[2]:
+            errorsList.append('Password too short (min 8 chars)!')
+        if not ver[3]:
+            errorsList.append('Password too long (max 30 chars)!')
+        if not ver[4]:
+            errorsList.append('Passwords do not match!')
+        if not ver[5]:
+            errorsList.append('Password has no digit!')
+        if not ver[6]:
+            errorsList.append('Password has no uppercase letter!')
+        if len(ver) > 7 and not ver[7]:
+            errorsList.append('Password has no lowercase letter!')
         return render(request, 'signup.html', {'errors': errorsList})
 
+@csrf_protect
 def LogIn(request):
     if request.user.is_authenticated:
         if request.user.user_role == 'helper':
