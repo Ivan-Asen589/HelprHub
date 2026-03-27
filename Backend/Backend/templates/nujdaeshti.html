@@ -47,6 +47,11 @@
 
             <p class="form-note"><span class="required-dot">*</span> Indicates a required field</p>
 
+            <label for="title">Title<span class="required-dot">*</span></label>
+            <div class="input-group">
+                <input type="text" id="title" name="title" placeholder="e.g. Help with groceries" value="{{ form.title.value|default:'' }}" required>
+            </div>
+            <hr></hr>
             <label for="description">What do you need help with?<span class="required-dot">*</span></label>
             <div class="input-group">
                 <textarea id="description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance" required>{{ form.description.value|default:'' }}</textarea>
@@ -89,12 +94,12 @@
             {% for post in user_posts %}
             <div class="post-card">
                 <div class="post-header">
-                    <strong>{{ post.description }}</strong>
+                    <strong style='font-weight: 600'>{{ post.title }}</strong>
+                    <p style='margin-top: 10px;'>{{ post.description }}</p>
                     <a href="{% url 'edit_post' post.pk %}" class="edit-btn" title="Edit post">
                         <i class="fa-solid fa-pencil"></i>
                     </a>
                 </div>
-                <hr id='post-divider'>
                 <div class="post-details">
                     <span><i class="fa-regular fa-calendar"></i> {{ post.date }}</span>
                     <span><i class="fa-regular fa-clock"></i> {{ post.start_time }} – {{ post.end_time }}</span>

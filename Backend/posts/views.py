@@ -3,7 +3,6 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth.decorators import login_required
-from django.db.models import Case, When, IntegerField
 from django.utils import timezone
 from .models import Post
 
@@ -27,13 +26,7 @@ class PostListView(RoleRequiredMixin, ListView):
 
     def get_queryset(self):
         today = timezone.now().date()
-        qs = Post.objects.annotate(
-            is_past=Case(
-                When(date__lt=today, then=1),
-                default=0,
-                output_field=IntegerField(),
-            )
-        ).order_by('is_past', 'date', 'start_time')
+        qs = Post.objects.filter(date__gte=today).order_by('date', 'start_time')
         username = self.request.GET.get('username', '').strip()
         city = self.request.GET.get('city', '').strip()
         date = self.request.GET.get('date', '').strip()
@@ -43,7 +36,7 @@ class PostListView(RoleRequiredMixin, ListView):
             qs = qs.filter(locationTown__icontains=city)
         if date:
             qs = qs.filter(date=date)
-        if self.request.GET.get('no_volunteer'):
+        if self.request.GET.get('no_volunteer') or not self.request.GET:
             qs = qs.filter(volunteer__isnull=True)
         if self.request.GET.get('my_volunteered') and self.request.user.is_authenticated:
             qs = qs.filter(volunteer=self.request.user)
@@ -66,7 +59,7 @@ class PostCreateView(RoleRequiredMixin, CreateView):
     required_role = 'receiver'
     model = Post
     template_name = 'nujdaeshti.html'
-    fields = ['description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
+    fields = ['title', 'description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
     success_url = '/nujdaeshti/'
 
     def form_valid(self, form):
@@ -84,7 +77,7 @@ class PostUpdateView(RoleRequiredMixin, UpdateView):
     required_role = 'receiver'
     model = Post
     template_name = 'posts/post_form.html'
-    fields = ['description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
+    fields = ['title', 'description', 'date', 'start_time', 'end_time', 'locationTown', 'locationNeighborhood']
     success_url = '/nujdaeshti/'
 
     def get_object(self, queryset=None):

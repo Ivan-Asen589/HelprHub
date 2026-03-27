@@ -34,6 +34,11 @@
         </div>
         {% endif %}
 
+        <label for="id_title">Title</label>
+        <div class="input-group">
+            <input type="text" id="id_title" name="title" placeholder="e.g. Help with groceries" value="{{ form.title.value }}">
+        </div>
+
         <label for="id_description">What do you need help with?</label>
         <div class="input-group">
             <textarea id="id_description" name="description" placeholder="e.g. I need help with groceries, housework, mobility assistance">{{ form.description.value }}</textarea>

@@ -11,10 +11,10 @@
 <h3>Back to Dashboard</h3>
 <h2>All Requests</h2>
 <form method="get" action="">
-    <input type="text" name="username" placeholder="Filter by username" value="{{ filter_username }}">
-    <input type="text" name="city" placeholder="Filter by city" value="{{ filter_city }}">
+    <input type="text" name="username" placeholder="Filter by Name" value="{{ filter_username }}">
+    <input type="text" name="city" placeholder="Filter by place" value="{{ filter_city }}">
     <input type="date" name="date" value="{{ filter_date }}">
-    <label><input type="checkbox" name="no_volunteer" value="1" {% if filter_no_volunteer %}checked{% endif %}> No volunteer assigned</label>
+    <label><input type="checkbox" name="no_volunteer" value="1" {% if filter_no_volunteer or not request.GET %}checked{% endif %}> No volunteer assigned</label>
     <label><input type="checkbox" name="my_volunteered" value="1" {% if filter_my_volunteered %}checked{% endif %}> My signed-up requests</label>
     <button type="submit">Search</button>
     <a href="?">Clear</a>
@@ -23,12 +23,19 @@
 {% if posts %}
     {% for post in posts %}
     <div class="card request-card">
-        <h3>{{ post.description }}</h3>
-        <p class="subtitle">Date: {{ post.date }}</p>
-        <p class="subtitle">Time: {{ post.start_time }}</p>
-        <p class="subtitle">Area: {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</p>
-        <p class="subtitle">Posted by: {{ post.publisher }}</p>
-        <p class="subtitle">Phone: {{ post.publisher.phone_number }}</p>
+        <div id='title' style='display: flex; justify-content: space-between;'>
+            <h3>{{ post.title }}</h3>
+            <a href="/posts/{{ post.pk }}/" style="color: inherit;"><i class="fa-solid fa-pencil"></i></a>
+    </div>
+        <p>{{ post.description }}</p>
+        <div class="post-details">
+            <div><p class="subtitle">{{ post.date }}</p></div>
+            <div><p class="subtitle">{{ post.start_time }}</p></div>
+            <div><p class="subtitle">{{ post.end_time }}</p></div>
+            <div><p class="subtitle">{{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</p></div>
+            <div><p class="subtitle">{{ post.publisher }}</p></div>
+            <div><p class="subtitle">{{ post.publisher.phone_number }}</p></div>
+        </div>
         {% if post.volunteer %}
             <p class="subtitle">Volunteer: {{ post.volunteer }}</p>
             {% if post.volunteer == request.user %}
