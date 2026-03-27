@@ -71,7 +71,7 @@ def SignUp(request):
         if not ver[5]: errorsList.append('Password must contain at least one digit!')
         if not ver[6]: errorsList.append('Password must contain an uppercase letter!')
         if not ver[7]: errorsList.append('Password must contain a lowercase letter!')
-        return render(request, 'signup.html', {'errors': errorsList})
+        return render(request, 'signup.html', {'errors': errorsList, 'form_data': request.POST})
 
 @csrf_protect
 def LogIn(request):
@@ -90,7 +90,7 @@ def LogIn(request):
             if user.user_role == 'helper':
                 return redirect('helper_selector')
             return redirect('nujdaeshti')
-        return render(request, 'login.html', {'errors': ['Invalid email or password.']})
+        return render(request, 'login.html', {'errors': ['Invalid email or password.'], 'email': email})
     
     return render(request, 'login.html')
 

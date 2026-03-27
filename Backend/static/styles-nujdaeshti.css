@@ -103,6 +103,7 @@ input, textarea {
     border: 1px solid #cbd5e1;
     font-size: 15px;
     transition: all 0.3s;
+    resize: none;
 }
 
 input:focus, textarea:focus {
@@ -164,15 +165,39 @@ button:hover {
 
 .primary-btn:hover { background-color: #334dc7; transform: translateY(-1px); }
 
-.requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 2px; }
+.requests-section { margin-top: 40px; border-top: 1px solid #e2e8f0; padding-top: 20px; }
 
 .post-card {
     background: #f8fafc;
-    padding: 2px;
+    padding: 20px;
     border-radius: 12px;
     margin-top: 15px;
     border: 1px solid #e2e8f0;
 }
+
+.post-card {
+    position: relative;
+}
+
+.post-header {
+    padding-right: 30px;
+}
+
+.post-header strong {
+    font-weight: normal;
+    font-size: 0.9rem;
+}
+
+.edit-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-decoration: none;
+}
+
+.edit-btn:hover { color: #4461ff; }
 
 .post-details { margin: 10px 0; color: #64748b; font-size: 0.9rem; }
 .post-details span { margin-right: 15px; }
@@ -186,12 +211,14 @@ footer {
 textarea {
     width: 100%;
     height: 120px; 
-    padding: 3px;
+    padding: 0;
     border-radius: 8px;
     border: 1px solid #ccc;
     font-size: 14px;
     resize: none;
+    padding: 20px;
     text-align: left;
+    height: auto;
 }
 
 .footer-links { margin-top: 10px; }
@@ -204,13 +231,17 @@ textarea {
 .footer-links a:hover { color: white; }
 
 .required-dot {
-    color: #ef4444; 
+    color: #ef4444; /* A bright red */
     margin-left: 4px;
     font-weight: bold;
 }
 
-#delete {
-    background-color: red;
-
+#post-divider {
+    margin: 15px 0;
+    border: none;
+    border-top: 1px solid #9da1a7;
 }
 
+.status {
+    margin: 10px 0;
+}
