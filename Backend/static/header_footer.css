@@ -138,3 +138,26 @@ footer {
     color: white !important;
     text-decoration: none;
 }
+
+@media (max-width: 480px) {
+    .header-content {
+        padding: 0 1em;
+    }
+
+    .logo {
+        font-size: 1.1em;
+    }
+
+    .nav-icons {
+        font-size: 1.1em;
+        gap: 1em;
+    }
+
+    .header-icon {
+        font-size: 1em;
+    }
+
+    .account-link {
+        font-size: 1em;
+    }
+}
