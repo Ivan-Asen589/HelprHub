@@ -15,35 +15,49 @@
     </div>
 </header>
 <main>
-    <h3> Back to Dashboard</h3>
-    <h2>Find Helpers</h2>
-    <div class="welcome card"></div>
-    <h3><b>Request details</b></h3>
+    <h3>Back to Dashboard</h3>
+    <h2>All Requests</h2>
+    <form method="get" action="">
+        <input type="text" name="username" placeholder="Filter by username" value="{{ filter_username }}">
+        <input type="text" name="city" placeholder="Filter by city" value="{{ filter_city }}">
+        <input type="date" name="date" value="{{ filter_date }}">
+        <label><input type="checkbox" name="no_volunteer" value="1" {% if filter_no_volunteer %}checked{% endif %}> No volunteer assigned</label>
+        <label><input type="checkbox" name="my_volunteered" value="1" {% if filter_my_volunteered %}checked{% endif %}> My signed-up requests</label>
+        <button type="submit">Search</button>
+        <a href="?">Clear</a>
+    </form>
     <hr>
-    <p class="subtitle">anything</p>
-    <p class="subtitle">date: 27.03.2026г.</p>
-    <p class="subtitle">time: 11:30</p>
-    <p class="subtitle">area: Sofia</p>
-    <h4>Available People in need</h4>
-    </div>
-    <div><h4>name</h4>
+    {% if posts %}
+        {% for post in posts %}
+        <div class="card request-card">
+            <h3>{{ post.description }}</h3>
+            <p class="subtitle">Date: {{ post.date }}</p>
+            <p class="subtitle">Time: {{ post.time }}</p>
+            <p class="subtitle">Area: {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</p>
+            <p class="subtitle">Posted by: {{ post.publisher }}</p>
+            {% if post.volunteer %}
+                <p class="subtitle">Volunteer: {{ post.volunteer }}</p>
+                {% if post.volunteer == request.user %}
+                    <form method="post" action="/posts/{{ post.pk }}/optout/">
+                        {% csrf_token %}
+                        <button type="submit">Opt out</button>
+                    </form>
+                {% endif %}
+            {% else %}
+                <p class="subtitle">No volunteer yet</p>
+                {% if request.user.is_authenticated and post.publisher != request.user %}
+                    <form method="post" action="/posts/{{ post.pk }}/volunteer/">
+                        {% csrf_token %}
+                        <button type="submit">Volunteer</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
         <hr>
-        <p class="subtitle">available: 10:00-12:00</p>
-        <p class="subtitle">area: Sofia</p>
-        <button>Select This Person</button>
-        <hr></div>
-    <div><h4>name</h4>
-        <hr>
-        <p class="subtitle">available: 10:00-12:00</p>
-        <p class="subtitle">area: Sofia</p>
-        <button>Select This Person</button>
-        <hr></div>
-    <div><h4>name</h4>
-        <hr>
-        <p class="subtitle">available: 10:00-12:00</p>
-        <p class="subtitle">area: Sofia</p>
-        <button>Select This Person</button>
-        <hr></div>
+        {% endfor %}
+    {% else %}
+        <p class="subtitle">No requests found.</p>
+    {% endif %}
 </main>
 </body>
 </html>
