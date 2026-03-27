@@ -23,7 +23,7 @@
 {% if posts %}
     {% for post in posts %}
     <div class="card request-card">
-        <h3>{{ post.description }}</h3>
+        <h3>{{ f"{post.description[:100]}..." }}</h3>
         <p class="subtitle">Date: {{ post.date }}</p>
         <p class="subtitle">Time: {{ post.time }}</p>
         <p class="subtitle">Area: {{ post.locationTown }}{% if post.locationNeighborhood %}, {{ post.locationNeighborhood }}{% endif %}</p>
