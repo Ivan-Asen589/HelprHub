@@ -1,6 +1,6 @@
 from posts.models import Post
 from django.shortcuts import render, redirect
-from django.contrib.auth import login as auth_login
+from django.contrib.auth import login as auth_login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 # This looks in the current folder (users) for forms.py
@@ -43,6 +43,15 @@ def login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'login.html', {'form': form})
+
+@login_required
+def logout_prompt(request):
+    return #REPLACE THIS
+
+@login_required
+def logout_conf(request):
+    logout(request.user)
+    return render(request, 'home.html', {})
 
 @login_required
 def profile(request):

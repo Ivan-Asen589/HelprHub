@@ -1,21 +1,35 @@
 from django.shortcuts import render, redirect
+from .models import User
 from django.contrib.auth import authenticate, get_user_model, login, logout
-from django.views.generic import DetailView, UpdateView, DeleteView
+
 
 User = get_user_model()
+# Create your views here.
+"""
+conditions:
+SignUp:
 
-
+"""
 def VerifySignUp(request):
     if request.method != 'POST':
         return None
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    confirm_password = request.POST.get('confirm_password')
-    cond = [False] * 7
-    cond[0] = not User.objects.filter(username=username).exists()
-    cond[1] = len(username) <= 30
-    cond[2] = len(password) >= 8
-    cond[3] = password == confirm_password
+    username=request.POST.get('username')
+    password=request.POST.get('password')
+    minLen = 8
+    maxLen = 30
+    cond = [False for i in range(7)]
+    
+    cond[0] = not any(elem.acc.username==username for elem in UserProperties.objects.all()) #not: username already exists?
+    
+    if len(username)<=maxLen:
+        cond[1]=True #not: username too long?
+    
+    if len(password)>=minLen:
+        cond[2]=True
+    
+    if len(password)<=maxLen:
+        cond[3]=True
+    
     cond[4] = any(char.isdigit() for char in password)
     cond[5] = any(char.isupper() for char in password)
     cond[6] = any(char.islower() for char in password)
@@ -23,24 +37,16 @@ def VerifySignUp(request):
 
 
 def SignUp(request):
-    if request.method != 'POST':
-        return render(request, 'signup.html')
     ver = VerifySignUp(request)
-    user_role = request.POST.get('user_role')
-    if False not in ver:
-        user = User.objects.create_user(
-            username=request.POST.get('username'),
-            email=request.POST.get('email'),
-            password=request.POST.get('password'),
+    if True not in ver:
+        User.objects.create(
+            username = request.POST.get('username'),
+            email = request.POST.get('email'),
+            password = request.POST.get('password')
         )
-        user.phone_number = request.POST.get('phone_number', '')
-        user.user_role = user_role
-        user.save()
-        login(request, user, backend='users.backends.EmailBackend')
-        if user_role == 'helper':
-            return redirect('helper_selector')
-        else:
-            return redirect('nujdaeshti')
+        
+        login(authenticate(username=request.POST.get('username'), password=request.POST.get('password')))
+        return redirect('home.html')
     else:
         errorsList = []
         if not ver[0]:
@@ -48,9 +54,9 @@ def SignUp(request):
         elif not ver[1]:
             errorsList.append('Username too long (>30)!')
         if not ver[2]:
-            errorsList.append('Password too short (min 8 chars)!')
-        if not ver[3]:
-            errorsList.append('Passwords do not match!')
+            errorsList.append('Password too short (<8)!')
+        elif not ver[3]:
+            errorsList.append('Password too long (>30)!')
         if not ver[4]:
             errorsList.append('Password has no digit!')
         if not ver[5]:
@@ -58,43 +64,29 @@ def SignUp(request):
         if not ver[6]:
             errorsList.append('Password has no lowercase letter!')
         return render(request, 'signup.html', {'errors': errorsList})
-
+    
 
 def LogIn(request):
-    if request.method == 'POST':
-        user = authenticate(request, email=request.POST.get('email'), password=request.POST.get('password'))
-        if user is not None:
-            login(request, user, backend='users.backends.EmailBackend')
-            if user.user_role == 'helper':
-                return redirect('helper_selector')
-            return redirect('nujdaeshti')
-        return render(request, 'login.html', {'errors': ['Invalid email or password.']})
-    return render(request, 'login.html')
-
-
+    user = authenticate(username=request.POST.get('username'), password=request.POST.get('password'))
+    if user is not None:
+        login(user)
+        return redirect('home.html')
+    else:
+        return render(request, 'login.html', {'error': 'Invalid username or password.'})
+ 
 def LogOut(request):
-    logout(request)
-    return redirect('login')
+    logout(request.user)
+    return redirect('signup.html')
+        
+
+    
 
 
-class UserDetailView(DetailView):
-    model = User
-    template_name = 'profile.html'
 
 
-class UserUpdateView(UpdateView):
-    model = User
-    template_name = 'profile.html'
-    fields = ['username', 'phone_number', 'town', 'neighborhood']
-
-    def get_object(self, queryset=None):
-        return self.request.user
 
 
-class UserDeleteView(DeleteView):
-    model = User
-    template_name = 'delete_account.html'
-    success_url = '/login/'
-
-    def get_object(self, queryset=None):
-        return self.request.user
+        
+    
+        
+    
