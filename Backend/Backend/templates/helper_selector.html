@@ -11,7 +11,7 @@
 {% if messages %}
 <div id="toast-container">
     {% for message in messages %}
-    <div class="toast">{{ message }}</div>
+    <div class="toast {{ message.tags }}">{{ message }}</div>
     {% endfor %}
 </div>
 {% endif %}

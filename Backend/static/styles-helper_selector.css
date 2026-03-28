@@ -20,6 +20,10 @@
     transition: opacity 0.5s ease;
 }
 
+.toast.error {
+    background-color: #ef4444;
+}
+
 body {
     background-color: #f5f7fb;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;

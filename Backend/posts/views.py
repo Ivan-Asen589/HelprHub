@@ -108,4 +108,5 @@ def volunteer_optout(request, pk):
     if post.volunteer == request.user:
         post.volunteer = None
         post.save()
+        messages.error(request, f'You have opted out of "{post.title}".')
     return redirect('/helper_selector/')
