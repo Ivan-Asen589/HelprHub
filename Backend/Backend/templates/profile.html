@@ -23,8 +23,10 @@
             <h2 class="username-display">@{{ user.username }}</h2>
             <p class="role-badge">{{ user.user_role|title }} Account</p>
 
-        <form method='POST'>
+        <form method='POST' autocomplete='off'>
             {% csrf_token %}
+            <!-- Dummy hidden field to prevent browser password manager autofill -->
+            <input type="password" name="fake_password" style="opacity:0; position:absolute; top:-9999px; left:-9999px;" autocomplete="new-password" tabindex="-1">
             <div class="form-section">
                     <h3><i class="fa-solid fa-address-card"></i> Personal Information</h3>
                 <div class="field">
@@ -50,11 +52,11 @@
                 <div class="input-grid">
                     <div class="field">
                         <label>New Password</label>
-                        <input type="password" name="new_password" placeholder="••••••••">
+                        <input type="password" name="new_password" placeholder="••••••••" value="" autocomplete="new-password" autocapitalize="off" spellcheck="false" required>
                     </div>
                     <div class="field">
                         <label>Confirm Password</label>
-                        <input type="password" name="confirm_password" placeholder="••••••••">
+                        <input type="password" name="confirm_password" placeholder="••••••••" value="" autocomplete="new-password" autocapitalize="off" spellcheck="false" required>
                     </div>
                 </div>
                 <p class="help-text">Leave password fields blank to keep your current password.</p>
