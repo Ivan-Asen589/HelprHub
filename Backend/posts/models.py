@@ -8,7 +8,7 @@ class Post(models.Model):
     publisher = models.ForeignKey('users.User', on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default=None, null=True)  # Added default value to avoid issues with blank titles
     locationTown = models.CharField(max_length=30)
-    locationNeighborhood = models.CharField(max_length=30)
+    locationNeighborhood = models.CharField(max_length=70)
     description = models.CharField(max_length=3000)
     date = models.DateField(default=datetime.date.today)
     start_time = models.TimeField(default=datetime.time.min)
