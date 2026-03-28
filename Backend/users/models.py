@@ -8,7 +8,6 @@ class User(AbstractUser):
     town = models.CharField(max_length=30, blank=True)
     neighborhood = models.CharField(max_length=70, blank=True)
     description = models.TextField(max_length=500, null=True, blank=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', null=True, blank=True)
     
     USER_TYPE_CHOICES = [
         ('helper', 'Helper'),
